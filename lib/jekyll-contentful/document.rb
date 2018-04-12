@@ -5,6 +5,10 @@ module Jekyll
   module Contentful
     class Document
 
+      class << self
+        attr_accessor :client
+      end
+
       attr_accessor :data, :options
 
       def initialize(obj, options={})
@@ -26,8 +30,8 @@ module Jekyll
         # else
         #   Jekyll.logger.warn "#{filename} already exists"
         # end
-      rescue Exception => e
-        binding.pry
+      # rescue Exception => e
+      #   binding.pry
       end
 
       private
@@ -42,6 +46,14 @@ module Jekyll
             if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
               matter[k] = @data
               v.split('/').each { |attr| matter[k] = matter[k].send(attr) }
+            end
+          end
+          (@options.dig('frontmatter','associations') || {}).each do |k, v|
+            binding.pry
+            self.class.client.entries(content_type: v['content_type_id']).select do |obj|
+              # matter[k] = @data
+              match_value = obj
+              v['match_field'].split('/').each { |attr| match_value = match_value.send(attr) }
             end
           end
           matter.to_yaml

@@ -23,6 +23,7 @@ module Jekyll
             access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
             space: ENV['CONTENTFUL_SPACE_ID']
           )
+          Jekyll::Contentful::Document.client = client
 
           content_types = site.config.dig('contentful', 'content_types').keys
           content_types.each do |type|
