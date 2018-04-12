@@ -10,23 +10,22 @@ module Jekyll
       def initialize(obj, options={})
         @data = obj
         @options = options
-        # binding.pry
       end
 
       def write!(force_rebuild=false)
-        if ! File.exist?(filename) || force_rebuild
+        # if ! File.exist?(filename) || force_rebuild
           FileUtils.mkdir_p "./#{File.dirname(filename)}"
           File.open(filename, 'w') do |file|
-            body = "---\n#{frontmatter}\n---\n\n"
+            body = "#{frontmatter}---\n\n"
             unless @options.dig('body').nil?
               body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
             end
             file.write body
           end
           Jekyll.logger.info "#{filename} imported"
-        else
-          Jekyll.logger.warn "#{filename} already exists"
-        end
+        # else
+        #   Jekyll.logger.warn "#{filename} already exists"
+        # end
       rescue Exception => e
         binding.pry
       end
@@ -34,13 +33,18 @@ module Jekyll
       private
 
         def frontmatter
-          other_attrs = (@options.dig('frontmatter','other') || {}).collect do |k,v|
-            "#{k}: #{v}"
+          matter = @options.dig('frontmatter','other') || {}
+          (@options.dig('frontmatter','entry_mappings') || {}).each do |k, v|
+            if @data.fields.keys.include?(v.to_sym)
+              matter[k] = @data.send(v.to_sym)
+              next
+            end
+            if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
+              matter[k] = @data
+              v.split('/').each { |attr| matter[k] = matter[k].send(attr) }
+            end
           end
-          mappings = (@options.dig('frontmatter','entry_mappings') || {}).collect do |k,v|
-            "#{k}: #{@data.send(v.to_sym)}" if  @data.fields.keys.include?(v.to_sym)
-          end
-          (mappings.compact + other_attrs).join("\n")
+          matter.to_yaml
         end
 
         def filename
