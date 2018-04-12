@@ -1,4 +1,5 @@
 require 'pry'
+require 'contentful'
 
 module Jekyll
   module Commands
@@ -6,7 +7,7 @@ module Jekyll
       class << self
 
         def init_with_program(prog)
-          prog.command(:hubspot) do |c|
+          prog.command(:contentful) do |c|
             c.syntax "contentful [options]"
             c.description 'Imports data from Contentful'
             c.option 'force', '-f', '--force', 'Overwrite local data'
@@ -18,18 +19,18 @@ module Jekyll
 
         def process!(args, options)
           site = scaffold(args)
-          binding.pry
+          client = ::Contentful::Client.new(
+            access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
+            space: ENV['CONTENTFUL_SPACE_ID']
+          )
 
-          # hubspot = Jekyll::Content::Importer.new(site)
-          # payload = hubspot.run
-          # payload.to_h.each do |collection, docs|
-          #   unless docs.nil?
-          #     FileUtils.mkdir_p("#{site.config['collections_dir']}/_#{collection.to_s}")
-          #     docs.each do |doc|
-          #       doc.write!(site, options.dig('force'))
-          #     end
-          #   end
-          # end
+          content_types = site.config.dig('contentful', 'content_types').keys
+          content_types.each do |type|
+            type_cfg = site.config.dig('contentful', 'content_types', type).merge({ 'collection_name' => type })
+            type_id = type_cfg.dig('id')
+            documents = client.entries(content_type: type_id).collect{|c| Jekyll::Contentful::Document.new(c, type_cfg) }
+            documents.map(&:write!)
+          end
         end
 
         def scaffold(args)
