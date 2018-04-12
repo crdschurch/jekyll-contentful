@@ -18,6 +18,8 @@ module Jekyll
         end
 
         def process!(args, options)
+          Dir.glob("collections/*").each { |dir| FileUtils.rm_r(dir) if Dir.exist?(dir) }
+
           site = scaffold(args)
           client = ::Contentful::Client.new(
             access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],

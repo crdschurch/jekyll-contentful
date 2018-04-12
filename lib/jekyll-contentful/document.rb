@@ -12,25 +12,16 @@ module Jekyll
         @options = options
       end
 
-      def write!(force_rebuild=false)
-        # if ! File.exist?(filename) || force_rebuild
-          FileUtils.mkdir_p "./#{File.dirname(filename)}"
-          File.open(filename, 'w') do |file|
-            body = "#{frontmatter}---\n\n"
-            unless @options.dig('body').nil?
-              body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
-            end
-            file.write body
+      def write!
+        FileUtils.mkdir_p "./#{File.dirname(filename)}"
+        File.open(filename, 'w') do |file|
+          body = "#{frontmatter}---\n\n"
+          unless @options.dig('body').nil?
+            body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
           end
-          Jekyll.logger.info "#{filename} imported"
-        # else
-        # ---
-        # Don't think we want to do this because the file may exist but its
-        # content may have been edited.
-        # ---
-        #   Jekyll.logger.warn "#{filename} already exists" end
-      rescue Exception => e
-        binding.pry
+          file.write body
+        end
+        Jekyll.logger.info "#{filename} imported"
       end
 
       private
