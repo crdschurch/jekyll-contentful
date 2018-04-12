@@ -18,8 +18,6 @@ module Jekyll
         end
 
         def process!(args, options)
-          Dir.glob("collections/*").each { |dir| FileUtils.rm_r(dir) if Dir.exist?(dir) }
-
           site = scaffold(args)
           client = ::Contentful::Client.new(
             access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
@@ -28,6 +26,7 @@ module Jekyll
 
           content_types = site.config.dig('contentful', 'content_types').keys
           content_types.each do |type|
+            Dir.glob("collections/_#{type}/*").each { |file| FileUtils.rm(file) if File.exist?(file) }
             type_cfg = site.config.dig('contentful', 'content_types', type).merge({ 'collection_name' => type })
             type_id = type_cfg.dig('id')
             documents = client.entries(content_type: type_id).collect{|c| Jekyll::Contentful::Document.new(c, type_cfg) }
