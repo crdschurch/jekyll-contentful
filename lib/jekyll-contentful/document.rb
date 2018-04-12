@@ -24,8 +24,11 @@ module Jekyll
           end
           Jekyll.logger.info "#{filename} imported"
         # else
-        #   Jekyll.logger.warn "#{filename} already exists"
-        # end
+        # ---
+        # Don't think we want to do this because the file may exist but its
+        # content may have been edited.
+        # ---
+        #   Jekyll.logger.warn "#{filename} already exists" end
       rescue Exception => e
         binding.pry
       end
@@ -51,7 +54,7 @@ module Jekyll
           if @data.respond_to?(:published_date)
             slug = "#{DateTime.parse(@data.published_date).strftime('%Y-%m-%d')}-#{@data.slug}.md"
           else
-            slug = @data.slug
+            slug = "#{@data.slug}.md"
           end
           ['collections', "_#{collection_name}", slug].join('/')
         end
