@@ -54,6 +54,7 @@ module Jekyll
               # matter[k] = @data
               match_value = obj
               v['match_field'].split('/').each { |attr| match_value = match_value.send(attr) }
+              match_value == @data.id
             end
           end
           matter.to_yaml
