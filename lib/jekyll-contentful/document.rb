@@ -35,17 +35,17 @@ module Jekyll
             end
             if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
               matter[k] = @data
-              v.split('/').each { |attr| matter[k] = matter[k].send(attr) }
+              v.split('/').each { |attr| matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil }
             end
           end
           matter.to_yaml
         end
 
         def filename
-          if @data.respond_to?(:published_date)
-            slug = "#{DateTime.parse(@data.published_date).strftime('%Y-%m-%d')}-#{@data.slug}.md"
+          slug = if @data.respond_to?(:published_date)
+            "#{DateTime.parse(@data.published_date).strftime('%Y-%m-%d')}-#{@data.slug}.md"
           else
-            slug = "#{@data.slug}.md"
+            "#{@data.slug}.md"
           end
           ['collections', "_#{collection_name}", slug].join('/')
         end
