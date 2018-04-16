@@ -5,6 +5,7 @@ gemspec
 group :development do
   gem 'pry'
   gem 'jekyll', '~> 3.7.2'
+  gem 'dotenv'
 end
 
 group :test do

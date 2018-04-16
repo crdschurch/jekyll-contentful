@@ -15,7 +15,7 @@ module Jekyll
       def write!
         FileUtils.mkdir_p "./#{File.dirname(filename)}"
         File.open(filename, 'w') do |file|
-          body = "#{frontmatter}---\n\n"
+          body = "#{frontmatter.to_yaml}---\n\n"
           unless @options.dig('body').nil?
             body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
           end
@@ -38,16 +38,20 @@ module Jekyll
               v.split('/').each { |attr| matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil }
             end
           end
-          matter.to_yaml
+          matter
         end
 
         def filename
-          slug = if @data.respond_to?(:published_date)
-            "#{DateTime.parse(@data.published_date).strftime('%Y-%m-%d')}-#{@data.slug}.md"
-          else
-            "#{@data.slug}.md"
+          _f = @data.slug
+
+          if @options.keys.include?("filename")
+            @template = Liquid::Template.parse(@options['filename']) # Parses and compiles the template
+            tpl_vars = @template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
+            mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
+            _f = @template.render(mapped)
           end
-          ['collections', "_#{collection_name}", slug].join('/')
+
+          ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
         end
 
         def collection_name
