@@ -32,6 +32,7 @@ contentful:
     authors:
       id: author
       body: bio
+      filename: '{{ first_name }}-{{ last_name }}'
       frontmatter:
         entry_mappings:
           title: displayName
@@ -43,13 +44,15 @@ contentful:
 
 The `id` attribute specifies the ID for the Contentful content-type you'd like to associate with this collection. The `body` attribute specifies which field from your content-type should populate the content of resulting Markdown file.
 
+The `filename` attribute is a Liquid template that defines the value used when saving each document for this content-type (sans-filename, of course). This is handy if you need to format a string or date value in your filename, derived from your Contentful data.
+
 The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter: `entry_mappings` is literally a list of target/src values that map a field from Contentful's API.  In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`. The `other` section refers to additional attributes that you want hardcoded for each document.
 
 An example of what might be rendered based on the above configuration, looks like this...
 
 ```yml
 ---
-title: Michael Crichton
+title: Walter Sobchak
 image: https://some/image.png
 layout: author
 draft: false
