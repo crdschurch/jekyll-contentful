@@ -10,7 +10,6 @@ module Jekyll
           prog.command(:contentful) do |c|
             c.syntax "contentful [options]"
             c.description 'Imports data from Contentful'
-            c.option 'force', '-f', '--force', 'Overwrite local data'
             c.action do |args, options|
               Jekyll::Commands::Contentful.process!(args, options)
             end
