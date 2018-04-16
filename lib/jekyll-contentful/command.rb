@@ -21,9 +21,9 @@ module Jekyll
           site = scaffold(args)
           client = ::Contentful::Client.new(
             access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-            space: ENV['CONTENTFUL_SPACE_ID']
+            space: ENV['CONTENTFUL_SPACE_ID'],
+            environment: (ENV['CONTENTFUL_ENV'] || 'master')
           )
-
           content_types = site.config.dig('contentful', 'content_types').keys
           content_types.each do |type|
             Dir.glob("collections/_#{type}/*").each { |file| FileUtils.rm(file) if File.exist?(file) }
