@@ -1,5 +1,6 @@
 require 'pry'
 require 'contentful'
+require 'dotenv/load'
 
 module Jekyll
   module Commands
