@@ -3,6 +3,7 @@ PATH
   specs:
     jekyll-contentful (0.0.1)
       contentful (>= 2.6.0)
+      dotenv
       jekyll
 
 GEM
