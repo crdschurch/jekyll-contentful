@@ -36,7 +36,7 @@ contentful:
       frontmatter:
         entry_mappings:
           title: displayName
-          image: avatar
+          images: [images, url]
         other:
           layout: author
           draft: false
@@ -44,16 +44,23 @@ contentful:
 
 The `id` attribute specifies the ID for the Contentful content-type you'd like to associate with this collection. The `body` attribute specifies which field from your content-type should populate the content of resulting Markdown file.
 
-The `filename` attribute is a Liquid template that defines the value used when saving each document for this content-type (sans-filename, of course). This is handy if you need to format a string or date value in your filename, derived from your Contentful data.
+The `filename` attribute is a Liquid template that defines the value used when saving each document for this content-type (sans-filename, of course). This is handy if you need to format a string or date value in your filename, derived from your Contentful data. If the `filename` attribute is missing, it will first look for a `slug` field on the document and falls back to parameterizing the title field.
 
-The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter: `entry_mappings` is literally a list of target/src values that map a field from Contentful's API.  In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`. The `other` section refers to additional attributes that you want hardcoded for each document.
+The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter:
+
+- `entry_mappings` is a list of target/src values that map a field from Contentful's API.
+    - By default the key is the desired frontmatter key, while the value is the field name in Contentful. (In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`.)
+    - When the Contentful field is a `has_many` relationship, you can use an array as the mapped value, where the first item is the field name and the second item is the field name on the associated item to save to the frontmatter. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
+- The `other` section refers to additional attributes that you want hardcoded for each document.
 
 An example of what might be rendered based on the above configuration, looks like this...
 
 ```yml
 ---
 title: Walter Sobchak
-image: https://some/image.png
+images:
+- //some/image.png
+- //another/image.jpg
 layout: author
 draft: false
 ---
@@ -75,7 +82,7 @@ The following environment variables are required to run the script. Please make 
 
 Once configured as described above, you can run the following Jekyll subcommand to persist content from the API to your local `collections/` directory.
 
-```bash
+```text
 $ bundle exec jekyll contentful
 ```
 

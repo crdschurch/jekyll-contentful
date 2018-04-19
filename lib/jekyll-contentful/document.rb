@@ -30,6 +30,10 @@ module Jekyll
         def frontmatter
           matter = @options.dig('frontmatter','other') || {}
           (@options.dig('frontmatter','entry_mappings') || {}).each do |k, v|
+            if v.is_a?(Array) && v.size == 2 && @data.fields.keys.include?(v.first.to_sym)
+              matter[k] = @data.send(v.first.to_sym).collect { |obj| obj.send(v.last.to_sym) }
+              next
+            end
             if @data.fields.keys.include?(v.to_sym)
               matter[k] = @data.send(v.to_sym)
               next
