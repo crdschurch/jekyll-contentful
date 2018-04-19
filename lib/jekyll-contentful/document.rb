@@ -1,5 +1,6 @@
 require 'jekyll'
 require 'kramdown'
+require 'active_support/inflector'
 
 module Jekyll
   module Contentful
@@ -42,7 +43,11 @@ module Jekyll
         end
 
         def filename
-          _f = @data.slug
+          _f = begin
+            @data.slug
+          rescue
+            @data.title.parameterize
+          end
 
           if @options.keys.include?("filename")
             @template = Liquid::Template.parse(@options['filename']) # Parses and compiles the template
