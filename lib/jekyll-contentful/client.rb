@@ -11,15 +11,19 @@ module Jekyll
 
       def sync!
         content_types.each do |type|
-          type_cfg = cfg(type)
-          type_id = type_cfg.dig('id')
           rm(type)
-          documents = client.entries(content_type: type_id).collect{|c| Jekyll::Contentful::Document.new(c, type_cfg) }
+          documents = get_entries(type)
           documents.map(&:write!)
         end
       end
 
       private
+
+        def get_entries(type)
+          type_cfg = cfg(type)
+          type_id = type_cfg.dig('id')
+          client.entries(content_type: type_id).collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
+        end
 
         def content_types
           @content_types ||= @site.config.dig('contentful', 'content_types').keys

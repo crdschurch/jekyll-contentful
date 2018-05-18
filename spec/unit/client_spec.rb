@@ -33,8 +33,13 @@ describe Jekyll::Contentful::Client do
     expect(glob).to include(@site.collections['articles'].first.path)
   end
 
-  it 'should clean the collections directory' do
-    # @client.send(:rm, 'articles')
+  context 'get_entries()' do
+    cassette 'contentful/articles'
+
+    it 'should return document instances for each CF entry' do
+      documents = @client.send(:get_entries, 'articles')
+      expect(documents.all?{|d| d.class.name == 'Jekyll::Contentful::Document' }).to be(true)
+    end
   end
 
 end
