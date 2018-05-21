@@ -6,16 +6,18 @@ module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :options
+      attr_accessor :data, :options, :filename, :dir
 
       def initialize(obj, options={})
         @data = obj
         @options = options
+        @dir = FileUtils.pwd
+        @filename = parse_filename
       end
 
       def write!
-        FileUtils.mkdir_p "./#{File.dirname(filename)}"
-        File.open(filename, 'w') do |file|
+        FileUtils.mkdir_p File.dirname(path)
+        File.open(path, 'w') do |file|
           body = "#{frontmatter.to_yaml}---\n\n"
           unless @options.dig('body').nil?
             body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
@@ -46,7 +48,7 @@ module Jekyll
           matter
         end
 
-        def filename
+        def parse_filename
           _f = begin
             @data.slug
           rescue
@@ -61,6 +63,10 @@ module Jekyll
           end
 
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
+        end
+
+        def path
+          File.join(@dir, @filename)
         end
 
         def collection_name
