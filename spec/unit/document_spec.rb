@@ -56,11 +56,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should write the file' do
-    @doc.dir = File.join(@doc.dir, 'tmp')
-    @doc.filename = 'testing.md'
-    path = @doc.send(:path)
-    FileUtils.rm(path) if File.exist?(path)
-    @doc.write!
+    path = write_document!
     expect(File.exist?(path)).to be(true)
   end
 
@@ -90,6 +86,20 @@ describe Jekyll::Contentful::Client do
       expect{ @doc.send(:frontmatter) }.to_not raise_error
     end
 
+    it 'should not throw an error if body is nil' do
+      allow(@doc.data).to receive('body').and_return(nil)
+      expect{ write_document! }.to_not raise_error
+    end
+
+  end
+
+  def write_document!(filename='testing.md')
+    @doc.dir = File.join(@doc.dir, 'tmp')
+    @doc.filename = filename
+    path = @doc.send(:path)
+    FileUtils.rm(path) if File.exist?(path)
+    @doc.write!
+    path
   end
 
 end
