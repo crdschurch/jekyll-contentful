@@ -30,8 +30,8 @@ module Jekyll
       private
 
         def frontmatter
-          matter = @options.dig('frontmatter','other') || {}
-          (@options.dig('frontmatter','entry_mappings') || {}).each do |k, v|
+          matter = frontmatter_extras
+          frontmatter_entry_mappings.each do |k, v|
             if v.is_a?(Array) && v.size == 2
               matter[k] = @data.send(v.first.to_sym).collect { |obj| obj.send(v.last.to_sym) }
               next
@@ -48,21 +48,29 @@ module Jekyll
           matter
         end
 
-        def parse_filename
-          _f = begin
-            @data.slug
-          rescue
-            @data.title.parameterize
-          end
+        def frontmatter_extras
+          @options.dig('frontmatter','other') || {}
+        end
 
+        def frontmatter_entry_mappings
+          @options.dig('frontmatter', 'entry_mappings') || {}
+        end
+
+        def parse_filename
+          _f = slug
           if @options.keys.include?("filename")
             @template = Liquid::Template.parse(@options['filename']) # Parses and compiles the template
             tpl_vars = @template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
             mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
             _f = @template.render(mapped)
           end
-
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
+        end
+
+        def slug
+          @data.slug
+        rescue
+          @data.title.parameterize
         end
 
         def path
