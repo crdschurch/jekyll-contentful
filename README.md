@@ -36,7 +36,7 @@ contentful:
       frontmatter:
         entry_mappings:
           title: displayName
-          images: [images, url]
+          images: images/url
         other:
           layout: author
           draft: false
@@ -50,7 +50,7 @@ The `frontmatter` section defines what fields we want to map from Contentful int
 
 - `entry_mappings` is a list of target/src values that map a field from Contentful's API.
     - By default the key is the desired frontmatter key, while the value is the field name in Contentful. (In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`.)
-    - When the Contentful field is a `has_many` relationship, you can use an array as the mapped value, where the first item is the field name and the second item is the field name on the associated item to save to the frontmatter. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
+    - When the Contentful field is a reference, you can use a slash (`/`) to chain attributes together. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
 - The `other` section refers to additional attributes that you want hardcoded for each document.
 
 An example of what might be rendered based on the above configuration, looks like this...

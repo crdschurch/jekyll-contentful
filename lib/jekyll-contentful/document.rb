@@ -6,19 +6,23 @@ module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :options
+      attr_accessor :data, :options, :filename, :dir
 
       def initialize(obj, options={})
         @data = obj
         @options = options
+        @dir = FileUtils.pwd
+        @filename = parse_filename
       end
 
       def write!
-        FileUtils.mkdir_p "./#{File.dirname(filename)}"
-        File.open(filename, 'w') do |file|
+        FileUtils.mkdir_p File.dirname(path)
+        File.open(path, 'w') do |file|
           body = "#{frontmatter.to_yaml}---\n\n"
           unless @options.dig('body').nil?
-            body = "#{body}#{Kramdown::Document.new( @data.send(@options.dig('body').to_sym) ).to_html}"
+            if content = @data.send(@options.dig('body').to_sym)
+              body = "#{body}#{Kramdown::Document.new(content).to_html}"
+            end
           end
           file.write body
         end
@@ -28,39 +32,53 @@ module Jekyll
       private
 
         def frontmatter
-          matter = @options.dig('frontmatter','other') || {}
-          (@options.dig('frontmatter','entry_mappings') || {}).each do |k, v|
-            if v.is_a?(Array) && v.size == 2
-              matter[k] = @data.send(v.first.to_sym).collect { |obj| obj.send(v.last.to_sym) }
-              next
-            end
+          matter = frontmatter_extras
+          frontmatter_entry_mappings.each do |k, v|
             if @data.fields.keys.include?(v.to_sym)
               matter[k] = @data.send(v.to_sym)
               next
             end
             if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
               matter[k] = @data
-              v.split('/').each { |attr| matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil }
+              v.split('/').each do |attr|
+                if matter[k].is_a?(Array)
+                  matter[k] = matter[k].map { |x| x.send(attr) }
+                else
+                  matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil
+                end
+              end
             end
           end
           matter
         end
 
-        def filename
-          _f = begin
-            @data.slug
-          rescue
-            @data.title.parameterize
-          end
+        def frontmatter_extras
+          @options.dig('frontmatter','other') || {}
+        end
 
+        def frontmatter_entry_mappings
+          @options.dig('frontmatter', 'entry_mappings') || {}
+        end
+
+        def parse_filename
+          _f = slug
           if @options.keys.include?("filename")
             @template = Liquid::Template.parse(@options['filename']) # Parses and compiles the template
             tpl_vars = @template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
             mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
             _f = @template.render(mapped)
           end
-
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
+        end
+
+        def slug
+          @data.slug
+        rescue
+          @data.title.parameterize
+        end
+
+        def path
+          File.join(@dir, @filename)
         end
 
         def collection_name

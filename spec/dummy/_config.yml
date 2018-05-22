@@ -1,0 +1,42 @@
+collections_dir: collections
+
+collections:
+  articles:
+    output: true
+    permalink: /articles/:slug
+
+contentful:
+  content_types:
+    articles:
+      id: article
+      body: body
+      filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+      frontmatter:
+        entry_mappings:
+          title: title
+          image: image/url
+          author: author/full_name
+          topic: category/title
+          date: published_at
+          slug: slug
+          tags: tags
+        other:
+          layout: article
+          draft: false
+    podcasts:
+      id: podcast
+      body: description
+      frontmatter:
+        entry_mappings:
+          title: title
+          subtitle: subtitle
+          image: image/url
+          background: bg_image/url
+          authors: author/full_name
+          apple_podcasts_url: apple_podcasts_url
+          google_play_url: google_play_url
+          stitcher_url: stitcher_url
+          slug: slug
+        other:
+          layout: podcast
+          draft: false
