@@ -34,17 +34,19 @@ module Jekyll
         def frontmatter
           matter = frontmatter_extras
           frontmatter_entry_mappings.each do |k, v|
-            if v.is_a?(Array) && v.size == 2
-              matter[k] = @data.send(v.first.to_sym).collect { |obj| obj.send(v.last.to_sym) }
-              next
-            end
             if @data.fields.keys.include?(v.to_sym)
               matter[k] = @data.send(v.to_sym)
               next
             end
             if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
               matter[k] = @data
-              v.split('/').each { |attr| matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil }
+              v.split('/').each do |attr|
+                if matter[k].is_a?(Array)
+                  matter[k] = matter[k].map { |x| x.send(attr) }
+                else
+                  matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil
+                end
+              end
             end
           end
           matter

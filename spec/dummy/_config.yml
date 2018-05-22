@@ -23,3 +23,20 @@ contentful:
         other:
           layout: article
           draft: false
+    podcasts:
+      id: podcast
+      body: description
+      frontmatter:
+        entry_mappings:
+          title: title
+          subtitle: subtitle
+          image: image/url
+          background: bg_image/url
+          authors: author/full_name
+          apple_podcasts_url: apple_podcasts_url
+          google_play_url: google_play_url
+          stitcher_url: stitcher_url
+          slug: slug
+        other:
+          layout: podcast
+          draft: false

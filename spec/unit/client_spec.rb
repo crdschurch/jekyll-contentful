@@ -16,7 +16,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should return content_types' do
-    expect(@client.send(:content_types)).to eq(['articles'])
+    expect(@client.send(:content_types)).to match_array(['articles', 'podcasts'])
   end
 
   it 'should return config' do
