@@ -96,6 +96,12 @@ describe Jekyll::Contentful::Client do
       expect{ write_document! }.to_not raise_error
     end
 
+    it 'should not render properties if they are not returned from CF' do
+      expect(@article.send(:frontmatter).keys).to include('slug')
+      @article.data.fields.delete(:slug)
+      expect(@article.send(:frontmatter).keys).to_not include('slug')
+    end
+
   end
 
   def write_document!(filename='testing.md')
