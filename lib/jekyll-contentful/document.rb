@@ -32,7 +32,9 @@ module Jekyll
       private
 
         def frontmatter
-          matter = frontmatter_extras
+          matter = {}
+          matter.merge!(frontmatter_extras)
+
           frontmatter_entry_mappings.each do |k, v|
             if @data.fields.keys.include?(v.to_sym)
               matter[k] = @data.send(v.to_sym)
