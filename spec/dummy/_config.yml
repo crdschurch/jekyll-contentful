@@ -25,7 +25,7 @@ contentful:
           draft: false
     podcasts:
       id: podcast
-      body: description
+      body: this_field_doesnt_exist
       frontmatter:
         entry_mappings:
           title: title

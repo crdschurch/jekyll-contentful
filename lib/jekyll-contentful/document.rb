@@ -20,8 +20,9 @@ module Jekyll
         File.open(path, 'w') do |file|
           body = "#{frontmatter.to_yaml}---\n\n"
           unless @options.dig('body').nil?
-            if content = @data.send(@options.dig('body').to_sym)
-              body = "#{body}#{Kramdown::Document.new(content).to_html}"
+            if @data.respond_to?(@options.dig('body').to_sym)
+              content = @data.send(@options.dig('body').to_sym)
+              body = "#{body}#{Kramdown::Document.new(content || '').to_html}"
             end
           end
           file.write body
