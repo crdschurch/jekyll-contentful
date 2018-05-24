@@ -12,6 +12,7 @@ describe Jekyll::Contentful::Client do
     VCR.use_cassette('contentful/articles') do
       @article = @client.send(:get_entries, 'articles').first
     end
+
     VCR.use_cassette('contentful/podcasts') do
       @podcast = @client.send(:get_entries, 'podcasts').first
     end
@@ -59,7 +60,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should write the file' do
-    path = write_document!
+    path = write_document!(@article)
     expect(File.exist?(path)).to be(true)
   end
 
@@ -93,7 +94,10 @@ describe Jekyll::Contentful::Client do
 
     it 'should not throw an error if body is nil' do
       allow(@article.data).to receive('body').and_return(nil)
-      expect{ write_document! }.to_not raise_error
+      expect{ write_document!(@article) }.to_not raise_error
+
+      allow(@podcast.data).to receive('description').and_return(nil)
+      expect{ write_document!(@podcast) }.to_not raise_error
     end
 
     it 'should not render properties if they are not returned from CF' do
@@ -104,12 +108,12 @@ describe Jekyll::Contentful::Client do
 
   end
 
-  def write_document!(filename='testing.md')
-    @article.dir = File.join(@article.dir, 'tmp')
-    @article.filename = filename
-    path = @article.send(:path)
+  def write_document!(obj, filename='testing.md')
+    obj.dir = File.join(obj.dir, 'tmp')
+    obj.filename = filename
+    path = obj.send(:path)
     FileUtils.rm(path) if File.exist?(path)
-    @article.write!
+    obj.write!
     path
   end
 
