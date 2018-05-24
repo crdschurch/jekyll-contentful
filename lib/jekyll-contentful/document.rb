@@ -28,8 +28,6 @@ module Jekyll
           file.write body
         end
         Jekyll.logger.info "#{filename} imported"
-      rescue NoMethodError
-        binding.pry
       end
 
       private
