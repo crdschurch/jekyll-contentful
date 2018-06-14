@@ -66,12 +66,16 @@ module Jekyll
         def parse_filename
           _f = slug
           if @options.keys.include?("filename")
-            @template = Liquid::Template.parse(@options['filename']) # Parses and compiles the template
-            tpl_vars = @template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
-            mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
-            _f = @template.render(mapped)
+            _f = render_liquid(@options['filename'])
           end
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
+        end
+
+        def render_liquid(tpl)
+          template = Liquid::Template.parse(tpl) # Parses and compiles the template
+          tpl_vars = template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
+          mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
+          template.render(mapped)
         end
 
         def slug
