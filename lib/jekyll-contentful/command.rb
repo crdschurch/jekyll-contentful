@@ -1,4 +1,3 @@
-require 'pry'
 require 'contentful'
 require 'dotenv/load'
 
