@@ -65,6 +65,18 @@ describe Jekyll::Contentful::Client do
   end
 
   context 'mapping fields from Contentful' do
+    it 'should capitalize the title with liquid templating' do
+      frontmatter = {"title"=>"{{ title | capitalize }}",
+        "image"=>"image/url",
+        "author"=>"author/full_name",
+        "topic"=>"category/title",
+        "date"=>"published_at",
+        "slug"=>"slug",
+        "tags"=>"tags"}
+      allow(@article).to receive(:frontmatter_entry_mappings).and_return(frontmatter)
+      allow(@article.data).to receive(:title).and_return('liquid test')
+      expect(@article.send(:frontmatter)['title']).to eq('Liquid test')
+    end
 
     it 'should map a many reference to an array of values' do
       mappings = @podcast.send(:frontmatter_entry_mappings)
