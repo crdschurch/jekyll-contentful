@@ -35,8 +35,11 @@ module Jekyll
         def frontmatter
           matter = {}
           matter.merge!(frontmatter_extras)
-
           frontmatter_entry_mappings.each do |k, v|
+            if v.match(/\{{2}/)
+              matter[k] = render_liquid(v)
+              next
+            end
             if @data.fields.keys.include?(v.to_sym)
               matter[k] = @data.send(v.to_sym)
               next
