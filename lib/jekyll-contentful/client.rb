@@ -40,7 +40,7 @@ module Jekyll
 
         def rm(type)
           collections_glob(type).each do |file|
-            FileUtils.rm(file) if File.exist?(file)
+            FileUtils.remove_entry_secure(file) if File.exist?(file)
           end
         end
 
