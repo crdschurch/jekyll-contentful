@@ -1,5 +1,7 @@
 # jekyll-contentful
 
+[![Build Status](https://travis-ci.org/crdschurch/jekyll-contentful.svg?branch=master)](https://travis-ci.org/crdschurch/jekyll-contentful)
+
 `jekyll-contentful` is a plugin that integrates blog content from the [Contentful API](https://www.contentful.com/developers/docs/references/content-delivery-api/) with your Jekyll site.
 
 ## Installation
