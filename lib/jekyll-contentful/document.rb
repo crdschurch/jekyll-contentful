@@ -77,7 +77,7 @@ module Jekyll
         def render_liquid(tpl)
           template = Liquid::Template.parse(tpl) # Parses and compiles the template
           tpl_vars = template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
-          mapped = tpl_vars.collect{|obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] }.reduce({}, :merge)
+          mapped = tpl_vars.collect { |obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] rescue nil }.reject(&:blank?).reduce({}, :merge)
           template.render(mapped)
         end
 
