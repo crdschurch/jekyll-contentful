@@ -35,6 +35,7 @@ module Jekyll
         def frontmatter
           matter = {}
           matter.merge!(frontmatter_extras)
+          matter.merge!(frontmatter_links)
           frontmatter_entry_mappings.each do |k, v|
             if v.match(/\{{2}/)
               matter[k] = render_liquid(v)
@@ -60,6 +61,18 @@ module Jekyll
 
         def frontmatter_extras
           @options.dig('frontmatter','other') || {}
+        end
+
+        def frontmatter_links
+          return {} unless @options.dig('links')
+          links = {}
+          @options.dig('links').each do |key, cfg|
+            entry = Client.entries[cfg['content_type'].to_sym]
+              .select { |e| e.send(cfg['linked_field']).collect(&:id).include?(@data.id) }.first
+            next if entry.nil?
+            links[key] = entry.send(cfg['display_field'])
+          end
+          links
         end
 
         def frontmatter_entry_mappings

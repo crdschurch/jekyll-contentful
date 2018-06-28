@@ -1,6 +1,30 @@
+require 'active_support/inflector'
+require 'pry'
+
 module Jekyll
   module Contentful
     class Client
+
+      class << self
+        attr_accessor :entries
+
+        def store_entries(type_id)
+          self.entries ||= {}
+          self.entries[type_id.to_sym] = client.entries(content_type: type_id)
+        end
+
+        private
+
+          def client
+            @client ||= begin
+              ::Contentful::Client.new(
+                access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
+                space: ENV['CONTENTFUL_SPACE_ID'],
+                environment: (ENV['CONTENTFUL_ENV'] || 'master')
+              )
+            end
+          end
+      end
 
       attr_accessor :site
 
@@ -22,7 +46,8 @@ module Jekyll
         def get_entries(type)
           type_cfg = cfg(type)
           type_id = type_cfg.dig('id')
-          client.entries(content_type: type_id).collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
+          entries = self.class.store_entries(type_id)
+          entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
         end
 
         def content_types
@@ -45,13 +70,7 @@ module Jekyll
         end
 
         def client
-          @client ||= begin
-            ::Contentful::Client.new(
-              access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-              space: ENV['CONTENTFUL_SPACE_ID'],
-              environment: (ENV['CONTENTFUL_ENV'] || 'master')
-            )
-          end
+          @client ||= self.class.send(:client)
         end
 
       class << self
