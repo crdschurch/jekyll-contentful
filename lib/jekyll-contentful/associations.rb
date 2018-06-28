@@ -28,8 +28,9 @@ module Jekyll
 
               # ...sort the array against the front-matter for the current document
               order = doc.data[k]
-              associations[k].sort_by_arr!(order, ['data', 'id'])
+              associations[k].uniq!.sort_by_arr!(order, 'id')
             end
+
 
             # set the associated docs back onto doc object so its exposed to Liquid
             doc.data['associations'] = associations
@@ -40,9 +41,10 @@ module Jekyll
       protected
 
         def get_associated_docs(owner, types_arr)
+          # binding.pry
           get_docs_of_type(types_arr).select do |assoc_doc|
-            owner.data['id'].include?(assoc_doc.data['id'])
-          end
+            owner.data['videos'].include?(assoc_doc.data['id'])
+          end.uniq
         end
 
         def get_docs_of_type(arr)

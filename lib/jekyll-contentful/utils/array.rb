@@ -1,5 +1,5 @@
 class Array
-  def sort_by_arr!(order, keys)
-    self.sort! { |a,b| order.index(a.dig(*keys)) <=> order.index(b.dig(*keys)) }
+  def sort_by_arr!(order, key)
+    self.sort! { |a,b| order.index(a.data[key]) <=> order.index(b.data[key]) }
   end
 end
