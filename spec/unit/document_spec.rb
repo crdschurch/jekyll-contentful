@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'jekyll'
 require 'active_support/inflector'
 
-describe Jekyll::Contentful::Client do
+describe Jekyll::Contentful::Document do
 
   before do
     Jekyll.logger.adjust_verbosity(quiet: true)
@@ -15,6 +15,14 @@ describe Jekyll::Contentful::Client do
 
     VCR.use_cassette('contentful/podcasts') do
       @podcast = @client.send(:get_entries, 'podcasts').first
+    end
+
+    VCR.use_cassette('contentful/messages') do
+      @message = @client.send(:get_entries, 'messages').first
+    end
+
+    VCR.use_cassette('contentful/series') do
+      @series = @client.send(:get_entries, 'series').first
     end
   end
 
