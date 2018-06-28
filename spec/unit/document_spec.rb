@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'jekyll'
 require 'active_support/inflector'
 
-describe Jekyll::Contentful::Client do
+describe Jekyll::Contentful::Document do
 
   before do
     Jekyll.logger.adjust_verbosity(quiet: true)

@@ -33,7 +33,9 @@ module Jekyll
       private
 
         def frontmatter
-          matter = {}
+          matter = {
+            "id" => data.id
+          }
           matter.merge!(frontmatter_extras)
           frontmatter_entry_mappings.each do |k, v|
             if v.match(/\{{2}/)
