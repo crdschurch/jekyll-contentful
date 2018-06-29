@@ -17,14 +17,15 @@ module Jekyll
             associations = {}
 
             # For each associated collection...
-            cfg.dig('associations').each do |k, assoc|
+            cfg.dig('associations').each do |mapping|
+              ref, collections = mapping
 
               # ...get all matching documents and concatenate them into one big array
-              associations[k] = get_associated_docs(doc, assoc)
+              associations[ref] = get_associated_docs(doc, mapping)
 
               # ...sort the array against the front-matter for the current document
-              order = doc.data[k]
-              associations[k].sort_by_arr!(order, 'id')
+              order = doc.data[ref]
+              associations[ref].sort_by_arr!(order, 'id')
             end
 
             # put associated docs back onto doc object so its exposed to Liquid
@@ -35,9 +36,15 @@ module Jekyll
 
       protected
 
-        def get_associated_docs(owner, types_arr)
-          get_docs_of_type(types_arr).select do |assoc_doc|
-            owner.data['videos'].include?(assoc_doc.data['id'])
+        def get_associated_docs(owner, mapping)
+          ref, collections = mapping
+
+          get_docs_of_type(collections).select do |assoc_doc|
+            begin
+              owner.data[ref].include?(assoc_doc.data['id'])
+            rescue
+              false
+            end
           end.uniq
         end
 
