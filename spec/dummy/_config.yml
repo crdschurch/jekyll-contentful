@@ -3,7 +3,16 @@ collections_dir: collections
 collections:
   articles:
     output: true
-    permalink: /articles/:slug
+    permalink: /:collection/:slug
+  podcasts:
+    output: true
+    permalink: /:collection/:slug
+  series:
+    output: true
+    permalink: /:collection/:slug
+  messages:
+    output: true
+    permalink: /:collection/:slug
 
 contentful:
   content_types:
@@ -39,4 +48,50 @@ contentful:
           slug: slug
         other:
           layout: podcast
+          draft: false
+    series:
+      id: series
+      body: description
+      frontmatter:
+        entry_mappings:
+          title: title
+          slug: slug
+          image: image/url
+          bg_image: background_image/url
+          start_date: starts_at
+          end_date: ends_at
+          youtube_url: youtube_url
+          apple_podcasts_url: apple_podcasts_url
+          google_play_url: google_play_url
+          year: "{{ starts_at | date: '%Y' }}"
+        other:
+          layout: series
+          draft: false
+    messages:
+      id: message
+      body: description
+      links:
+        series_slug:
+          content_type: series
+          field: videos
+          value: slug
+      frontmatter:
+        entry_mappings:
+          title: title
+          authors: author/full_name
+          image: image/url
+          source_url: source_url
+          series: series/title
+          program: program/url
+          video_duration: video_duration
+          topic: category/title
+          topic_slug: category/slug
+          tags: tags
+          transcription: transcription
+          apple_podcasts_url: apple_podcasts_url
+          google_play_url: google_play_url
+          date: published_at
+          slug: slug
+        other:
+          layout: video
           draft: false

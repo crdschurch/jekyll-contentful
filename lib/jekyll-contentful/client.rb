@@ -22,7 +22,13 @@ module Jekyll
         def get_entries(type)
           type_cfg = cfg(type)
           type_id = type_cfg.dig('id')
-          client.entries(content_type: type_id).collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
+          fetch_entries(type_id).collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
+        end
+
+        def fetch_entries(type_id, entries = [])
+          this_page = client.entries(content_type: type_id, limit: 1000, skip: entries.size).to_a
+          entries.concat(this_page)
+          this_page.size == 1000 ? fetch_entries(type_id, entries) : entries
         end
 
         def content_types

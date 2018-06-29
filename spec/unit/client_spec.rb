@@ -16,7 +16,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should return content_types' do
-    expect(@client.send(:content_types)).to match_array(['articles', 'podcasts'])
+    expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series])
   end
 
   it 'should return config' do
@@ -39,6 +39,15 @@ describe Jekyll::Contentful::Client do
     it 'should return document instances for each CF entry' do
       documents = @client.send(:get_entries, 'articles')
       expect(documents.all?{|d| d.class.name == 'Jekyll::Contentful::Document' }).to be(true)
+    end
+  end
+
+  context 'fetch_entries()' do
+    cassette 'contentful/messages'
+
+    it 'fetches all entries when there are more than 1000' do
+      documents = @client.send(:fetch_entries, 'message')
+      expect(documents.size).to eq(1068)
     end
   end
 
