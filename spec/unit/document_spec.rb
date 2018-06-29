@@ -64,9 +64,9 @@ describe Jekyll::Contentful::Document do
   end
 
   it 'should expose entry id in frontmatter of every document' do
-    yml = @article.send(:frontmatter)
+    yml = article.send(:frontmatter)
     expect(yml.keys).to include('id')
-    expect(yml['id']).to eq('2TE9Jy8rvyoq2o6E8OQu44')
+    expect(yml['id']).to eq('5aYJRTYvBCc66UCEaQeuiE')
   end
 
   it 'should return parameterized title if slug is not defined' do
