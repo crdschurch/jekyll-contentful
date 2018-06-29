@@ -3,7 +3,19 @@ collections_dir: collections
 collections:
   articles:
     output: true
-    permalink: /articles/:slug
+    permalink: /:collection/:slug
+  podcasts:
+    output: true
+    permalink: /:collection/:slug
+  messages:
+    output: true
+    permalink: /:collection/:slug
+  series:
+    output: true
+    permalink: /:collection/:slug
+  trailers:
+    output: true
+    permalink: /:collection/:slug
 
 contentful:
   content_types:
@@ -40,3 +52,26 @@ contentful:
         other:
           layout: podcast
           draft: false
+    messages:
+      id: message
+      frontmatter:
+        entry_mappings:
+          title: title
+          slug: slug
+    series:
+      id: series
+      associations:
+        videos:
+          - trailers
+          - messages
+      frontmatter:
+        entry_mappings:
+          title: title
+          videos: videos/id
+          slug: slug
+    trailers:
+      id: trailer
+      frontmatter:
+        entry_mappings:
+          title: title
+          slug: slug
