@@ -62,8 +62,8 @@ contentful:
       id: series
       associations:
         videos:
-          trailers: id
-          messages: id
+          - trailers
+          - messages
       frontmatter:
         entry_mappings:
           title: title
