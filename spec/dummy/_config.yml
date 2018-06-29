@@ -54,6 +54,11 @@ contentful:
           draft: false
     messages:
       id: message
+      links:
+        series_slug:
+          content_type: series
+          field: videos
+          value: slug
       frontmatter:
         entry_mappings:
           title: title
