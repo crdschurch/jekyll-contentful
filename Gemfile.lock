@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-contentful (0.0.5)
+    jekyll-contentful (0.0.6)
       activesupport
       contentful (>= 2.6.0)
       dotenv
