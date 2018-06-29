@@ -3,7 +3,7 @@ require 'pry'
 require 'jekyll'
 require 'active_support/inflector'
 
-describe Jekyll::Contentful::Client do
+describe Jekyll::Contentful::Document do
 
   let(:article) {
     VCR.use_cassette('contentful/articles') do
@@ -61,6 +61,12 @@ describe Jekyll::Contentful::Client do
     cfg.each do |mapped,src|
       expect(article.send(:frontmatter_entry_mappings)[mapped]).to eq(src)
     end
+  end
+
+  it 'should expose entry id in frontmatter of every document' do
+    yml = @article.send(:frontmatter)
+    expect(yml.keys).to include('id')
+    expect(yml['id']).to eq('2TE9Jy8rvyoq2o6E8OQu44')
   end
 
   it 'should return parameterized title if slug is not defined' do
