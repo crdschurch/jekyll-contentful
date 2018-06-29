@@ -46,6 +46,13 @@ describe Jekyll::Contentful::Document do
     end
   end
 
+  it 'should add links to frontmatter' do
+    expect(@article.send(:frontmatter_links)).to eq({})
+    expect(@podcast.send(:frontmatter_links)).to eq({})
+    expect(@series.send(:frontmatter_links)).to eq({})
+    expect(@message.send(:frontmatter_links)).to eq({"series_slug"=>"where-in-the-world-is-carmen-sandiego"})
+  end
+
   it 'should return frontmatter entry mappings' do
     cfg = @site.config.dig('contentful', 'content_types', 'articles', 'frontmatter', 'entry_mappings')
     cfg.each do |mapped,src|

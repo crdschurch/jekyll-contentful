@@ -68,7 +68,7 @@ module Jekyll
           links = {}
           @options.dig('links').each do |key, cfg|
             entry = Client.entries[cfg['content_type'].to_sym]
-              .select { |e| e.send(cfg['linked_field']).collect(&:id).include?(@data.id) }.first
+              .select { |e| e.send(cfg['linked_field']).collect(&:id).include?(@data.id) rescue false }.first
             next if entry.nil?
             links[key] = entry.send(cfg['display_field'])
           end
