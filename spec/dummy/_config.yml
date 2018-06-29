@@ -73,8 +73,8 @@ contentful:
       links:
         series_slug:
           content_type: series
-          linked_field: videos
-          display_field: slug
+          field: videos
+          value: slug
       frontmatter:
         entry_mappings:
           title: title
