@@ -37,7 +37,11 @@ module Jekyll
 
         def get_associated_docs(owner, types_arr)
           get_docs_of_type(types_arr).select do |assoc_doc|
-            owner.data['videos'].include?(assoc_doc.data['id'])
+            begin
+              owner.data['videos'].include?(assoc_doc.data['id'])
+            rescue
+              false
+            end
           end.uniq
         end
 
