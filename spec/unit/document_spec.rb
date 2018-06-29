@@ -7,7 +7,7 @@ describe Jekyll::Contentful::Document do
 
   let(:article) {
     VCR.use_cassette('contentful/articles') do
-      return @client.send(:get_entries, 'articles').first
+      return @client.send(:get_entries, 'articles').select { |p| p.data.id == '5aYJRTYvBCc66UCEaQeuiE' }.first
     end
   }
 
@@ -54,6 +54,13 @@ describe Jekyll::Contentful::Document do
     cfg.each do |mapped,src|
       expect(article.send(:frontmatter_extras)[mapped]).to eq(src)
     end
+  end
+
+  it 'should add links to frontmatter' do
+    expect(article.send(:frontmatter_links)).to eq({})
+    expect(podcast.send(:frontmatter_links)).to eq({})
+    expect(series.send(:frontmatter_links)).to eq({})
+    expect(message.send(:frontmatter_links)).to eq({"series_slug"=>"seasons"})
   end
 
   it 'should return frontmatter entry mappings' do
