@@ -10,10 +10,16 @@ module Jekyll
 
         def store_entries(type_id)
           self.entries ||= {}
-          self.entries[type_id.to_sym] = client.entries(content_type: type_id)
+          self.entries[type_id.to_sym] = fetch_entries(type_id)
         end
 
         private
+
+          def fetch_entries(type_id, entries = [])
+            this_page = client.entries(content_type: type_id, limit: 1000, skip: entries.size).to_a
+            entries.concat(this_page)
+            this_page.size == 1000 ? fetch_entries(type_id, entries) : entries
+          end
 
           def client
             @client ||= begin

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 require 'jekyll'
 require 'active_support/inflector'
 
@@ -6,25 +7,25 @@ describe Jekyll::Contentful::Document do
 
   let(:article) {
     VCR.use_cassette('contentful/articles') do
-      return @client.send(:get_entries, 'articles').select { |p| p.data.id == '5aYJRTYvBCc66UCEaQeuiE' }.first
+      return @client.send(:get_entries, 'articles').detect { |p| p.data.id == '5aYJRTYvBCc66UCEaQeuiE' }
     end
   }
 
   let(:podcast) {
     VCR.use_cassette('contentful/podcasts') do
-      return @client.send(:get_entries, 'podcasts').select { |p| p.data.id == '5q50uJgqNUkqkMmaegK6M8' }.first
+      return @client.send(:get_entries, 'podcasts').detect { |p| p.data.id == '5q50uJgqNUkqkMmaegK6M8' }
     end
   }
 
   let(:series) {
     VCR.use_cassette('contentful/series') do
-      return @client.send(:get_entries, 'series').first
+      return @client.send(:get_entries, 'series').detect { |p| p.data.id == 'ElSFOutc0oA446C6Aw28S' }
     end
   }
 
   let(:message) {
     VCR.use_cassette('contentful/messages') do
-      return @client.send(:get_entries, 'messages').first
+      return @client.send(:get_entries, 'messages').detect { |p| p.data.id == '4xopQV6xOoIAAucCGE2OoC' }
     end
   }
 
@@ -59,7 +60,7 @@ describe Jekyll::Contentful::Document do
     expect(article.send(:frontmatter_links)).to eq({})
     expect(podcast.send(:frontmatter_links)).to eq({})
     expect(series.send(:frontmatter_links)).to eq({})
-    expect(message.send(:frontmatter_links)).to eq({"series_slug"=>"seasons"})
+    expect(message.send(:frontmatter_links)).to eq({"series_slug"=>"power-house"})
   end
 
   it 'should return frontmatter entry mappings' do
