@@ -33,7 +33,9 @@ module Jekyll
       private
 
         def frontmatter
-          matter = {}
+          matter = {
+            "id" => data.id
+          }
           matter.merge!(frontmatter_extras)
           matter.merge!(frontmatter_links)
           frontmatter_entry_mappings.each do |k, v|

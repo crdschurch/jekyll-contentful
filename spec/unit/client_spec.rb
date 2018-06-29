@@ -17,7 +17,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should return content_types' do
-    expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series])
+    expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series trailers])
   end
 
   it 'should return config' do
