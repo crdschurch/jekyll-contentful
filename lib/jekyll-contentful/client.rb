@@ -1,5 +1,4 @@
 require 'active_support/inflector'
-require 'pry'
 
 module Jekyll
   module Contentful

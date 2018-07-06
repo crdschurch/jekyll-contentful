@@ -1,5 +1,3 @@
-require 'pry'
-
 module Jekyll
   module Contentful
     class Generator < Jekyll::Generator
