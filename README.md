@@ -70,6 +70,30 @@ draft: false
 Body content here.
 ```
 
+## Associations
+
+This gem provides some utilities for setting up associations between your content models and a generator that will populate your collection pages with the associated objects. To use this feature, you need to specify the Contentful reference field name and what content models it is associated with under the `has_many` heading in `_config.yml`, like this...
+
+```yml
+contentful:
+  content_types:
+    articles:
+      ...
+    recipes:
+      ...
+    authors:
+      has_many:
+        contributions:
+          - articles
+          - recipes
+```
+
+When your site is built, the page object for every author will be prepopulated with that author's associated objects. You can access all of them in your templates, like so...
+
+```
+{{ page.associations.contributions }}
+```
+
 ## Environment Variables
 
 The following environment variables are required to run the script. Please make sure they are exported to the same scope in which your Jekyll commands are run.
@@ -79,6 +103,7 @@ The following environment variables are required to run the script. Please make 
 | `CONTENTFUL_ACCESS_TOKEN` | Access token for Contentful's Develivery or Preview API | |
 | `CONTENTFUL_SPACE_ID` | ID specifying Contentful Space | |
 | `CONTENTFUL_ENV` | Contentful environment | `master` |
+
 
 ## Usage
 

@@ -2,33 +2,30 @@ module Jekyll
   module Contentful
     class Associations
 
-      attr_accessor :site, :types
+      attr_accessor :site, :defs
 
       def initialize(site)
         @site = site
-        @types = site.config.dig('contentful', 'content_types').select{|type, cfg| cfg.keys.include?('associations') }
+        @defs = site.config.dig('contentful', 'content_types').select{|type, cfg| cfg.keys.include?('has_many') }
       end
 
       def run!
-        @types.each do |type, cfg|
+        @defs.each do |content_model, cfg|
 
-          # Loop through all the documents for collection types specified in associations config
-          @site.collections[type].docs.each do |doc|
+          # Loop through all the documents for this content_model
+          @site.collections[content_model].docs.each do |doc|
             associations = {}
 
-            # For each associated collection...
-            cfg.dig('associations').each do |mapping|
-              ref, collections = mapping
-
+            cfg.dig('has_many').each do |name, models|
               # ...get all matching documents and concatenate them into one big array
-              associations[ref] = get_associated_docs(doc, mapping)
+              associations[name] = get_associated_docs(doc, name, models)
 
               # ...sort the array against the front-matter for the current document
-              order = doc.data[ref]
-              associations[ref].sort_by_arr!(order, 'id')
+              order = doc.data[name]
+              associations[name].sort_by_arr!(order, 'id')
             end
 
-            # put associated docs back onto doc object so its exposed to Liquid
+            # put associations on doc object so they're exposed to Liquid
             doc.data['associations'] = associations
           end
         end
@@ -36,12 +33,10 @@ module Jekyll
 
       protected
 
-        def get_associated_docs(owner, mapping)
-          ref, collections = mapping
-
-          get_docs_of_type(collections).select do |assoc_doc|
+        def get_associated_docs(owner, name, models)
+          get_docs_of_type(models).select do |doc|
             begin
-              owner.data[ref].include?(assoc_doc.data['id'])
+              owner.data[name].include?(doc.data['id'])
             rescue
               false
             end

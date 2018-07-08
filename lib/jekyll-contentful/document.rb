@@ -61,6 +61,17 @@ module Jekyll
           matter
         end
 
+        def frontmatter_associations
+          if @options.keys.include?('has_many')
+            yml = @options.dig('has_many').values.flatten.uniq.collect do |model|
+              ['blocks', 'blocks/id']
+            end
+            Hash[yml]
+          else
+            {}
+          end
+        end
+
         def frontmatter_extras
           @options.dig('frontmatter','other') || {}
         end
@@ -78,7 +89,7 @@ module Jekyll
         end
 
         def frontmatter_entry_mappings
-          @options.dig('frontmatter', 'entry_mappings') || {}
+          (@options.dig('frontmatter', 'entry_mappings') || {}).merge(frontmatter_associations)
         end
 
         def parse_filename
