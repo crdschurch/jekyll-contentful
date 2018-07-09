@@ -1,3 +1,4 @@
+require 'pry'
 require 'jekyll'
 require 'kramdown'
 require 'active_support/inflector'
@@ -63,8 +64,8 @@ module Jekyll
 
         def frontmatter_associations
           if @options.keys.include?('has_many')
-            yml = @options.dig('has_many').values.flatten.uniq.collect do |model|
-              ['blocks', 'blocks/id']
+            yml = @options.dig('has_many').keys.collect do |assoc|
+              [assoc, "#{assoc}/id"]
             end
             Hash[yml]
           else
