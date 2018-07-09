@@ -35,7 +35,8 @@ module Jekyll
 
         def frontmatter
           matter = {
-            "id" => data.id
+            "id" => data.id,
+            "content_type" => @data.content_type.id
           }
           matter.merge!(frontmatter_extras)
           matter.merge!(frontmatter_links)
