@@ -49,13 +49,6 @@ describe Jekyll::Contentful::Document do
     expect(article.send(:slug)).to eq('lorem-ipsum')
   end
 
-  it 'should return frontmatter extras' do
-    cfg = @site.config.dig('contentful', 'content_types', 'articles', 'frontmatter', 'other')
-    cfg.each do |mapped,src|
-      expect(article.send(:frontmatter_extras)[mapped]).to eq(src)
-    end
-  end
-
   it 'should add links to frontmatter' do
     expect(article.send(:frontmatter_links)).to eq({})
     expect(podcast.send(:frontmatter_links)).to eq({})
@@ -64,7 +57,7 @@ describe Jekyll::Contentful::Document do
   end
 
   it 'should return frontmatter entry mappings' do
-    cfg = @site.config.dig('contentful', 'content_types', 'articles', 'frontmatter', 'entry_mappings')
+    cfg = @site.config.dig('contentful', 'content_types', 'articles', 'frontmatter')
     cfg.each do |mapped,src|
       expect(article.send(:frontmatter_entry_mappings)[mapped]).to eq(src)
     end
@@ -85,7 +78,7 @@ describe Jekyll::Contentful::Document do
   it 'should return frontmatter' do
     yml = article.send(:frontmatter)
     expect(yml).to be_instance_of(Hash)
-    %w(layout title image author topic date slug).each do |k|
+    %w(title image author topic date slug).each do |k|
       expect(yml.keys).to include(k)
     end
   end

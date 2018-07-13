@@ -38,7 +38,6 @@ module Jekyll
             "id" => data.id,
             "content_type" => @data.content_type.id
           }
-          matter.merge!(frontmatter_extras)
           matter.merge!(frontmatter_links)
           frontmatter_entry_mappings.each do |k, v|
             if v.match(/\{{2}/)
@@ -74,10 +73,6 @@ module Jekyll
           end
         end
 
-        def frontmatter_extras
-          @options.dig('frontmatter','other') || {}
-        end
-
         def frontmatter_links
           return {} unless @options.dig('links')
           links = {}
@@ -91,7 +86,7 @@ module Jekyll
         end
 
         def frontmatter_entry_mappings
-          (@options.dig('frontmatter', 'entry_mappings') || {}).merge(frontmatter_associations)
+          (@options.dig('frontmatter') || {}).merge(frontmatter_associations)
         end
 
         def parse_filename

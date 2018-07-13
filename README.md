@@ -36,24 +36,17 @@ contentful:
       body: bio
       filename: '{{ first_name }}-{{ last_name }}'
       frontmatter:
-        entry_mappings:
-          title: displayName
-          images: images/url
-        other:
-          layout: author
-          draft: false
+        title: displayName
+        images: images/url
 ```
 
 The `id` attribute specifies the ID for the Contentful content-type you'd like to associate with this collection. The `body` attribute specifies which field from your content-type should populate the content of resulting Markdown file.
 
 The `filename` attribute is a Liquid template that defines the value used when saving each document for this content-type (sans-filename, of course). This is handy if you need to format a string or date value in your filename, derived from your Contentful data. If the `filename` attribute is missing, it will first look for a `slug` field on the document and falls back to parameterizing the title field.
 
-The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter:
+The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter. Each key/value pair defines the fields/values that map a field from Contentful's API. By default the key is the desired frontmatter key, while the value is the field name in Contentful. In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`.
 
-- `entry_mappings` is a list of target/src values that map a field from Contentful's API.
-    - By default the key is the desired frontmatter key, while the value is the field name in Contentful. (In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`.)
-    - When the Contentful field is a reference, you can use a slash (`/`) to chain attributes together. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
-- The `other` section refers to additional attributes that you want hardcoded for each document.
+When the Contentful field is a reference, you can use a slash (`/`) to chain attributes together. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
 
 An example of what might be rendered based on the above configuration, looks like this...
 
@@ -63,8 +56,6 @@ title: Walter Sobchak
 images:
 - //some/image.png
 - //another/image.jpg
-layout: author
-draft: false
 ---
 
 Body content here.
