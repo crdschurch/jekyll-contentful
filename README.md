@@ -104,6 +104,12 @@ Once configured as described above, you can run the following Jekyll subcommand 
 $ bundle exec jekyll contentful
 ```
 
+You can limit the content returned from Contentful by specifying one or more collections on the command line, like so...
+
+```
+$ bundle exec jekyll contentful --collections articles,authors
+```
+
 ## License
 
 This project is licensed under the [3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause).

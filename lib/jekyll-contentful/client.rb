@@ -31,11 +31,12 @@ module Jekyll
           end
       end
 
-      attr_accessor :site
+      attr_accessor :site, :options
 
-      def initialize(args: [], site: nil)
+      def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
+        @options = options
       end
 
       def sync!
@@ -56,7 +57,14 @@ module Jekyll
         end
 
         def content_types
-          @content_types ||= @site.config.dig('contentful', 'content_types').keys
+          @content_types ||= begin
+            collections = @site.config.dig('contentful', 'content_types').keys
+            if @options.dig('collections').nil?
+              collections
+            else
+              collections & @options.dig('collections')
+            end
+          end
         end
 
         def cfg(type)

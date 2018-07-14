@@ -20,6 +20,13 @@ describe Jekyll::Contentful::Client do
     expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series trailers])
   end
 
+  it 'should return only content_types specified in options' do
+    @client.options = {
+      "collections" => ['trailers']
+    }
+    expect(@client.send(:content_types)).to match_array(%w[trailers])
+  end
+
   it 'should return config' do
     expect(@client.send(:cfg, 'articles')).to be_instance_of(Hash)
   end
