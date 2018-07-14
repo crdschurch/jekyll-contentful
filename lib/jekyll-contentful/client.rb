@@ -12,6 +12,15 @@ module Jekyll
           self.entries[type_id.to_sym] = fetch_entries(type_id, limit: limit)
         end
 
+        def scaffold(app_root)
+          overrides = Jekyll::Configuration.new.read_config_file(File.join(app_root, '_config.yml'))
+          site_config = Jekyll::Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, overrides.merge({
+            "source" => app_root,
+            "destination" => File.join(app_root, '_site')
+          }))
+          Jekyll::Site.new(site_config)
+        end
+
         private
 
           def fetch_entries(type_id, limit: nil, entries: [])
@@ -29,6 +38,7 @@ module Jekyll
               )
             end
           end
+
       end
 
       attr_accessor :site, :options
@@ -85,17 +95,6 @@ module Jekyll
         def client
           @client ||= self.class.send(:client)
         end
-
-      class << self
-        def scaffold(app_root)
-          overrides = Jekyll::Configuration.new.read_config_file(File.join(app_root, '_config.yml'))
-          site_config = Jekyll::Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, overrides.merge({
-            "source" => app_root,
-            "destination" => File.join(app_root, '_site')
-          }))
-          Jekyll::Site.new(site_config)
-        end
-      end
 
     end
   end
