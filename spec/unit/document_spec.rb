@@ -57,7 +57,7 @@ describe Jekyll::Contentful::Document do
   end
 
   it 'should return frontmatter entry mappings' do
-    cfg = @site.config.dig('contentful', 'content_types', 'articles', 'frontmatter')
+    cfg = @site.config.dig('contentful', 'articles', 'frontmatter')
     cfg.each do |mapped,src|
       expect(article.send(:frontmatter_entry_mappings)[mapped]).to eq(src)
     end

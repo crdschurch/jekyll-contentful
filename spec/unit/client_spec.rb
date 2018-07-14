@@ -16,15 +16,15 @@ describe Jekyll::Contentful::Client do
     expect(@site).to be_instance_of(Jekyll::Site)
   end
 
-  it 'should return content_types' do
-    expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series trailers])
+  it 'should return collections' do
+    expect(@client.send(:collections)).to match_array(%w[articles podcasts messages series trailers])
   end
 
-  it 'should return only content_types specified in options' do
+  it 'should return only collections specified in options' do
     @client.options = {
       "collections" => ['trailers']
     }
-    expect(@client.send(:content_types)).to match_array(%w[trailers])
+    expect(@client.send(:collections)).to match_array(%w[trailers])
   end
 
   it 'should return config' do

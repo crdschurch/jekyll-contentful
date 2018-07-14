@@ -30,14 +30,13 @@ For each collection you want persisted from Contentful, define the `id`, `body` 
 
 ```yml
 contentful:
-  content_types:
-    authors:
-      id: author
-      body: bio
-      filename: '{{ first_name }}-{{ last_name }}'
-      frontmatter:
-        title: displayName
-        images: images/url
+  authors:
+    id: author
+    body: bio
+    filename: '{{ first_name }}-{{ last_name }}'
+    frontmatter:
+      title: displayName
+      images: images/url
 ```
 
 The `id` attribute specifies the ID for the Contentful content-type you'd like to associate with this collection. The `body` attribute specifies which field from your content-type should populate the content of resulting Markdown file.
@@ -67,16 +66,15 @@ This gem provides some utilities for setting up associations between your conten
 
 ```yml
 contentful:
-  content_types:
-    articles:
-      ...
-    recipes:
-      ...
-    authors:
-      has_many:
-        contributions:
-          - articles
-          - recipes
+  articles:
+    ...
+  recipes:
+    ...
+  authors:
+    has_many:
+      contributions:
+        - articles
+        - recipes
 ```
 
 When your site is built, the page object for every author will be prepopulated with that author's associated objects. You can access all of them in your templates, like so...

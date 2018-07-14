@@ -18,53 +18,52 @@ collections:
     permalink: /:collection/:slug
 
 contentful:
-  content_types:
-    articles:
-      id: article
-      body: body
-      filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
-      frontmatter:
-        title: title
-        image: image/url
-        author: author/full_name
-        topic: category/title
-        date: published_at
-        slug: slug
-        tags: tags
-    podcasts:
-      id: podcast
-      body: this_field_doesnt_exist
-      frontmatter:
-        title: title
-        subtitle: subtitle
-        image: image/url
-        background: bg_image/url
-        authors: author/full_name
-        apple_podcasts_url: apple_podcasts_url
-        google_play_url: google_play_url
-        stitcher_url: stitcher_url
-        slug: slug
-    messages:
-      id: message
-      links:
-        series_slug:
-          content_type: series
-          field: videos
-          value: slug
-      frontmatter:
-        title: title
-        slug: slug
-    series:
-      id: series
-      has_many:
-        videos:
-          - trailers
-          - messages
-      frontmatter:
-        title: title
-        slug: slug
-    trailers:
-      id: trailer
-      frontmatter:
-        title: title
-        slug: slug
+  articles:
+    id: article
+    body: body
+    filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+    frontmatter:
+      title: title
+      image: image/url
+      author: author/full_name
+      topic: category/title
+      date: published_at
+      slug: slug
+      tags: tags
+  podcasts:
+    id: podcast
+    body: this_field_doesnt_exist
+    frontmatter:
+      title: title
+      subtitle: subtitle
+      image: image/url
+      background: bg_image/url
+      authors: author/full_name
+      apple_podcasts_url: apple_podcasts_url
+      google_play_url: google_play_url
+      stitcher_url: stitcher_url
+      slug: slug
+  messages:
+    id: message
+    links:
+      series_slug:
+        content_type: series
+        field: videos
+        value: slug
+    frontmatter:
+      title: title
+      slug: slug
+  series:
+    id: series
+    has_many:
+      videos:
+        - trailers
+        - messages
+    frontmatter:
+      title: title
+      slug: slug
+  trailers:
+    id: trailer
+    frontmatter:
+      title: title
+      slug: slug

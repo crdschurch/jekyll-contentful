@@ -40,7 +40,7 @@ module Jekyll
       end
 
       def sync!
-        content_types.each do |type|
+        collections.each do |type|
           rm(type)
           documents = get_entries(type)
           documents.map(&:write!)
@@ -56,9 +56,9 @@ module Jekyll
           entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
         end
 
-        def content_types
-          @content_types ||= begin
-            collections = @site.config.dig('contentful', 'content_types').keys
+        def collections
+          @collections ||= begin
+            collections = @site.config.dig('contentful').keys
             if @options.dig('collections').nil?
               collections
             else
@@ -68,7 +68,7 @@ module Jekyll
         end
 
         def cfg(type)
-          @site.config.dig('contentful', 'content_types', type).merge({ 'collection_name' => type })
+          @site.config.dig('contentful', type).merge({ 'collection_name' => type })
         end
 
         def collections_glob(type)

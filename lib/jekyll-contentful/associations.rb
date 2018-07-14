@@ -6,7 +6,7 @@ module Jekyll
 
       def initialize(site)
         @site = site
-        @defs = site.config.dig('contentful', 'content_types').select{|type, cfg| cfg.keys.include?('has_many') }
+        @defs = site.config.dig('contentful').select{|type, cfg| cfg.keys.include?('has_many') }
       end
 
       def run!
