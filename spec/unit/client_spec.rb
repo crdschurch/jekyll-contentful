@@ -58,11 +58,18 @@ describe Jekyll::Contentful::Client do
   end
 
   context 'fetch_entries()' do
-    cassette 'contentful/messages'
-
     it 'fetches all entries when there are more than 1000' do
-      documents = @client.class.send(:fetch_entries, 'message')
-      expect(documents.size).to eq(1068)
+      VCR.use_cassette 'contentful/messages' do
+        documents = @client.class.send(:fetch_entries, 'message')
+        expect(documents.size).to eq(1068)
+      end
+    end
+
+    it 'fetches fewer entries when a limit is specified' do
+      VCR.use_cassette 'contentful/messages-limit' do
+        documents = @client.class.send(:fetch_entries, 'message', limit: 3)
+        expect(documents.size).to eq(3)
+      end
     end
   end
 

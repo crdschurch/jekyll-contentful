@@ -7,17 +7,17 @@ module Jekyll
       class << self
         attr_accessor :entries
 
-        def store_entries(type_id)
+        def store_entries(type_id, limit)
           self.entries ||= {}
-          self.entries[type_id.to_sym] = fetch_entries(type_id)
+          self.entries[type_id.to_sym] = fetch_entries(type_id, limit: limit)
         end
 
         private
 
-          def fetch_entries(type_id, entries = [])
-            this_page = client.entries(content_type: type_id, limit: 1000, skip: entries.size).to_a
+          def fetch_entries(type_id, limit: nil, entries: [])
+            this_page = client.entries(content_type: type_id, limit: (limit || 1000), skip: entries.size).to_a
             entries.concat(this_page)
-            this_page.size == 1000 ? fetch_entries(type_id, entries) : entries
+            this_page.size == 1000 ? fetch_entries(type_id, entries: entries) : entries
           end
 
           def client
@@ -52,7 +52,7 @@ module Jekyll
         def get_entries(type)
           type_cfg = cfg(type)
           type_id = type_cfg.dig('id')
-          entries = self.class.store_entries(type_id)
+          entries = self.class.store_entries(type_id, @options.dig('limit'))
           entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
         end
 

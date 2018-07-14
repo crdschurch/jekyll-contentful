@@ -102,10 +102,10 @@ Once configured as described above, you can run the following Jekyll subcommand 
 $ bundle exec jekyll contentful
 ```
 
-You can limit the content returned from Contentful by specifying one or more collections on the command line, like so...
+You can reduce the volume of content returned from Contentful by specifying one or more collections on the command line and/or speciyfing a limit. The following example will return (up to) 10 records for both articles & authors collection...
 
 ```
-$ bundle exec jekyll contentful --collections articles,authors
+$ bundle exec jekyll contentful --collections articles,authors --limit 10
 ```
 
 ## License
