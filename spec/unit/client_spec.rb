@@ -38,7 +38,7 @@ describe Jekyll::Contentful::Client do
 
   it 'should store a reference to entries on the class' do
     expect(Jekyll::Contentful::Client.entries).to eq(nil)
-    expect(@client.send(:get_entries, 'articles').collect(&:data))
+    expect(@client.send(:get_entries_of_type, 'articles').collect(&:data))
       .to eq(Jekyll::Contentful::Client.entries[:article].to_a)
   end
 
@@ -48,11 +48,11 @@ describe Jekyll::Contentful::Client do
     expect(glob).to include(@site.collections['articles'].first.path)
   end
 
-  context 'get_entries()' do
+  context 'get_entries_of_type()' do
     cassette 'contentful/articles'
 
     it 'should return document instances for each CF entry' do
-      documents = @client.send(:get_entries, 'articles')
+      documents = @client.send(:get_entries_of_type, 'articles')
       expect(documents.all?{|d| d.class.name == 'Jekyll::Contentful::Document' }).to be(true)
     end
   end
@@ -73,4 +73,16 @@ describe Jekyll::Contentful::Client do
     end
   end
 
+  it 'should build belongs_to references for any has_many relationship' do
+    VCR.use_cassette 'contentful/documents' do
+      @client.options = { 'collections' => %w(series messages), 'limit' => 100 }
+      @client.add_belongs_to_for_every_has_many!
+    end
+
+    docs = @client.send(:documents)
+    series = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'series' && doc.frontmatter.dig('id') == '3vfkg7rU3KYkQCcOOiUWuq' }
+    message = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'message' && doc.frontmatter.dig('id') == 'i5ec6JNJGSAsGaECu2yOY' }
+
+    expect(message.frontmatter.dig('series')).to include(series.frontmatter.dig('id'))
+  end
 end

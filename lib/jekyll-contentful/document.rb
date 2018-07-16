@@ -7,33 +7,48 @@ module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :options, :filename, :dir
+      attr_accessor :data, :options, :filename, :dir, :body, :frontmatter, :associations
 
       def initialize(obj, options={})
         @data = obj
         @options = options
         @dir = FileUtils.pwd
-        @filename = parse_filename
+        reload!
+      end
+
+      def build
+        body = "#{@frontmatter.to_yaml}---\n\n"
+        unless @options.dig('body').nil?
+          if @data.respond_to?(@options.dig('body').to_sym)
+            content = @data.send(@options.dig('body').to_sym)
+            body = "#{body}#{Kramdown::Document.new(content || '').to_html}"
+          end
+        end
+        body
       end
 
       def write!
         FileUtils.mkdir_p File.dirname(path)
         File.open(path, 'w') do |file|
-          body = "#{frontmatter.to_yaml}---\n\n"
-          unless @options.dig('body').nil?
-            if @data.respond_to?(@options.dig('body').to_sym)
-              content = @data.send(@options.dig('body').to_sym)
-              body = "#{body}#{Kramdown::Document.new(content || '').to_html}"
-            end
-          end
-          file.write body
+          @body = build
+          file.write @body
         end
         Jekyll.logger.info "#{filename} imported"
       end
 
+      def association_ids
+        @associations.keys.collect{|key| @frontmatter.dig(key) }.flatten
+      end
+
+      def reload!
+        @filename = parse_filename
+        @associations = frontmatter_associations
+        @frontmatter = build_frontmatter
+      end
+
       private
 
-        def frontmatter
+        def build_frontmatter
           matter = {
             "id" => data.id,
             "content_type" => @data.content_type.id
@@ -77,7 +92,7 @@ module Jekyll
           return {} unless @options.dig('links')
           links = {}
           @options.dig('links').each do |key, cfg|
-            entry = Client.entries[cfg['content_type'].to_sym]
+            entry = (Client.entries[cfg['content_type'].to_sym] || [])
               .select { |e| e.send(cfg['field']).collect(&:id).include?(@data.id) rescue false }.first
             next if entry.nil?
             links[key] = entry.send(cfg['value'])

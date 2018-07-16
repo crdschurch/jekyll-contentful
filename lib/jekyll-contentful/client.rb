@@ -50,16 +50,44 @@ module Jekyll
       end
 
       def sync!
-        collections.each do |type|
-          rm(type)
-          documents = get_entries(type)
-          documents.map(&:write!)
+        add_belongs_to_for_every_has_many!
+        # write everything to disk
+        documents.map(&:write!)
+      end
+
+      def add_belongs_to_for_every_has_many!
+        documents.map do |doc|
+
+          # for every document, are there any associations?
+          refs = (doc.frontmatter.keys & doc.associations.keys)
+          if refs.length > 0
+
+            # reduce all entries down to just those that are association with document
+            related = documents.select{|e|
+              doc.association_ids.include? e.frontmatter.dig('id')
+            }
+            # for each related document, add this document to frontmatter
+            related.map do |r_entry|
+              yml = r_entry.frontmatter[doc.frontmatter.dig('content_type')] ||= []
+              yml.push(doc.frontmatter.dig('id'))
+            end
+
+          end
         end
       end
 
       private
 
-        def get_entries(type)
+        def documents
+          @documents ||= begin
+            Hash[collections.collect{|type|
+              rm(type)
+              [type, get_entries_of_type(type)]
+            }].values.flatten
+          end
+        end
+
+        def get_entries_of_type(type)
           type_cfg = cfg(type)
           type_id = type_cfg.dig('id')
           entries = self.class.store_entries(type_id, @options.dig('limit'))
