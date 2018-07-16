@@ -12,11 +12,11 @@ describe Jekyll::Contentful::Associations do
   end
 
   it 'should get content_types that declare associations' do
-    expect(@assoc.defs.keys).to eql(['series'])
+    expect(@assoc.defs.keys).to match_array(['series', 'articles'])
   end
 
   it 'should concat disparate collections into a single array' do
-    expect(@assoc.send(:get_docs_of_type, ['trailers', 'messages']).length).to eq(2)
+    expect(@assoc.send(:get_docs_of_type, ['trailer', 'message']).length).to eq(2)
   end
 
   context 'run!()' do

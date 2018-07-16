@@ -120,11 +120,11 @@ describe Jekyll::Contentful::Document do
 
     it 'should support nested attributes' do
       mappings = article.send(:frontmatter_entry_mappings)
-      allow(mappings).to receive(:author).and_return('author/full_name')
+      allow(mappings).to receive(:author_name).and_return('author/full_name')
       author_name = 'Walter Sobchak'
       allow(article.data.author).to receive(:full_name).and_return(author_name)
       article.reload!
-      expect(article.send(:frontmatter)['author']).to be(author_name)
+      expect(article.send(:frontmatter)['author_name']).to be(author_name)
     end
 
     it 'should not raise exception if mapped field doesn\'t actually exist in CF payload' do

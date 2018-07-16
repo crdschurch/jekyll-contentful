@@ -21,7 +21,7 @@ module Jekyll
         unless @options.dig('body').nil?
           if @data.respond_to?(@options.dig('body').to_sym)
             content = @data.send(@options.dig('body').to_sym)
-            body = "#{body}#{Kramdown::Document.new(content || '').to_html}"
+            body = "#{body}#{content}"
           end
         end
         body
@@ -78,8 +78,11 @@ module Jekyll
         end
 
         def frontmatter_associations
-          if @options.keys.include?('has_many')
-            yml = @options.dig('has_many').keys.collect do |assoc|
+          if @options.keys.include?('has_many') || @options.keys.include?('belongs_to')
+            has_many = (@options.dig('has_many') || {}).keys
+            belongs_to = (@options.dig('belongs_to') || {}).keys
+
+            yml = (has_many + belongs_to).collect do |assoc|
               [assoc, "#{assoc}/id"]
             end
             Hash[yml]

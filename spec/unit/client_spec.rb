@@ -17,7 +17,7 @@ describe Jekyll::Contentful::Client do
   end
 
   it 'should return collections' do
-    expect(@client.send(:collections)).to match_array(%w[articles podcasts messages series trailers])
+    expect(@client.send(:collections)).to match_array(%w[articles authors podcasts messages series trailers])
   end
 
   it 'should return only collections specified in options' do

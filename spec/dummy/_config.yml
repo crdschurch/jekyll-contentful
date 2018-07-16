@@ -4,6 +4,9 @@ collections:
   articles:
     output: true
     permalink: /:collection/:slug
+  authors:
+    output: true
+    permalink: /:collection/:slug
   podcasts:
     output: true
     permalink: /:collection/:slug
@@ -18,14 +21,21 @@ collections:
     permalink: /:collection/:slug
 
 contentful:
+  authors:
+    id: author
+    body: summary
+    frontmatter:
+      name: full_name
   articles:
     id: article
     body: body
     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+    belongs_to:
+      author: author
     frontmatter:
       title: title
       image: image/url
-      author: author/full_name
+      author_name: author/full_name
       topic: category/title
       date: published_at
       slug: slug
@@ -57,8 +67,8 @@ contentful:
     id: series
     has_many:
       videos:
-        - trailers
-        - messages
+        - trailer
+        - message
     frontmatter:
       title: title
       slug: slug
