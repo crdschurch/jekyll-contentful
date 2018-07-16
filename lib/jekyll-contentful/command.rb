@@ -12,7 +12,7 @@ module Jekyll
             c.description 'Imports data from Contentful'
             c.option 'collections', '-c', '--collections COL1[,COL2]', Array, 'Return content for specific collections'
             c.option 'limit', '-n', '--limit N', Integer, 'Limit the number of entries returned'
-
+            c.option 'clean', '-f', '--force', 'Remove existing collections data prior to importing'
             c.action do |args, options|
               Jekyll::Contentful::Client.new(args: args, options: options).sync!
             end

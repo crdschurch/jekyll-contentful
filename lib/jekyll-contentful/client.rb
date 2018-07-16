@@ -115,8 +115,10 @@ module Jekyll
         end
 
         def rm(type)
-          collections_glob(type).each do |file|
-            FileUtils.remove_entry_secure(file) if File.exist?(file)
+          if @options.dig('force')
+            collections_glob(type).each do |file|
+              FileUtils.remove_entry_secure(file) if File.exist?(file)
+            end
           end
         end
 
