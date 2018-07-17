@@ -7,9 +7,9 @@ module Jekyll
       class << self
         attr_accessor :entries
 
-        def store_entries(type_id, limit)
+        def store_entries(type_id, limit, order)
           self.entries ||= {}
-          self.entries[type_id.to_sym] = fetch_entries(type_id, limit: limit)
+          self.entries[type_id.to_sym] = fetch_entries(type_id, limit: limit, order: order)
         end
 
         def scaffold(app_root)
@@ -21,12 +21,35 @@ module Jekyll
           Jekyll::Site.new(site_config)
         end
 
+        def sort_order(order)
+          if order.nil?
+            '-sys.createdAt'
+          else
+            field, dir = order.split(' ')
+            if order[0..3] == 'sys.'
+              "#{'-' if dir == 'desc'}#{field}"
+            else
+              "#{'-' if dir == 'desc'}fields.#{field}"
+            end
+          end
+        end
+
         private
 
-          def fetch_entries(type_id, limit: nil, entries: [])
-            this_page = client.entries(content_type: type_id, limit: (limit || 1000), skip: entries.size).to_a
+          def fetch_entries(type_id, limit: nil, entries: [], order: nil)
+            this_page = client.entries({
+              content_type: type_id,
+              limit: (limit || 1000),
+              skip: entries.size,
+              order: sort_order(order)
+            }).to_a
             entries.concat(this_page)
-            this_page.size == 1000 ? fetch_entries(type_id, entries: entries) : entries
+
+            if this_page.size == 1000
+              fetch_entries(type_id, limit: limit, entries: entries, order: order)
+            else
+              entries
+            end
           end
 
           def client
@@ -38,7 +61,6 @@ module Jekyll
               )
             end
           end
-
       end
 
       attr_accessor :site, :options
@@ -90,7 +112,7 @@ module Jekyll
         def get_entries_of_type(type)
           type_cfg = cfg(type)
           type_id = type_cfg.dig('id')
-          entries = self.class.store_entries(type_id, @options.dig('limit'))
+          entries = self.class.store_entries(type_id, @options.dig('limit'), type_cfg.dig('order'))
           entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
         end
 

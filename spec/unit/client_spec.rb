@@ -3,7 +3,6 @@ require 'jekyll'
 require 'active_support/inflector'
 
 describe Jekyll::Contentful::Client do
-  cassette 'contentful/articles'
 
   before do
     Jekyll.logger.adjust_verbosity(quiet: true)
@@ -12,40 +11,46 @@ describe Jekyll::Contentful::Client do
     @client = Jekyll::Contentful::Client.new(site: @site)
   end
 
-  it 'should scaffold Jekyll site' do
-    expect(@site).to be_instance_of(Jekyll::Site)
-  end
+  context 'loading articles' do
+    cassette 'contentful/articles'
 
-  it 'should return collections' do
-    expect(@client.send(:collections)).to match_array(%w[articles authors podcasts messages series trailers])
-  end
+    it 'should scaffold Jekyll site' do
+      expect(@site).to be_instance_of(Jekyll::Site)
+    end
 
-  it 'should return only collections specified in options' do
-    @client.options = {
-      "collections" => ['trailers']
-    }
-    expect(@client.send(:collections)).to match_array(%w[trailers])
-  end
+    it 'should return collections' do
+      expect(@client.send(:collections)).to match_array(%w[articles authors podcasts messages series trailers])
+    end
 
-  it 'should return config' do
-    expect(@client.send(:cfg, 'articles')).to be_instance_of(Hash)
-  end
+    it 'should return only collections specified in options' do
+      @client.options = {
+        "collections" => ['trailers']
+      }
+      expect(@client.send(:collections)).to match_array(%w[trailers])
+    end
 
-  it 'should return client object, stored on the class' do
-    expect(@client.send(:client)).to be_instance_of(Contentful::Client)
-    expect(@client.send(:client)).to eq(@client.class.send(:client))
-  end
+    it 'should return config' do
+      expect(@client.send(:cfg, 'articles')).to be_instance_of(Hash)
+    end
 
-  it 'should store a reference to entries on the class' do
-    expect(Jekyll::Contentful::Client.entries).to eq(nil)
-    expect(@client.send(:get_entries_of_type, 'articles').collect(&:data))
-      .to eq(Jekyll::Contentful::Client.entries[:article].to_a)
-  end
+    it 'should return client object, stored on the class' do
+      expect(@client.send(:client)).to be_instance_of(Contentful::Client)
+      expect(@client.send(:client)).to eq(@client.class.send(:client))
+    end
 
-  it 'should return collections glob' do
-    @site.collections['articles'].read
-    glob = @client.send(:collections_glob, 'articles')
-    expect(glob).to include(@site.collections['articles'].first.path)
+    it 'should store a reference to entries on the class' do
+      Jekyll::Contentful::Client.entries = nil
+      expect(Jekyll::Contentful::Client.entries).to eq(nil)
+      expect(@client.send(:get_entries_of_type, 'articles').collect(&:data))
+        .to eq(Jekyll::Contentful::Client.entries[:article].to_a)
+    end
+
+    it 'should return collections glob' do
+      @site.collections['articles'].read
+      glob = @client.send(:collections_glob, 'articles')
+      expect(glob).to include(@site.collections['articles'].first.path)
+    end
+
   end
 
   context 'get_entries_of_type()' do
@@ -84,5 +89,11 @@ describe Jekyll::Contentful::Client do
     message = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'message' && doc.frontmatter.dig('id') == 'i5ec6JNJGSAsGaECu2yOY' }
 
     expect(message.frontmatter.dig('series')).to include(series.frontmatter.dig('id'))
+  end
+
+  it 'should normalize sort order for client queries' do
+    load './lib/jekyll-contentful/client.rb'
+    expect(@client.class.send(:sort_order, 'title desc')).to eq('-fields.title')
+    expect(@client.class.send(:sort_order, 'sys.createdAt asc')).to eq('sys.createdAt')
   end
 end
