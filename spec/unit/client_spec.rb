@@ -78,17 +78,17 @@ describe Jekyll::Contentful::Client do
     end
   end
 
-  it 'should build belongs_to references for any has_many relationship' do
+  it 'should build links_to references for any model that has a belongs_to' do
     VCR.use_cassette 'contentful/documents' do
       @client.options = { 'collections' => %w(series messages), 'limit' => 100 }
-      @client.add_belongs_to_for_every_has_many!
+        @client.add_belongs_to!
     end
 
     docs = @client.send(:documents)
-    series = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'series' && doc.frontmatter.dig('id') == '3vfkg7rU3KYkQCcOOiUWuq' }
-    message = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'message' && doc.frontmatter.dig('id') == 'i5ec6JNJGSAsGaECu2yOY' }
+    series = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'series' && doc.frontmatter.dig('id') == '4iswJxw2BOUgC8asqoIc4o' }
+    message = docs.detect{|doc| doc.frontmatter.dig('content_type') == 'message' && doc.frontmatter.dig('id') == '2Ya4RNjhpuku2eUy4mOyku' }
 
-    expect(message.frontmatter.dig('series')).to include(series.frontmatter.dig('id'))
+    expect(message.frontmatter.dig('links_to', 'series', 0, 'id')).to include(series.frontmatter.dig('id'))
   end
 
   it 'should normalize sort order for client queries' do

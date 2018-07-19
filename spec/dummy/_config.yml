@@ -31,7 +31,7 @@ contentful:
     body: body
     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
     belongs_to:
-      author: author
+      - author
     frontmatter:
       title: title
       image: image/url
@@ -55,6 +55,8 @@ contentful:
       slug: slug
   messages:
     id: message
+    belongs_to:
+      - series
     links:
       series_slug:
         content_type: series

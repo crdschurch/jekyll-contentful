@@ -78,7 +78,7 @@ describe Jekyll::Contentful::Document do
   it 'should return frontmatter' do
     yml = article.send(:frontmatter)
     expect(yml).to be_instance_of(Hash)
-    %w(title image author topic date slug).each do |k|
+    %w(title image topic date slug).each do |k|
       expect(yml.keys).to include(k)
     end
   end
