@@ -72,29 +72,24 @@ module Jekyll
       end
 
       def sync!
-        add_belongs_to_for_every_has_many!
+        add_belongs_to!
         # write everything to disk
         documents.map(&:write!)
       end
 
-      def add_belongs_to_for_every_has_many!
+      def add_belongs_to!
         documents.map do |doc|
-
-          # for every document, are there any associations?
-          refs = (doc.frontmatter.keys & doc.associations.keys)
-          if refs.length > 0
-
-            # reduce all entries down to just those that are association with document
-            related = documents.select{|e|
-              doc.association_ids.include? e.frontmatter.dig('id')
-            }
-            # for each related document, add this document to frontmatter
-            related.map do |r_entry|
-              yml = r_entry.frontmatter[doc.frontmatter.dig('content_type')] ||= []
-              yml.push(doc.frontmatter.dig('id'))
+          links_to = Hash[(doc.options.dig('belongs_to') || []).collect do |type|
+            cfg = site.config.dig('contentful', type.pluralize, 'frontmatter')
+            entries = client.entries(links_to_entry: doc.frontmatter.dig('id'), content_type: type)
+            docs = entries.items.collect do |e|
+              Hash[cfg.collect{|a,b|
+                [a, e.fields[b.intern]]
+              }.push(['id', e.id])]
             end
-
-          end
+            [type.pluralize, docs]
+          end]
+          doc.frontmatter['links_to'] = links_to
         end
       end
 

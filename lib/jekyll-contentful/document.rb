@@ -78,11 +78,9 @@ module Jekyll
         end
 
         def frontmatter_associations
-          if @options.keys.include?('has_many') || @options.keys.include?('belongs_to')
+          if @options.keys.include?('has_many')
             has_many = (@options.dig('has_many') || {}).keys
-            belongs_to = (@options.dig('belongs_to') || {}).keys
-
-            yml = (has_many + belongs_to).collect do |assoc|
+            yml = has_many.collect do |assoc|
               [assoc, "#{assoc}/id"]
             end
             Hash[yml]

@@ -64,7 +64,7 @@ Body content here.
 
 This gem provides some utilities for setting up associations between your content models and a generator that will populate your collection pages with the associated objects.
 
-To use this feature, you need to specify the Contentful reference field name and what content-model(s) it is associated with under the `has_many` heading in `_config.yml`, like this...
+To use this feature, you need to specify the Contentful reference field name and what content-model(s) it is associated with under the `has_many` or `belongs_to` heading in `_config.yml`, like this...
 
 ```yml
 contentful:
@@ -86,7 +86,13 @@ contentful:
 When your site is built, the page object for every author will be prepopulated with that author's associated objects. You can access all of them in your templates, like so...
 
 ```
-{{ page.associations.contributions }}
+{{ page.has_many.contributions }}
+```
+
+Likewise, every article and recipe page will be prepopulated with their associated objects, like so...
+
+```
+{{ page.belongs_to.authors }}
 ```
 
 ## Environment Variables

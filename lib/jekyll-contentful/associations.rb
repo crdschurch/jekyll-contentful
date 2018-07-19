@@ -18,33 +18,49 @@ module Jekyll
           # Loop through all the documents for this content_model
           @site.collections[content_model].docs.each do |doc|
             associations = {}
-
-            has_many = cfg.dig('has_many') || {}
-            belongs_to = cfg.dig('belongs_to') || {}
-
-            has_many.merge(belongs_to).each do |name, models|
-
-              # ...get all matching documents and concatenate them into one big array
-              associations[name] = get_associated_docs(doc, name, models)
-
-              # ...sort the array against the front-matter for the current document
-              order = doc.data[name]
-              associations[name].sort_by_arr!(order, 'id')
-
-            end
-
-            # put associations on doc object so they're exposed to Liquid
-            doc.data['associations'] = associations
+            doc.data['belongs_to'] = populate_belongs_to(cfg, doc)
+            doc.data['has_many'] = populate_has_many(cfg, doc)
           end
         end
       end
 
       protected
 
-        def get_associated_docs(owner, name, models)
+        def populate_belongs_to(cfg, doc)
+          associations = {}
+          belongs_to = cfg.dig('belongs_to') || {}
+          belongs_to.each do |name|
+            associations[name.pluralize] = get_docs_of_type(name).select do |entry|
+              begin
+                links_to = doc.data.dig('links_to', name.pluralize).collect(& ->(h) { h['id'] })
+                links_to.include? entry.data.dig('id')
+              rescue
+                false
+              end
+            end
+          end
+          associations
+        end
+
+        def populate_has_many(cfg, doc)
+          associations = {}
+          has_many = cfg.dig('has_many') || {}
+          has_many.each do |name, models|
+
+            # ...get all matching documents and concatenate them into one big array
+            associations[name] = get_has_many_docs(doc, name, models)
+
+            # ...sort the array against the front-matter for the current document
+            order = doc.data[name]
+            associations[name].sort_by_arr!(order, 'id')
+          end
+          associations
+        end
+
+        def get_has_many_docs(owner, name, models)
           get_docs_of_type(models).select do |doc|
             begin
-              owner.data[name].include?(doc.data['id'])
+              owner.data[name].include? doc.data.dig('id')
             rescue
               false
             end
