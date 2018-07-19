@@ -9,7 +9,7 @@
 Add the following to your `Gemfile` and bundle...
 
 ```ruby
-gem "jekyll-contentful", "~> 0.0.1", git: 'https://github.com/crdschurch/jekyll-contentful.git'
+gem "jekyll-contentful", "~> 1.0.0", git: 'https://github.com/crdschurch/jekyll-contentful.git'
 ```
 
 Note, in order to support Contentful environents, this project requires [v2.6.0](https://github.com/contentful/contentful.rb/releases/tag/v2.6.0) or greater of the [Contentful gem](http://rubygems.org/gems/contentful).
@@ -105,7 +105,6 @@ The following environment variables are required to run the script. Please make 
 | `CONTENTFUL_SPACE_ID` | ID specifying Contentful Space | |
 | `CONTENTFUL_ENV` | Contentful environment | `master` |
 
-
 ## Usage
 
 Once configured as described above, you can run the following Jekyll subcommand to persist content from the API to your local `collections/` directory.
@@ -119,6 +118,30 @@ You can reduce the volume of content returned from Contentful by specifying one 
 ```
 $ bundle exec jekyll contentful --collections articles,authors --limit 10
 ```
+
+### Sorting Contentful Queries
+
+When reducing the result-set returned from Contentful, it can be helpful to ensure you're only returning the most recent content from the API. To do this, you can specify a sort order that will be passed to the API when making queries for that type of content.
+
+The following example configuration will inform `jekyll-contentful` to query the API for the most recent entries, based on a date field called `published_at`...
+
+```
+contentful:
+  articles:
+    order: published_at desc
+    ...
+```
+
+If you need to query against a system field, such as `createdAt` or `updatedAt`, you can do it like so...
+
+```
+contentful:
+  articles:
+    order: sys.createdAt desc
+    ...
+```
+
+When coupled with flags like `--limit` and `--collections` you can substantially reduce the amount of content returned. This is particularly useful for speeding up builds while doing local development.
 
 ## License
 
