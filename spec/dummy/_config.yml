@@ -1,13 +1,15 @@
 collections_dir: collections
 
 collections:
+  articles:
+    output: false
   testables:
     output: false
   videos:
     output: false
 
 contentful:
-  skip:
+  exclude:
     - migrations
 
 # collections:

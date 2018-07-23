@@ -76,73 +76,42 @@ module Jekyll
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
         @options = options
-        @space = management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
       end
 
       def sync!
-        content_types.each do |model, schema|
+        docs.values.map(&:write!)
+      end
+
+      def docs
+        Hash[content_types.collect do |model, schema|
+          if @options.dig('clean')
+            rm(model.pluralize)
+          end
+
           cfg = @site.config.dig('collections', model.pluralize)
+          cfl = @site.config.dig('contentful', model.pluralize)
+
           entries = client.entries(content_type: model)
           docs = entries.collect{|entry|
-            Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
+            Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, cfl: cfl)
           }
-          docs.map(&:write!)
+          [model.pluralize, docs]
+        end]
+      end
+
+      def collections_glob(type)
+        path = File.join(@site.collections_path, "_#{type}/*")
+        Dir.glob(path)
+      end
+
+      def rm(type)
+        collections_glob(type).each do |file|
+          FileUtils.remove_entry_secure(file) if File.exist?(file)
         end
       end
 
       def content_types
-        @content_types ||= begin
-          models = @space.content_types.all
-          schema = models.collect do |model|
-
-            fields = []
-            references = []
-            model.properties.dig(:fields).each do |field|
-              if %w(Array Link).include?(field.type) && field.properties.dig(:linkType) != 'Asset'
-                references.push(field)
-              else
-                fields.push(field)
-              end
-            end
-
-            [model.id, {
-              "fields" => fields.collect(&:id),
-              "references" => references.collect{|ref|
-                if ref.type == 'Array'
-                  link_content_types = ref.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
-                else
-                  link_content_types = ref.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
-                end
-
-                if link_content_types.empty?
-                  ref.id
-                else
-                  Hash[ref.id, link_content_types]
-                end
-              }
-            }]
-          end
-
-          schema.reject!{|arr| (@site.config.dig('contentful', 'skip') || []).include? arr.first }
-          schema_obj = Hash[schema]
-
-          Hash[schema.collect{|name,obj|
-            obj['references'] = obj['references'].collect{|type|
-              begin
-                if type.is_a? Hash
-                  type, models = type.first
-                  Hash[type, models.collect{|model| Hash[model, schema_obj[model]['fields']] }]
-                else
-                  Hash[type, schema_obj[type.singularize]['fields']]
-                end
-              rescue
-                binding.pry
-              end
-
-            }.reduce({}, :merge)
-            [name, obj]
-          }]
-        end
+        @content_types ||= Jekyll::Contentful::ContentTypes.all(@site.config.dig('source'))
       end
 
       def client
@@ -151,6 +120,10 @@ module Jekyll
 
       def management
         @management ||= self.class.send(:management)
+      end
+
+      def space
+        @space ||= management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
       end
 
     end

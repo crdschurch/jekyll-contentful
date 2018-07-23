@@ -5,27 +5,21 @@ require 'active_support/inflector'
 
 describe Jekyll::Contentful::Document do
 
+  let(:product) {
+    VCR.use_cassette('contentful/entries/products') do
+      @client.docs.dig('products').first
+    end
+  }
+
   let(:article) {
-    VCR.use_cassette('contentful/articles') do
-      return @client.send(:get_entries_of_type, 'articles').detect { |p| p.data.id == '5aYJRTYvBCc66UCEaQeuiE' }
+    VCR.use_cassette('contentful/entries/articles') do
+      @client.docs.dig('articles').first
     end
   }
 
-  let(:podcast) {
-    VCR.use_cassette('contentful/podcasts') do
-      return @client.send(:get_entries_of_type, 'podcasts').detect { |p| p.data.id == '5q50uJgqNUkqkMmaegK6M8' }
-    end
-  }
-
-  let(:series) {
-    VCR.use_cassette('contentful/series') do
-      return @client.send(:get_entries_of_type, 'series').detect { |p| p.data.id == 'ElSFOutc0oA446C6Aw28S' }
-    end
-  }
-
-  let(:message) {
-    VCR.use_cassette('contentful/messages') do
-      return @client.send(:get_entries_of_type, 'messages').detect { |p| p.data.id == '4xopQV6xOoIAAucCGE2OoC' }
+  let(:author) {
+    VCR.use_cassette('contentful/entries/authors') do
+      @client.docs.dig('authors').first
     end
   }
 
@@ -37,115 +31,68 @@ describe Jekyll::Contentful::Document do
   end
 
   it 'should return the collection name' do
-    expect(article.send(:collection_name)).to eq('articles')
+    expect(product.send(:collection_name)).to eq('products')
   end
 
   it 'should return filename' do
-    expect(article.send(:filename)).to match(/collections\/_articles\/[^\.]*\.md/)
+    expect(product.send(:filename)).to match(/collections\/_products\/[^\.]*\.md/)
   end
 
   it 'should return slug if defined' do
-    allow(article.data).to receive(:slug).and_return('lorem-ipsum')
-    expect(article.send(:slug)).to eq('lorem-ipsum')
+    allow(product.data).to receive(:slug).and_return('lorem-ipsum')
+    expect(product.send(:slug)).to eq('lorem-ipsum')
   end
 
+  # TODO ... review the implementation and/or need for "links" following refactor
   it 'should add links to frontmatter' do
-    expect(article.send(:frontmatter_links)).to eq({})
-    expect(podcast.send(:frontmatter_links)).to eq({})
-    expect(series.send(:frontmatter_links)).to eq({})
-    expect(message.send(:frontmatter_links)).to eq({"series_slug"=>"power-house"})
+    pending
+    expect(product.send(:frontmatter_links)).to eq({})
   end
 
   it 'should return frontmatter entry mappings' do
-    cfg = @site.config.dig('contentful', 'articles', 'frontmatter')
-    cfg.each do |mapped,src|
-      expect(article.send(:frontmatter_entry_mappings)[mapped]).to eq(src)
+    product.schema.dig('fields').each do |field|
+      expect(product.data.send(field)).to_not be_nil
     end
   end
 
   it 'should expose entry id in frontmatter of every document' do
-    yml = article.send(:frontmatter)
+    yml = product.send(:frontmatter)
     expect(yml.keys).to include('id')
-    expect(yml['id']).to eq('5aYJRTYvBCc66UCEaQeuiE')
+    expect(yml.keys).to include('content_type')
   end
 
-  it 'should return parameterized title if slug is not defined' do
-    allow(article.data).to receive(:title).and_return('this is a test')
-    allow(article.data).to receive(:slug) { raise }
-    expect(article.send(:slug)).to eq('this-is-a-test')
+  it 'should return "content-type and id" if slug is not defined' do
+    allow(product.data).to receive(:title).and_return('this is a test')
+    allow(product.data).to receive(:slug) { raise }
+    expect(product.send(:slug)).to eq("#{product.data.content_type.id}-#{product.data.id}")
   end
 
   it 'should return frontmatter' do
-    yml = article.send(:frontmatter)
+    yml = product.send(:frontmatter)
     expect(yml).to be_instance_of(Hash)
-    %w(title image topic date slug).each do |k|
-      expect(yml.keys).to include(k)
-    end
   end
 
   it 'should write the file' do
-    path = write_document!(article)
+    path = write_document!(product)
     expect(File.exist?(path)).to be(true)
   end
 
   context 'mapping fields from Contentful' do
-    it 'should capitalize the title with liquid templating' do
-      frontmatter = {"title"=>"{{ title | capitalize }}",
-        "image"=>"image/url",
-        "author"=>"author/full_name",
-        "topic"=>"category/title",
-        "date"=>"published_at",
-        "slug"=>"slug",
-        "tags"=>"tags"}
-      allow(article).to receive(:frontmatter_entry_mappings).and_return(frontmatter)
-      allow(article.data).to receive(:title).and_return('liquid test')
-      article.reload!
-      expect(article.send(:frontmatter)['title']).to eq('Liquid test')
+
+    it 'should populate has-many references' do
+      expect(article.frontmatter.dig('widgets')).to be_a(Array)
     end
 
-    it 'should map a many reference to an array of values' do
-      mappings = podcast.send(:frontmatter_entry_mappings)
-      allow(mappings).to receive(:authors).and_return('author/full_name')
-      article.reload!
-      expect(podcast.data.author.class).to eq(Array)
-      expect(podcast.send(:frontmatter)['authors']).to include(podcast.data.author.first.full_name)
-    end
-
-    it 'should support individual fields' do
-      title = 'Ever thus to deadbeats, Lebowski'
-      allow(article.data).to receive(:title).and_return(title)
-      article.reload!
-      expect(article.send(:frontmatter)['title']).to eq(title)
-    end
-
-    it 'should support nested attributes' do
-      mappings = article.send(:frontmatter_entry_mappings)
-      allow(mappings).to receive(:author_name).and_return('author/full_name')
-      author_name = 'Walter Sobchak'
-      allow(article.data.author).to receive(:full_name).and_return(author_name)
-      article.reload!
-      expect(article.send(:frontmatter)['author_name']).to be(author_name)
-    end
-
-    it 'should not raise exception if mapped field doesn\'t actually exist in CF payload' do
-      allow(article).to receive(:frontmatter_entry_mappings).and_return({ "foo" => "bar" })
-      article.reload!
-      expect{ article.send(:frontmatter) }.to_not raise_error
+    it 'should populate all fields for references' do
+      %w(full_name id content_type).each do |field_name|
+        expect(article.frontmatter.dig('author').keys).to include(field_name)
+        expect(article.frontmatter.dig('author', field_name)).to_not be_nil
+      end
     end
 
     it 'should not throw an error if body is nil' do
-      allow(article.data).to receive('body').and_return(nil)
-      expect{ write_document!(article) }.to_not raise_error
-
-      allow(podcast.data).to receive('description').and_return(nil)
-      expect{ write_document!(podcast) }.to_not raise_error
-    end
-
-    it 'should not render properties if they are not returned from CF' do
-      expect(article.send(:frontmatter).keys).to include('slug')
-      article.data.fields.delete(:slug)
-      article.reload!
-      expect(article.send(:frontmatter).keys).to_not include('slug')
+      allow(product.data).to receive('body').and_return(nil)
+      expect{ write_document!(product) }.to_not raise_error
     end
 
   end
