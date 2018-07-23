@@ -7,30 +7,20 @@ module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :options, :filename, :dir, :body, :frontmatter, :associations
+      attr_accessor :data, :schema, :cfg, :filename, :dir, :body, :frontmatter, :associations
 
-      def initialize(obj, options={})
+      def initialize(obj, schema:, cfg:)
         @data = obj
-        @options = options
+        @cfg = cfg
+        @schema = schema
         @dir = FileUtils.pwd
         reload!
-      end
-
-      def build
-        body = "#{@frontmatter.to_yaml}---\n\n"
-        unless @options.dig('body').nil?
-          if @data.respond_to?(@options.dig('body').to_sym)
-            content = @data.send(@options.dig('body').to_sym)
-            body = "#{body}#{content}"
-          end
-        end
-        body
       end
 
       def write!
         FileUtils.mkdir_p File.dirname(path)
         File.open(path, 'w') do |file|
-          @body = build
+          @body = "#{@frontmatter.to_yaml}---\n\n"
           file.write @body
         end
         Jekyll.logger.info "#{filename} imported"
@@ -42,73 +32,128 @@ module Jekyll
 
       def reload!
         @filename = parse_filename
-        @associations = frontmatter_associations
+        # @associations = frontmatter_associations
         @frontmatter = build_frontmatter
       end
 
       private
 
         def build_frontmatter
-          matter = {
-            "id" => data.id,
-            "content_type" => @data.content_type.id
-          }
-          matter.merge!(frontmatter_links)
-          frontmatter_entry_mappings.each do |k, v|
-            if v.match(/\{{2}/)
-              matter[k] = render_liquid(v)
-              next
-            end
-            if @data.fields.keys.include?(v.to_sym)
-              matter[k] = @data.send(v.to_sym)
-              next
-            end
-            if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
-              matter[k] = @data
-              v.split('/').each do |attr|
-                if matter[k].is_a?(Array)
-                  matter[k] = matter[k].map { |x| x.send(attr) }
-                else
-                  matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil
-                end
-              end
-            end
+          @frontmatter ||= begin
+            defaults = {
+              "id" => @data.id,
+              "content_type" => @data.content_type.id
+            }
+            Hash[@data.fields.collect do |field_name, value|
+              [
+                field_name.to_s,
+                parse_field(field_name, value)
+              ]
+            end].merge(defaults)
           end
-          matter
         end
 
-        def frontmatter_associations
-          if @options.keys.include?('has_many')
-            has_many = (@options.dig('has_many') || {}).keys
-            yml = has_many.collect do |assoc|
-              [assoc, "#{assoc}/id"]
+        def parse_field(field_name, value)
+          if value.is_a? ::Contentful::Asset
+            parse_asset(value)
+          elsif value.is_a? Array
+            value.collect do |entry|
+              parse_reference(entry, field_name)
             end
-            Hash[yml]
+          elsif value.is_a? ::Contentful::Entry
+            parse_reference(value, field_name)
           else
-            {}
+            value
           end
         end
 
-        def frontmatter_links
-          return {} unless @options.dig('links')
-          links = {}
-          @options.dig('links').each do |key, cfg|
-            entry = (Client.entries[cfg['content_type'].to_sym] || [])
-              .select { |e| e.send(cfg['field']).collect(&:id).include?(@data.id) rescue false }.first
-            next if entry.nil?
-            links[key] = entry.send(cfg['value'])
-          end
-          links
+        def parse_asset(asset)
+          {
+            "url" => asset.fields.dig(:file).url
+          }
         end
 
-        def frontmatter_entry_mappings
-          (@options.dig('frontmatter') || {}).merge(frontmatter_associations)
+        def parse_reference(entry, field_name)
+          fields = @schema.dig('references', field_name.to_s)
+          if fields.all?{|f| f.is_a?(String) }
+            parse_entry_fields(entry, fields)
+          else
+            fields = fields.reduce({}, :merge)[entry.content_type.id]
+            parse_entry_fields(entry, fields)
+          end
         end
+
+        def parse_entry_fields(entry, fields)
+          (fields + ['id']).uniq.collect{|field_name|
+            value = entry.send(field_name) rescue nil
+            Hash[
+              field_name,
+              parse_field(field_name, value)
+            ]
+          }.reduce({}, :merge)
+        end
+
+        # def build_frontmatter
+        #   matter = {
+        #     "id" => data.id,
+        #     "content_type" => @data.content_type.id
+        #   }
+        #   matter.merge!(frontmatter_links)
+        #   frontmatter_entry_mappings.each do |k, v|
+        #     if v.match(/\{{2}/)
+        #       matter[k] = render_liquid(v)
+        #       next
+        #     end
+        #     if @data.fields.keys.include?(v.to_sym)
+        #       matter[k] = @data.send(v.to_sym)
+        #       next
+        #     end
+        #     if v.split('/').size > 1 && @data.fields.keys.include?(v.split('/').first.to_sym)
+        #       matter[k] = @data
+        #       v.split('/').each do |attr|
+        #         if matter[k].is_a?(Array)
+        #           matter[k] = matter[k].map { |x| x.send(attr) }
+        #         else
+        #           matter[k] = matter[k].respond_to?(attr) ? matter[k].send(attr) : nil
+        #         end
+        #       end
+        #     end
+        #   end
+        #   matter
+        # end
+
+        # def frontmatter_associations
+        #   if @options.keys.include?('has_many')
+        #     has_many = (@options.dig('has_many') || {}).keys
+        #     yml = has_many.collect do |assoc|
+        #       [assoc, "#{assoc}/id"]
+        #     end
+        #     Hash[yml]
+        #   else
+        #     {}
+        #   end
+        # end
+
+        # def frontmatter_links
+        #   return {} unless @options.dig('links')
+        #   links = {}
+        #   @options.dig('links').each do |key, cfg|
+        #     entry = (Client.entries[cfg['content_type'].to_sym] || [])
+        #       .select { |e| e.send(cfg['field']).collect(&:id).include?(@data.id) rescue false }.first
+        #     next if entry.nil?
+        #     links[key] = entry.send(cfg['value'])
+        #   end
+        #   links
+        # end
+
+        # def frontmatter_entry_mappings
+        #   (@options.dig('frontmatter') || {}).merge(frontmatter_associations)
+        # end
 
         def parse_filename
           _f = slug
-          if @options.keys.include?("filename")
-            _f = render_liquid(@options['filename'])
+          if @cfg.keys.include?("filename")
+            _f = render_liquid(@cfg.dig('filename'))
           end
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
         end
@@ -131,7 +176,7 @@ module Jekyll
         end
 
         def collection_name
-          @options.dig('collection_name').to_s
+          @data.sys.dig(:content_type).id.pluralize
         end
 
     end

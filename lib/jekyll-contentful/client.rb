@@ -1,4 +1,5 @@
 require 'active_support/inflector'
+require 'contentful/management'
 
 module Jekyll
   module Contentful
@@ -61,87 +62,96 @@ module Jekyll
               )
             end
           end
+
+          def management
+            @management ||= begin
+              ::Contentful::Management::Client.new(ENV['CONTENTFUL_MANAGEMENT_TOKEN'])
+            end
+          end
       end
 
-      attr_accessor :site, :options
+      attr_accessor :site, :options, :space
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
         @options = options
+        @space = management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
       end
 
       def sync!
-        add_belongs_to!
-        # write everything to disk
-        documents.map(&:write!)
-      end
-
-      def add_belongs_to!
-        documents.map do |doc|
-          links_to = Hash[(doc.options.dig('belongs_to') || []).collect do |type|
-            cfg = site.config.dig('contentful', type.pluralize, 'frontmatter')
-            entries = client.entries(links_to_entry: doc.frontmatter.dig('id'), content_type: type)
-            docs = entries.items.collect do |e|
-              Hash[cfg.collect{|a,b|
-                [a, e.fields[b.intern]]
-              }.push(['id', e.id])]
-            end
-            [type.pluralize, docs]
-          end]
-          doc.frontmatter['links_to'] = links_to
+        content_types.each do |model, schema|
+          cfg = @site.config.dig('collections', model.pluralize)
+          entries = client.entries(content_type: model)
+          docs = entries.collect{|entry|
+            Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
+          }
+          docs.map(&:write!)
         end
       end
 
-      private
+      def content_types
+        @content_types ||= begin
+          models = @space.content_types.all
+          schema = models.collect do |model|
 
-        def documents
-          @documents ||= begin
-            Hash[collections.collect{|type|
-              rm(type)
-              [type, get_entries_of_type(type)]
-            }].values.flatten
-          end
-        end
-
-        def get_entries_of_type(type)
-          type_cfg = cfg(type)
-          type_id = type_cfg.dig('id')
-          entries = self.class.store_entries(type_id, @options.dig('limit'), type_cfg.dig('order'))
-          entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
-        end
-
-        def collections
-          @collections ||= begin
-            collections = @site.config.dig('contentful').keys
-            if @options.dig('collections').nil?
-              collections
-            else
-              collections & @options.dig('collections')
+            fields = []
+            references = []
+            model.properties.dig(:fields).each do |field|
+              if %w(Array Link).include?(field.type) && field.properties.dig(:linkType) != 'Asset'
+                references.push(field)
+              else
+                fields.push(field)
+              end
             end
+
+            [model.id, {
+              "fields" => fields.collect(&:id),
+              "references" => references.collect{|ref|
+                if ref.type == 'Array'
+                  link_content_types = ref.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+                else
+                  link_content_types = ref.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+                end
+
+                if link_content_types.empty?
+                  ref.id
+                else
+                  Hash[ref.id, link_content_types]
+                end
+              }
+            }]
           end
-        end
 
-        def cfg(type)
-          @site.config.dig('contentful', type).merge({ 'collection_name' => type })
-        end
+          schema.reject!{|arr| (@site.config.dig('contentful', 'skip') || []).include? arr.first }
+          schema_obj = Hash[schema]
 
-        def collections_glob(type)
-          path = File.join(@site.collections_path, "_#{type}/*")
-          Dir.glob(path)
-        end
+          Hash[schema.collect{|name,obj|
+            obj['references'] = obj['references'].collect{|type|
+              begin
+                if type.is_a? Hash
+                  type, models = type.first
+                  Hash[type, models.collect{|model| Hash[model, schema_obj[model]['fields']] }]
+                else
+                  Hash[type, schema_obj[type.singularize]['fields']]
+                end
+              rescue
+                binding.pry
+              end
 
-        def rm(type)
-          if @options.dig('force')
-            collections_glob(type).each do |file|
-              FileUtils.remove_entry_secure(file) if File.exist?(file)
-            end
-          end
+            }.reduce({}, :merge)
+            [name, obj]
+          }]
         end
+      end
 
-        def client
-          @client ||= self.class.send(:client)
-        end
+      def client
+        @client ||= self.class.send(:client)
+      end
+
+      def management
+        @management ||= self.class.send(:management)
+      end
 
     end
   end

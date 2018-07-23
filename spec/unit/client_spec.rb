@@ -6,11 +6,71 @@ describe Jekyll::Contentful::Client do
 
   before do
     Jekyll.logger.adjust_verbosity(quiet: true)
-    base = File.join(__dir__, '../dummy')
-    @site = Jekyll::Contentful::Client.scaffold(base)
-    @client = Jekyll::Contentful::Client.new(site: @site)
+    @base = File.join(__dir__, '../dummy')
   end
 
+  context 'on init' do
+
+    # it 'should select collections that include a contentful key' do
+    #   @site = Jekyll::Contentful::Client.scaffold(@base)
+    #   @site.config['collections'] = { "posts" => { "contentful" => true }, "widgets" => {} }
+    #   @client = Jekyll::Contentful::Client.new(site: @site)
+    #   expect(@client.models.keys).to include('posts')
+    #   expect(@client.models.keys).to_not include('widgets')
+    # end
+
+  end
+
+  context 'after init' do
+    before do
+      @site = Jekyll::Contentful::Client.scaffold(@base)
+      VCR.use_cassette 'contentful/spaces' do
+        @client = Jekyll::Contentful::Client.new(site: @site)
+      end
+    end
+
+    context 'with mocked data' do
+      # before do
+      #   fake_content_types = {
+      #     "testable" => {
+      #       "fields" => ["title"],
+      #       "references" => ["widgets", "product"]
+      #     }
+      #   }
+      #   allow(@client).to receive(:content_types).and_return(fake_content_types)
+      # end
+
+      it 'should return Contentful client' do
+        expect(@client.send(:client)).to be_instance_of(Contentful::Client)
+      end
+
+      it 'should return content types' do
+        VCR.use_cassette 'contentful/content_types' do
+          content_types = @client.content_types
+          expect(content_types.dig('testable', 'references', 'widgets')).to match_array(content_types.dig('widget', 'fields'))
+        end
+      end
+
+      it 'should sync documents' do
+        VCR.use_cassette 'contentful/entries' do
+          @client.sync!
+          # TODO
+        end
+      end
+    end
+
+    it 'should get content_types' do
+      VCR.use_cassette 'contentful/content_types' do
+        content_types = @client.content_types
+        expect(content_types.keys).to match_array(%w(testable widget product))
+        expect(content_types.dig('testable').keys).to match_array(%w(fields references))
+        expect(content_types.dig('testable', 'fields')).to match_array(%w(title))
+        expect(content_types.dig('testable', 'references')).to match_array([{"widgets"=>["title"]}, {"product"=>["title"]}])
+      end
+    end
+  end
+
+=begin
   context 'loading articles' do
     cassette 'contentful/articles'
 
@@ -96,4 +156,6 @@ describe Jekyll::Contentful::Client do
     expect(@client.class.send(:sort_order, 'title desc')).to eq('-fields.title')
     expect(@client.class.send(:sort_order, 'sys.createdAt asc')).to eq('sys.createdAt')
   end
+=end
+
 end
