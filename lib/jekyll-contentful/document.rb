@@ -74,7 +74,7 @@ module Jekyll
         end
 
         def parse_reference(entry, field_name)
-          fields = @schema.dig('references', field_name.to_s)
+          fields = @schema.dig('references', field_name.to_s) || []
           if fields.all?{|f| f.is_a?(String) }
             parse_entry_fields(entry, fields)
           else

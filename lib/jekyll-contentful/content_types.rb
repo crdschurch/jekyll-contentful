@@ -15,13 +15,15 @@ module Jekyll
             schema = Hash[get_schema]
             Hash[schema.collect{|name,obj|
               obj['references'] = obj['references'].collect{|type|
-                if type.is_a? Hash
-                  type, models = type.first
-                  Hash[type, models.collect{|model| Hash[model, schema[model]['fields']] }]
-                else
-                  Hash[type, schema[type.singularize]['fields']]
+                if !models.include?(type)
+                  if type.is_a? Hash
+                    type, models = type.first
+                    Hash[type, models.collect{|model| Hash[model, schema[model]['fields']] }]
+                  else
+                    Hash[type, schema[type.singularize]['fields']]
+                  end
                 end
-              }.reduce({}, :merge)
+              }.compact.reduce({}, :merge)
               [name, obj]
             }]
           end
