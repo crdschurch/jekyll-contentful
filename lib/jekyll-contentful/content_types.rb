@@ -33,7 +33,8 @@ module Jekyll
             if @options.dig('collections').nil?
               space.content_types.all
             else
-              space.content_types.all.select{|t| @options.dig('collections').include?(t.id) }
+              collections = @options.dig('collections').collect(&:singularize)
+              space.content_types.all.select{|t| collections.include?(t.id) }
             end
           end
 
