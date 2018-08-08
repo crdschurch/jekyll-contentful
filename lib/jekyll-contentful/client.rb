@@ -88,13 +88,10 @@ module Jekyll
             if @options.dig('clean')
               rm(model.pluralize)
             end
-
             cfg = @site.config.dig('collections', model.pluralize)
-            cfl = @site.config.dig('contentful', model.pluralize)
-
             entries = client.entries(content_type: model)
             docs = entries.collect{|entry|
-              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, cfl: cfl)
+              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
             }
             [model.pluralize, docs]
           end]

@@ -7,12 +7,11 @@ module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :schema, :cfg, :cfl, :filename, :dir, :body, :frontmatter, :associations
+      attr_accessor :data, :schema, :cfg, :filename, :dir, :body, :frontmatter, :associations
 
-      def initialize(obj, schema:, cfg:, cfl:)
+      def initialize(obj, schema:, cfg:)
         @data = obj
         @cfg = cfg
-        @cfl = cfl
         @schema = schema
         @dir = FileUtils.pwd
         reload!
@@ -101,8 +100,8 @@ module Jekyll
 
         def parse_filename
           _f = slug
-          if (@cfl || {}).keys.include?("filename")
-            _f = render_liquid(@cfl.dig('filename'))
+          if (@cfg || {}).keys.include?("filename")
+            _f = render_liquid(@cfg.dig('filename'))
           end
           ['collections', "_#{collection_name}", "#{_f}.md"].join('/')
         end

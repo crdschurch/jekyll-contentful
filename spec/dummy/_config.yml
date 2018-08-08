@@ -2,6 +2,7 @@ collections_dir: collections
 
 collections:
   articles:
+    filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
     output: false
   testables:
     output: false
@@ -11,99 +12,3 @@ collections:
 contentful:
   exclude:
     - migrations
-
-# collections:
-#   articles:
-#     output: true
-#     contentful: false
-#     permalink: /:collection/:slug
-#   authors:
-#     output: true
-#     contentful:
-#       filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
-#     permalink: /:collection/:slug
-#   podcasts:
-#     output: true
-#     contentful: true
-#     permalink: /:collection/:slug
-#   messages:
-#     output: true
-#     contentful: true
-#     permalink: /:collection/:slug
-#   series:
-#     output: true
-#     contentful: true
-#     permalink: /:collection/:slug
-#   trailers:
-#     output: true
-#     contentful: true
-#     permalink: /:collection/:slug
-
-# contentful:
-#   authors: {}
-#   articles:
-#     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
-#   podcasts: {}
-#   messages: {}
-#   series: {}
-#   trailers: {}
-
-# contentful:
-#   authors:
-#     id: author
-#     body: summary
-#     frontmatter:
-#       name: full_name
-#   articles:
-#     id: article
-#     body: body
-#     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
-#     belongs_to:
-#       - author
-#     frontmatter:
-#       title: title
-#       image: image/url
-#       author_name: author/full_name
-#       topic: category/title
-#       date: published_at
-#       slug: slug
-#       tags: tags
-#   podcasts:
-#     id: podcast
-#     body: this_field_doesnt_exist
-#     frontmatter:
-#       title: title
-#       subtitle: subtitle
-#       image: image/url
-#       background: bg_image/url
-#       authors: author/full_name
-#       apple_podcasts_url: apple_podcasts_url
-#       google_play_url: google_play_url
-#       stitcher_url: stitcher_url
-#       slug: slug
-#   messages:
-#     id: message
-#     belongs_to:
-#       - series
-#     links:
-#       series_slug:
-#         content_type: series
-#         field: videos
-#         value: slug
-#     frontmatter:
-#       title: title
-#       slug: slug
-#   series:
-#     id: series
-#     has_many:
-#       videos:
-#         - trailer
-#         - message
-#     frontmatter:
-#       title: title
-#       slug: slug
-#   trailers:
-#     id: trailer
-#     frontmatter:
-#       title: title
-#       slug: slug

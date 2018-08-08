@@ -38,6 +38,11 @@ describe Jekyll::Contentful::Document do
     expect(product.send(:filename)).to match(/collections\/_products\/[^\.]*\.md/)
   end
 
+  it 'should return parse liquid template for filenames, where required' do
+    stamp = DateTime.parse(article.data.published_at).strftime('%Y-%m-%d')
+    expect(article.filename).to eq("collections/_articles/#{stamp}-#{article.data.slug}.md")
+  end
+
   it 'should return slug if defined' do
     allow(product.data).to receive(:slug).and_return('lorem-ipsum')
     expect(product.send(:slug)).to eq('lorem-ipsum')
