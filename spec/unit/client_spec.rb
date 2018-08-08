@@ -11,12 +11,8 @@ describe Jekyll::Contentful::Client do
     @client = Jekyll::Contentful::Client.new(site: @site)
   end
 
-  it 'should scaffold Jekyll site' do
-    expect(@site).to be_instance_of(Jekyll::Site)
-  end
-
   it 'should return content_types, sans-exclusions' do
-    VCR.use_cassette 'contentful/types' do
+    VCR.use_cassette 'contentful/types-excluded' do
       @site.config['contentful'] = { exclude: 'products' }
       types = @client.content_types
       expect(types.keys).to include('testable')
@@ -24,6 +20,12 @@ describe Jekyll::Contentful::Client do
       expect(types.keys).to_not include('products')
     end
   end
+
+
+  it 'should scaffold Jekyll site' do
+    expect(@site).to be_instance_of(Jekyll::Site)
+  end
+
 
   it 'should return collections glob' do
     @site.collections['articles'].read

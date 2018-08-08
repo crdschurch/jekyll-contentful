@@ -70,7 +70,7 @@ module Jekyll
           end
       end
 
-      attr_accessor :site, :options, :space
+      attr_accessor :site, :options, :space, :docs
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
@@ -79,24 +79,26 @@ module Jekyll
       end
 
       def sync!
-        docs.values.map(&:write!)
+        docs.values.flatten.map(&:write!)
       end
 
       def docs
-        Hash[content_types.collect do |model, schema|
-          if @options.dig('clean')
-            rm(model.pluralize)
-          end
+        @docs ||= begin
+          Hash[content_types.collect do |model, schema|
+            if @options.dig('clean')
+              rm(model.pluralize)
+            end
 
-          cfg = @site.config.dig('collections', model.pluralize)
-          cfl = @site.config.dig('contentful', model.pluralize)
+            cfg = @site.config.dig('collections', model.pluralize)
+            cfl = @site.config.dig('contentful', model.pluralize)
 
-          entries = client.entries(content_type: model)
-          docs = entries.collect{|entry|
-            Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, cfl: cfl)
-          }
-          [model.pluralize, docs]
-        end]
+            entries = client.entries(content_type: model)
+            docs = entries.collect{|entry|
+              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, cfl: cfl)
+            }
+            [model.pluralize, docs]
+          end]
+        end
       end
 
       def collections_glob(type)
@@ -111,7 +113,7 @@ module Jekyll
       end
 
       def content_types
-        @content_types ||= Jekyll::Contentful::ContentTypes.all(@site.config.dig('source'))
+        @content_types ||= Jekyll::Contentful::ContentTypes.all(@site.config.dig('source'), @options)
       end
 
       def client

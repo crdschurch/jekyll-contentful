@@ -53,27 +53,27 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       X-Contentful-Request-Id:
-      - da290dc39f47ee28efea42039c40f472
+      - a1615348eeeaecf0892f7978674474ba
       Content-Length:
       - '697'
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 01 Aug 2018 18:51:27 GMT
+      - Mon, 06 Aug 2018 19:51:42 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '2064'
+      - '0'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1736-ORD
+      - cache-mdw17381-MDW
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '7'
+      - '0'
       X-Timer:
-      - S1533149488.918996,VS0,VE0
+      - S1533585102.090187,VS0,VE210
       Vary:
       - Accept-Encoding
     body:
@@ -81,7 +81,7 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+1WTW/iMBC98ysinxeUQFpYbgix2qrtlgpYSlc9pIkXWTgf9UdbWvHfa8cJMamTUIm9bQ5R7Hg8b97MPPu9ZVmAbikYWu/iUwzYNoFiBEaEeFsg5nbf5BoWMw+LeScd0Q1KxMBOBxiFiMlfthojBkO54Z90Q7VtyUvqiSaeL13lK9SkhkVOpJM5pisUbYD0WTzCe7SZZ5hn6Y6lBSiQ4eANCV8pPHeDQSKjyp/d/juNUz1A2Ti/6F3823be0Gp5ce3OnpY3dHOp7b8HNokY2eo/fAI9BoOR5AV0bWfQtvvtrj13+kPXGdq9Tq/bv9cNeBJ8zQBGz4jEUQgj6aOZQxVS6FEGSZmiY/mdaD4bOSTwGVEUR3nRZNT6ccQE5ixlzbiPxTbW9jVWAIOUeY8YNmcfx74n1onMwai9mOUG+wIBfxHEQdEzMjLAEFM2V2jNsWdNOeHUuo4xRtT6wakPrVvuhXrOX1CwhqxoFcWQTomhbTIaa2hJW7JoinJtHpR4dzq/e7t5/TkZzdZPK385Gq/o+EWnSAiAMdUPWrskJA64f1wd1gBvhJ315RkKXe/x9mJ6uZ5N7PECbl2+WlXkNQOvgpDvFDhAkY95ADXhUzzlslUIlzEHRvEyrlTFkQmUQcBK2TJJmIRbK2KlHOnln1lW5PlgZZ6ZzwUD6uTMHrrnne/uQJczgbhO0CpMqiWtmtkaWRNGNcVW4r1C2uqYNQuc2Lda4qrjOB5ptdDt60QJS00XH+S9Qu6ykz+TC4PkSX5z0RsTT6gcJPI44qE1jwmLSQEgl5C9hBYid3D7yJyZbganoO4fNVeFHp2muXqDzuCs96XmMpr8by4LNMvvEc2VH3baqVinEifpLk6ouEwsMCPIR5Bak7W8zFBDg6WoHsR719q1PgAmFicf3gsAAA==
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 18:51:27 GMT
+  recorded_at: Mon, 06 Aug 2018 19:51:42 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=product
@@ -133,27 +133,27 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       X-Contentful-Request-Id:
-      - b36c6fa1533502176a446979d6ba0973
+      - 8a556db05b11dab976fd847e8f42f9f7
       Content-Length:
       - '896'
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 01 Aug 2018 18:51:27 GMT
+      - Mon, 06 Aug 2018 19:51:42 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '2064'
+      - '0'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1733-ORD
+      - cache-mdw17358-MDW
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1533149488.976481,VS0,VE0
+      - S1533585103.629699,VS0,VE126
       Vary:
       - Accept-Encoding
     body:
@@ -204,7 +204,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 18:51:27 GMT
+  recorded_at: Mon, 06 Aug 2018 19:51:42 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=article
@@ -258,27 +258,27 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       X-Contentful-Request-Id:
-      - 42f3d86e01cd15d12676579f70b62a39
+      - 543846df2f807c9bebc740c5331d4660
       Content-Length:
       - '758'
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 01 Aug 2018 18:51:28 GMT
+      - Mon, 06 Aug 2018 19:51:43 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '2064'
+      - '0'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1723-ORD
+      - cache-mdw17346-MDW
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1533149488.034395,VS0,VE0
+      - S1533585103.089830,VS0,VE225
       Vary:
       - Accept-Encoding
     body:
@@ -286,7 +286,7 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+1XW2+bMBR+769APK8RSShjeUvbVIvaatpItZuqiYKbHmEMwaYpqvLfZ3N1M0OIlvVlRVGEjY/Pdy7fh3k+0jSdZlSfaM/8lg9YFiM+0qdJ4mY6n9u8E2tYxFzM54f5iAYQ84GRDzCEwMQjoxgDQ6HY8Ge+YbHtlpfcE41dT7iqVhSTEhYxkU9WmK6ABLrw2VzcOwkWJWYn33FrAfgiHBwk4RNFlunbsYiqujb1fR5ncemFjUnXBEw2/RgiYzm3s8w5s5xM2r8GNiMsefHAS5DLkD8VedFHxtA+NvhvuBjak+HJxDQG1nvrh7xTGvv7GSDyCElEQkSEj905LEIKXcpQsp2ivvmdST535jBBj0AhIlXTlKn1IsI45rJku3H3xXYm7avsADdh4GG0u/g48ly+jhcOkeMbpzKo+0O/B4T9hjIiMJ0BK2xmGJh27sZwl1LtFO4Q8dNQrrSbsoco6VWzvrFvt1+OqCi4dR2ef/dml0+ryMyot15Fxtya707CGvwlYg2Ni+rJ5VJQuixxB+xcLhrCqoDX0LEZfwuC9fSzc335KQ0uVwCwkpFzbZK7UK76qwIdB4svD6d27BhA6dwIv84dC6YdSGvUt+VdEYf4v80lFYiHUx9JslxkqhLVRlaVVVBKq3Jl0bulfCrkdateKoFt6tUisR1lKpu0JYFyQVullrvvFtuxPRiNTVlsuUm33CpN2gW3PbMdosuN9uFJI/ZSy3dlVi2/IlutAtweR3+k7TJc90khLR30eFH3FjUuzyWl4igUWeS30mQOiiKPIZYm2lWUoFC7wSwBDzjD6nRWWlLrfKMhL05IpUvV6eUQCfxHFGt5DxyGYqPxYDSy96KY0uSNYpq+W4R7UKw8Y/SUir+g2H2K8S/ihvlxyeHEWiCM0/+GVeojymFINR4OzA8ne5FKafJGqgOR6vXfW7Mlosyl2kUCZAkYu9qMgRtqFynl37l/vrnyGXGm3Bxtjn4DOzBC1tsPAAA=
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 18:51:28 GMT
+  recorded_at: Mon, 06 Aug 2018 19:51:43 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=author
@@ -338,27 +338,27 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       X-Contentful-Request-Id:
-      - '099ef1d4045c715ba594179dbdf7f8de'
+      - b8633059752e83726425e74532e454bb
       Content-Length:
       - '885'
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 01 Aug 2018 18:51:28 GMT
+      - Mon, 06 Aug 2018 19:51:43 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '2064'
+      - '0'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1724-ORD
+      - cache-mdw17356-MDW
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1533149488.099057,VS0,VE1
+      - S1533585104.619846,VS0,VE143
       Vary:
       - Accept-Encoding
     body:
@@ -409,7 +409,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 18:51:28 GMT
+  recorded_at: Mon, 06 Aug 2018 19:51:43 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=widget
@@ -463,27 +463,27 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       X-Contentful-Request-Id:
-      - 44420118cda4506ed1455d836415f13b
+      - 2ac09fd93610019858e396f235b8924d
       Content-Length:
       - '504'
       Accept-Ranges:
       - bytes
       Date:
-      - Wed, 01 Aug 2018 18:51:28 GMT
+      - Mon, 06 Aug 2018 19:51:44 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1959'
+      - '0'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1741-ORD
+      - cache-mdw17333-MDW
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1533149488.159238,VS0,VE1
+      - S1533585104.059694,VS0,VE64
       Vary:
       - Accept-Encoding
     body:
@@ -491,5 +491,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+2UzU/bMBTA7/0rLJ/XKmlDCbllVdAQTGxLELBpByvxuqfYTmo7lIL6v892+hF10wLTDiDhU96L36ff7z0OEMJqpXCEHs2nEfSqpkbCsZRkhY1u/c7e0ZUmzOgnTlIl1EbwnMCAgzaS77UyaMqtw2/OYev2IIqLpGqS21DbG62yk4tVOOU2pwsQJbYx98dEF2W2yTl1Hg8uQGHLYaXk94pOgyKsbVXbs959uzrbg1ub8afs5uHy/kMSp/PFbX4dz27VbNnxv0ssEVquuj9ySYmmRWz7gseeHw694+HYy/zjKPCiYDo6CcKvXYOmLp5nQMUdyEpwKmyM/h62JXGiNJWHLXpqf5NOzN4eSnoHCiphJ6PT2rwS2uS8ebL+vJ+a26zj948TsIRiTnX/27MqJ8whQMXwKt0a7MYD/wDKij0xdmSwBt3azCRR6JRK+y4NR1kldSV3PlzTNp5eMRgsqG/Kchl/Tj+eXzbl+QIAFv/KhUHDz/ww8o+iiT8KTo76uPi7wRsXdiPvd+IL4SKZU6UtGhLEHBgjKNFAODptlFnZm2XSLuPXz8ekzL78fB/WqQdKnXn8+iydQvw/AAlH40nwHEB+N3gD5EUCYjhVNNdUNxJdVJJydMW0hByoOsDDwPJ9sB78As6Z2cu7CQAA
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 18:51:28 GMT
+  recorded_at: Mon, 06 Aug 2018 19:51:44 GMT
 recorded_with: VCR 4.0.0

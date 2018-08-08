@@ -80,4 +80,19 @@ describe Jekyll::Contentful::ContentTypes do
     end
   end
 
+  context 'with --collections' do
+
+    before do
+      @types = ['product', 'article']
+      @klass.instance_variable_set('@options', { 'collections' => @types })
+    end
+
+    it 'should return content_types defined' do
+      VCR.use_cassette 'contentful/types-filtered' do
+        expect(@klass.send(:get_models).collect(&:id)).to match_array(@types)
+      end
+    end
+
+  end
+
 end

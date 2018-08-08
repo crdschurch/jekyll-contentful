@@ -12,5 +12,5 @@ VCR.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.extend CassetteHelper
+  # config.extend CassetteHelper
 end

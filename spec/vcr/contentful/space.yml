@@ -47,7 +47,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Wed, 01 Aug 2018 20:10:22 GMT
+      - Wed, 08 Aug 2018 13:37:42 GMT
       Etag:
       - W/"c52f61517c43318550d9441468f61419"
       Referrer-Policy:
@@ -69,7 +69,7 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 8e7d8ec905a694b6a6e6a5878cc67071
+      - '059f96a16767145e9ea1aec7d816a7dc'
       X-Download-Options:
       - noopen
       X-Frame-Options:
@@ -83,14 +83,14 @@ http_interactions:
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_622_673446=9c1RIJZX1kD4U9AAccqhCK4TYlsAAAAAjGR6uWVIW1HaoOFgCXWmRA==;
+      - incap_ses_480_673446=6RxlKapBdh8YhOgjfE6pBibyalsAAAAARuIn1EDoGnjNfAXWGJm/ZQ==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=7WAZM+V/ISS0NqDz6lKYhQAAAACo1rrQVGY6G4q4cPScuLN7; path=/; Domain=.contentful.com
-      - visid_incap_673446=CgCUrAkuQsaGAUC5bWrc/a4TYlsAAAAAQUIPAAAAAAAJndynpQZ9Fkwdojk9+uUG;
-        expires=Thu, 01 Aug 2019 07:17:24 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=XdReIYVLQHht6Z2H6lKYhQAAAACZnt3fdiHqwEesWMq3HY+r; path=/; Domain=.contentful.com
+      - visid_incap_673446=thX7I/JDRBuNhgGIqz+OJybyalsAAAAAQUIPAAAAAADEST3Mr78u4c8FXMyEd0kI;
+        expires=Thu, 08 Aug 2019 07:00:56 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 7-20900885-20900897 NNNN CT(1 0 0) RT(1533154221874 87) q(0 0 0 -1) r(1 1)
-        U5
+      - 10-257696395-257696418 NNNN CT(1 6 0) RT(1533735461896 91) q(0 0 0 -1) r(1
+        1) U5
       X-Cdn:
       - Incapsula
     body:
@@ -122,7 +122,7 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 20:10:22 GMT
+  recorded_at: Wed, 08 Aug 2018 13:37:42 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
@@ -164,9 +164,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Wed, 01 Aug 2018 20:10:22 GMT
+      - Wed, 08 Aug 2018 13:37:42 GMT
       Etag:
-      - '"131f4c8ca4cdf33fea6ab25f73074856"'
+      - '"c4059e783dfa173ce982cbb23755461d"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -184,20 +184,20 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '8'
       X-Contentful-Request-Id:
-      - 17338baa8002be0f406d71bf38e9f216
+      - f29ff650f380ec41a032a644316638df
       Content-Length:
-      - '9666'
+      - '9696'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_622_673446=innSRykCkn2UVNAAccqhCK4TYlsAAAAAplzM+eW1n/Q/XvkhJsMazg==;
+      - incap_ses_480_673446=4DdKJiAk621jhOgjfE6pBibyalsAAAAA39PyOQRFkPqzyRKb4AVPpw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=K/RHXgq5YBAsei7A6lKYhQAAAADNbOSOpWELBMl5ilreXI4c; path=/; Domain=.contentful.com
-      - visid_incap_673446=JVz1Wn4dShiMshXAv6PHj64TYlsAAAAAQUIPAAAAAADZzMl+EMY19D3ZfCkjdaY/;
-        expires=Thu, 01 Aug 2019 07:17:24 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=W+ikAB56JjS7QHve6lKYhQAAAAA9gaTjGFFHM+PNnUTeY6ww; path=/; Domain=.contentful.com
+      - visid_incap_673446=J27PcAHuTTek6uk/a9CaFibyalsAAAAAQUIPAAAAAAATw4IcEPtdH7cCTyG+gaDC;
+        expires=Thu, 08 Aug 2019 07:00:56 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 8-44457699-44457714 NNNN CT(2 1 0) RT(1533154222118 79) q(0 0 1 -1) r(3 3)
-        U5
+      - 10-257696471-257696498 NNNN CT(0 7 0) RT(1533735462149 59) q(0 0 0 -1) r(1
+        1) U5
       X-Cdn:
       - Incapsula
     body:
@@ -387,7 +387,7 @@ http_interactions:
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2018-08-01T18:14:36.656Z",
+                "updatedAt": "2018-08-02T18:47:53.959Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -409,8 +409,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 1,
-                "version": 2,
+                "publishedCounter": 2,
+                "version": 4,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -418,9 +418,9 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedVersion": 1,
+                "publishedVersion": 3,
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
-                "publishedAt": "2018-08-01T18:14:36.656Z"
+                "publishedAt": "2018-08-02T18:47:53.959Z"
               },
               "displayField": "title",
               "name": "Article",
@@ -467,6 +467,7 @@ http_interactions:
                     "validations": [
                       {
                         "linkContentType": [
+                          "testable",
                           "widget"
                         ]
                       }
@@ -605,5 +606,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Wed, 01 Aug 2018 20:10:22 GMT
+  recorded_at: Wed, 08 Aug 2018 13:37:42 GMT
 recorded_with: VCR 4.0.0

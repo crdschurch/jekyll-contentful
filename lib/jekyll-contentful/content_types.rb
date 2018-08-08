@@ -6,11 +6,11 @@ module Jekyll
     class ContentTypes
       class << self
 
-        attr_accessor :space, :entries, :config, :models
+        attr_accessor :space, :entries, :config, :models, :options
 
-        def all(project_dir=nil)
+        def all(project_dir=nil, options={})
           load_jekyll_config(project_dir)
-
+          @options = options
           @entries ||= begin
             schema = Hash[get_schema]
             Hash[schema.collect{|name,obj|
@@ -30,7 +30,11 @@ module Jekyll
         private
 
           def get_models
-            space.content_types.all
+            if @options.dig('collections').nil?
+              space.content_types.all
+            else
+              space.content_types.all.select{|t| @options.dig('collections').include?(t.id) }
+            end
           end
 
           def get_fields(model)
