@@ -47,7 +47,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Wed, 08 Aug 2018 13:50:51 GMT
+      - Thu, 09 Aug 2018 18:59:38 GMT
       Etag:
       - W/"c52f61517c43318550d9441468f61419"
       Referrer-Policy:
@@ -61,7 +61,7 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35994'
+      - '35969'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
@@ -69,7 +69,7 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 10cb074830bb28636cb854b2e6e99323
+      - b93156168f347d7eb9fb58406a2c72bf
       X-Download-Options:
       - noopen
       X-Frame-Options:
@@ -83,14 +83,14 @@ http_interactions:
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_480_673446=MQZTUIkvgBLX6ewjfE6pBjr1alsAAAAA2MrgX9vqJVh/SJuS+sZy9w==;
+      - incap_ses_480_673446=FcCqL15oIWP0hsQlfE6pBhqPbFsAAAAADkKzljJli4q09NNpH4lmtA==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=nbqyIhRAhzz/v9tT6lKYhQAAAAB2/5lTL7SXBhtO2GWy2Tkq; path=/; Domain=.contentful.com
-      - visid_incap_673446=JXuENlaZRHynTdgg2TQvuzr1alsAAAAAQUIPAAAAAABuQFo9e1kzNzAVFT6XAvuB;
-        expires=Thu, 08 Aug 2019 07:00:56 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=uJY2ckJCE2dgzEGK6lKYhQAAAACX9bqR6Q6oIpAwwP4OX7AM; path=/; Domain=.contentful.com
+      - visid_incap_673446=LZv/bOkxTFustPwhaSorDhqPbFsAAAAAQUIPAAAAAACBzC+t7h/R87RE+KjrlLFc;
+        expires=Fri, 09 Aug 2019 07:00:57 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 10-257902063-257902071 NNNN CT(0 1 0) RT(1533736250849 47) q(0 0 0 -1) r(1
-        1) U5
+      - 5-243476628-243476641 NNNN CT(0 0 0) RT(1533841178664 71) q(0 0 0 -1) r(0
+        0) U5
       X-Cdn:
       - Incapsula
     body:
@@ -122,7 +122,7 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Wed, 08 Aug 2018 13:50:51 GMT
+  recorded_at: Thu, 09 Aug 2018 18:59:38 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
@@ -164,9 +164,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Wed, 08 Aug 2018 13:50:51 GMT
+      - Thu, 09 Aug 2018 18:59:39 GMT
       Etag:
-      - '"c4059e783dfa173ce982cbb23755461d"'
+      - '"3fafcbac0675da7d20de215088a87557"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -176,27 +176,27 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35993'
+      - '35968'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '8'
+      - '9'
       X-Contentful-Request-Id:
-      - 5ee7d6ed0331e217cf56a569dbfe45ca
+      - 2bb987167c7f511d82f623480a6ae1ae
       Content-Length:
-      - '9696'
+      - '10196'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_480_673446=EhoDMct6wzZC6uwjfE6pBjv1alsAAAAAppJl6PCGDRBnOEOwifzG2Q==;
+      - incap_ses_480_673446=sSPjN5pCiX8th8QlfE6pBhqPbFsAAAAA11BqpiiFzUwTaSbxurYp0Q==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=tWFCHcGkij5XaogP6lKYhQAAAABYyQhBsw4VMTnK+YzwYxD4; path=/; Domain=.contentful.com
-      - visid_incap_673446=Qmsria9cQb6+NkzrRtr8Xjv1alsAAAAAQUIPAAAAAAA/uIvjRTxFmKOhb34hKYuG;
-        expires=Thu, 08 Aug 2019 07:00:56 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=cMhAWfOB8WAWsK1T6lKYhQAAAAAIO/ppFlXTNQiV/lJaBwtd; path=/; Domain=.contentful.com
+      - visid_incap_673446=nqluv0mAS0ujs/O85EklGxqPbFsAAAAAQUIPAAAAAACPy0KV5X1evjBFPI1rZlTm;
+        expires=Fri, 09 Aug 2019 07:00:57 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 7-41628568-41628572 NNNN CT(0 0 0) RT(1533736251077 81) q(0 0 0 -1) r(2 2)
+      - 1-53959988-53959992 NNNN CT(0 0 0) RT(1533841178839 82) q(0 0 0 -1) r(0 0)
         U5
       X-Cdn:
       - Incapsula
@@ -220,6 +220,195 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
+                "id": "widget",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:51:16.575Z",
+                "updatedAt": "2018-07-20T16:51:16.734Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 1,
+                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
+                "publishedAt": "2018-07-20T16:51:16.734Z"
+              },
+              "displayField": "title",
+              "name": "Widget",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "product",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:52:20.890Z",
+                "updatedAt": "2018-07-20T16:59:57.545Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 3,
+                "version": 6,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 5,
+                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
+                "publishedAt": "2018-07-20T16:59:57.545Z"
+              },
+              "displayField": "title",
+              "name": "Product",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "author",
+                "type": "ContentType",
+                "createdAt": "2018-08-01T18:13:37.445Z",
+                "updatedAt": "2018-08-01T18:13:37.638Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 1,
+                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
+                "publishedAt": "2018-08-01T18:13:37.638Z"
+              },
+              "displayField": "full_name",
+              "name": "Author",
+              "description": "",
+              "fields": [
+                {
+                  "id": "full_name",
+                  "name": "Full Name",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
                 "id": "testable",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:50:56.009Z",
@@ -321,73 +510,10 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
-                "id": "product",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2018-07-20T16:59:57.545Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 3,
-                "version": 6,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 5,
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "publishedAt": "2018-07-20T16:59:57.545Z"
-              },
-              "displayField": "title",
-              "name": "Product",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2018-08-02T18:47:53.959Z",
+                "updatedAt": "2018-08-08T17:20:17.703Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -409,8 +535,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 2,
-                "version": 4,
+                "publishedCounter": 5,
+                "version": 10,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -418,9 +544,9 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedVersion": 3,
+                "publishedVersion": 9,
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
-                "publishedAt": "2018-08-02T18:47:53.959Z"
+                "publishedAt": "2018-08-08T17:20:17.703Z"
               },
               "displayField": "title",
               "name": "Article",
@@ -474,129 +600,23 @@ http_interactions:
                     ],
                     "linkType": "Entry"
                   }
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
                 },
-                "id": "author",
-                "type": "ContentType",
-                "createdAt": "2018-08-01T18:13:37.445Z",
-                "updatedAt": "2018-08-01T18:13:37.638Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
-                "publishedAt": "2018-08-01T18:13:37.638Z"
-              },
-              "displayField": "full_name",
-              "name": "Author",
-              "description": "",
-              "fields": [
                 {
-                  "id": "full_name",
-                  "name": "Full Name",
-                  "type": "Symbol",
+                  "id": "published_at",
+                  "name": "Published At",
+                  "type": "Date",
                   "localized": false,
                   "required": false,
                   "validations": [],
                   "disabled": false,
                   "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
                 },
-                "id": "widget",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:51:16.575Z",
-                "updatedAt": "2018-07-20T16:51:16.734Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
-                "publishedAt": "2018-07-20T16:51:16.734Z"
-              },
-              "displayField": "title",
-              "name": "Widget",
-              "description": "",
-              "fields": [
                 {
-                  "id": "title",
-                  "name": "Title",
+                  "id": "slug",
+                  "name": "Slug",
                   "type": "Symbol",
                   "localized": false,
-                  "required": false,
+                  "required": true,
                   "validations": [],
                   "disabled": false,
                   "omitted": false
@@ -606,7 +626,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Wed, 08 Aug 2018 13:50:51 GMT
+  recorded_at: Thu, 09 Aug 2018 18:59:39 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
@@ -648,9 +668,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Wed, 08 Aug 2018 13:50:51 GMT
+      - Thu, 09 Aug 2018 18:59:39 GMT
       Etag:
-      - '"c4059e783dfa173ce982cbb23755461d"'
+      - '"3fafcbac0675da7d20de215088a87557"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -660,28 +680,28 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35992'
+      - '35967'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '7'
+      - '8'
       X-Contentful-Request-Id:
-      - a9462f80a49b3cd2520b928dfe384fb4
+      - bb80e77ada93058cd333f36065a84d90
       Content-Length:
-      - '9696'
+      - '10196'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_480_673446=JZRycAG+T1nH6uwjfE6pBjv1alsAAAAAbylYHqqFCvqgG+18XG3i/Q==;
+      - incap_ses_480_673446=OSugRQKpwl5yh8QlfE6pBhuPbFsAAAAACuzZcgIBHo9koOy/l8V4Sg==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=HgiJWaxWUyINSmSu6lKYhQAAAACzPRp4S3JUUnTVndIz/OAJ; path=/; Domain=.contentful.com
-      - visid_incap_673446=NBVHIMUrTwG5nEH2oFgwJTv1alsAAAAAQUIPAAAAAAB6PLvPd6g+ur7ZzdphQV57;
-        expires=Thu, 08 Aug 2019 07:00:56 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=OTKyegCrX0ipl6ih6lKYhQAAAACnda65R0WWgPCIH+hokfd7; path=/; Domain=.contentful.com
+      - visid_incap_673446=zSaarncgQxaLYdJvlwMykhuPbFsAAAAAQUIPAAAAAABBtIErR6ZmCkXrq8FED/5t;
+        expires=Fri, 09 Aug 2019 07:00:57 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 4-185665983-185665995 NNNN CT(1 8 0) RT(1533736251411 87) q(0 0 1 -1) r(2
-        2) U5
+      - 7-46299092-46299094 NNNN CT(0 0 0) RT(1533841179048 64) q(0 0 0 -1) r(0 0)
+        U5
       X-Cdn:
       - Incapsula
     body:
@@ -695,6 +715,195 @@ http_interactions:
           "skip": 0,
           "limit": 100,
           "items": [
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "widget",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:51:16.575Z",
+                "updatedAt": "2018-07-20T16:51:16.734Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 1,
+                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
+                "publishedAt": "2018-07-20T16:51:16.734Z"
+              },
+              "displayField": "title",
+              "name": "Widget",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "product",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:52:20.890Z",
+                "updatedAt": "2018-07-20T16:59:57.545Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 3,
+                "version": 6,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 5,
+                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
+                "publishedAt": "2018-07-20T16:59:57.545Z"
+              },
+              "displayField": "title",
+              "name": "Product",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "author",
+                "type": "ContentType",
+                "createdAt": "2018-08-01T18:13:37.445Z",
+                "updatedAt": "2018-08-01T18:13:37.638Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedVersion": 1,
+                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
+                "publishedAt": "2018-08-01T18:13:37.638Z"
+              },
+              "displayField": "full_name",
+              "name": "Author",
+              "description": "",
+              "fields": [
+                {
+                  "id": "full_name",
+                  "name": "Full Name",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
             {
               "sys": {
                 "space": {
@@ -805,73 +1014,10 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
-                "id": "product",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2018-07-20T16:59:57.545Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 3,
-                "version": 6,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 5,
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "publishedAt": "2018-07-20T16:59:57.545Z"
-              },
-              "displayField": "title",
-              "name": "Product",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2018-08-02T18:47:53.959Z",
+                "updatedAt": "2018-08-08T17:20:17.703Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -893,8 +1039,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 2,
-                "version": 4,
+                "publishedCounter": 5,
+                "version": 10,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -902,9 +1048,9 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedVersion": 3,
+                "publishedVersion": 9,
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
-                "publishedAt": "2018-08-02T18:47:53.959Z"
+                "publishedAt": "2018-08-08T17:20:17.703Z"
               },
               "displayField": "title",
               "name": "Article",
@@ -958,129 +1104,23 @@ http_interactions:
                     ],
                     "linkType": "Entry"
                   }
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
                 },
-                "id": "author",
-                "type": "ContentType",
-                "createdAt": "2018-08-01T18:13:37.445Z",
-                "updatedAt": "2018-08-01T18:13:37.638Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
-                "publishedAt": "2018-08-01T18:13:37.638Z"
-              },
-              "displayField": "full_name",
-              "name": "Author",
-              "description": "",
-              "fields": [
                 {
-                  "id": "full_name",
-                  "name": "Full Name",
-                  "type": "Symbol",
+                  "id": "published_at",
+                  "name": "Published At",
+                  "type": "Date",
                   "localized": false,
                   "required": false,
                   "validations": [],
                   "disabled": false,
                   "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
                 },
-                "id": "widget",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:51:16.575Z",
-                "updatedAt": "2018-07-20T16:51:16.734Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
-                "publishedAt": "2018-07-20T16:51:16.734Z"
-              },
-              "displayField": "title",
-              "name": "Widget",
-              "description": "",
-              "fields": [
                 {
-                  "id": "title",
-                  "name": "Title",
+                  "id": "slug",
+                  "name": "Slug",
                   "type": "Symbol",
                   "localized": false,
-                  "required": false,
+                  "required": true,
                   "validations": [],
                   "disabled": false,
                   "omitted": false
@@ -1090,5 +1130,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Wed, 08 Aug 2018 13:50:51 GMT
+  recorded_at: Thu, 09 Aug 2018 18:59:39 GMT
 recorded_with: VCR 4.0.0

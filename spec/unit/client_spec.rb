@@ -21,7 +21,6 @@ describe Jekyll::Contentful::Client do
     end
   end
 
-
   it 'should scaffold Jekyll site' do
     expect(@site).to be_instance_of(Jekyll::Site)
   end
@@ -62,4 +61,24 @@ describe Jekyll::Contentful::Client do
     expect(@client.management).to be_a(Contentful::Management::Client)
   end
 
+  context 'with limits' do
+
+    it 'should return query string params for recent queries' do
+      Timecop.freeze(Time.local(2018, 8, 9)) do
+        @client = Jekyll::Contentful::Client.new(site: @site, options: { 'recent' => '1.day.ago' })
+        expect(@client.send(:query_params).dig('sys.createdAt[gte]')).to eq('2018-08-08')
+      end
+    end
+
+    it 'should limit the number of results returned' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'limit' => 2 })
+      VCR.use_cassette 'contentful/entries-limited' do
+        docs = @client.docs
+        docs.keys.each do |id|
+          expect(docs.dig(id).count).to eq(2)
+        end
+      end
+    end
+
+  end
 end

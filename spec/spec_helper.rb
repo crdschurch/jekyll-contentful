@@ -3,6 +3,7 @@ require 'bundler/setup'
 Bundler.setup
 require 'jekyll-contentful'
 require 'vcr'
+require 'timecop'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 

@@ -84,7 +84,8 @@ module Jekyll
         end
 
         def parse_entry_fields(entry, fields)
-          (fields + ['id', 'content_type']).uniq.collect{|field_name|
+          fields = (fields || []) + ['id', 'content_type']
+          fields.uniq.collect{|field_name|
             if field_name == 'content_type'
               value = entry.send(:content_type).id
             else
@@ -96,6 +97,8 @@ module Jekyll
               parse_field(field_name, value)
             ]
           }.reduce({}, :merge)
+        rescue Exception => e
+          binding.pry
         end
 
         def parse_filename

@@ -7,13 +7,13 @@ describe Jekyll::Contentful::Document do
 
   let(:product) {
     VCR.use_cassette('contentful/entries/products') do
-      @client.docs.dig('products').first
+      @client.docs.dig('products').detect{|p| p.data.id == '5im4abQIPKgSE0CUey4uYY' }
     end
   }
 
   let(:article) {
     VCR.use_cassette('contentful/entries/articles') do
-      @client.docs.dig('articles').first
+      @client.docs.dig('articles').detect{|a| a.data.id == '4swni4tAHme0gI8yySC6Sy' }
     end
   }
 
@@ -90,8 +90,9 @@ describe Jekyll::Contentful::Document do
 
     it 'should populate all fields for references' do
       %w(full_name id content_type).each do |field_name|
-        expect(article.frontmatter.dig('author').keys).to include(field_name)
-        expect(article.frontmatter.dig('author', field_name)).to_not be_nil
+        frontmatter = article.frontmatter
+        expect(frontmatter.dig('author').keys).to include(field_name)
+        expect(frontmatter.dig('author', field_name)).to_not be_nil
       end
     end
 

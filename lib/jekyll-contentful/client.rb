@@ -1,4 +1,4 @@
-require 'active_support/inflector'
+require 'active_support/all'
 require 'contentful/management'
 
 module Jekyll
@@ -6,13 +6,6 @@ module Jekyll
     class Client
 
       class << self
-        attr_accessor :entries
-
-        def store_entries(type_id, limit, order)
-          self.entries ||= {}
-          self.entries[type_id.to_sym] = fetch_entries(type_id, limit: limit, order: order)
-        end
-
         def scaffold(app_root)
           overrides = Jekyll::Configuration.new.read_config_file(File.join(app_root, '_config.yml'))
           site_config = Jekyll::Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, overrides.merge({
@@ -21,61 +14,15 @@ module Jekyll
           }))
           Jekyll::Site.new(site_config)
         end
-
-        def sort_order(order)
-          if order.nil?
-            '-sys.createdAt'
-          else
-            field, dir = order.split(' ')
-            if order[0..3] == 'sys.'
-              "#{'-' if dir == 'desc'}#{field}"
-            else
-              "#{'-' if dir == 'desc'}fields.#{field}"
-            end
-          end
-        end
-
-        private
-
-          def fetch_entries(type_id, limit: nil, entries: [], order: nil)
-            this_page = client.entries({
-              content_type: type_id,
-              limit: (limit || 1000),
-              skip: entries.size,
-              order: sort_order(order)
-            }).to_a
-            entries.concat(this_page)
-
-            if this_page.size == 1000
-              fetch_entries(type_id, limit: limit, entries: entries, order: order)
-            else
-              entries
-            end
-          end
-
-          def client
-            @client ||= begin
-              ::Contentful::Client.new(
-                access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-                space: ENV['CONTENTFUL_SPACE_ID'],
-                environment: (ENV['CONTENTFUL_ENV'] || 'master')
-              )
-            end
-          end
-
-          def management
-            @management ||= begin
-              ::Contentful::Management::Client.new(ENV['CONTENTFUL_MANAGEMENT_TOKEN'])
-            end
-          end
       end
 
-      attr_accessor :site, :options, :space, :docs
+      attr_accessor :site, :options, :space, :docs, :entries
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
         @options = options
+        @entries = {}
       end
 
       def sync!
@@ -89,7 +36,7 @@ module Jekyll
               rm(model.pluralize)
             end
             cfg = @site.config.dig('collections', model.pluralize)
-            entries = client.entries(content_type: model)
+            entries = fetch_entries(model)
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
             }
@@ -114,16 +61,62 @@ module Jekyll
       end
 
       def client
-        @client ||= self.class.send(:client)
+        @client ||= begin
+          ::Contentful::Client.new(
+            access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
+            space: ENV['CONTENTFUL_SPACE_ID'],
+            environment: (ENV['CONTENTFUL_ENV'] || 'master')
+          )
+        end
       end
 
       def management
-        @management ||= self.class.send(:management)
+        @management ||= ::Contentful::Management::Client.new(ENV['CONTENTFUL_MANAGEMENT_TOKEN'])
       end
 
       def space
         @space ||= management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
       end
+
+      private
+
+        def fetch_entries(type_id)
+          @entries[type_id] = [] unless @entries.keys.include?(type_id)
+          params = query_params.merge({ skip: @entries[type_id].count })
+          this_page = client.entries(params).to_a
+          @entries[type_id].concat(this_page)
+          if this_page.size == 1000
+            fetch_entries(type_id)
+          else
+            @entries[type_id]
+          end
+        end
+
+        def query_params
+          args = {
+            limit: (options.dig('limit') || 1000),
+            order: sort_order(options.dig('order'))
+          }
+          if !options.dig('recent').nil?
+            args['sys.createdAt[gte]'] = eval(options.dig('recent')).strftime('%Y-%m-%d') rescue nil
+          end
+          args
+        rescue Exception => e
+          binding.pry
+        end
+
+        def sort_order(order)
+          if order.nil?
+            '-sys.createdAt'
+          else
+            field, dir = order.split(' ')
+            if order[0..3] == 'sys.'
+              "#{'-' if dir == 'desc'}#{field}"
+            else
+              "#{'-' if dir == 'desc'}fields.#{field}"
+            end
+          end
+        end
 
     end
   end

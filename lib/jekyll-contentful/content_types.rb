@@ -18,7 +18,7 @@ module Jekyll
                 if !models.include?(type)
                   if type.is_a? Hash
                     type, models = type.first
-                    Hash[type, models.collect{|model| Hash[model, schema[model]['fields']] }]
+                    Hash[type, models.collect{|model| Hash[model, schema.dig(model, 'fields')] }]
                   else
                     Hash[type, schema[type.singularize]['fields']]
                   end
