@@ -97,9 +97,17 @@ module Jekyll
             limit: (options.dig('limit') || 1000),
             order: sort_order(options.dig('order'))
           }
+
           if !options.dig('recent').nil?
             args['sys.createdAt[gte]'] = eval(options.dig('recent')).strftime('%Y-%m-%d') rescue nil
           end
+
+          if !options.dig('query').nil?
+            CGI.parse(options.dig('query')).each do |k,v|
+              args[k] = v.first
+            end
+          end
+
           args
         rescue Exception => e
           binding.pry
