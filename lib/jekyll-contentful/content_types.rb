@@ -13,7 +13,13 @@ module Jekyll
           @options = options
           @entries ||= begin
             schema = Hash[get_schema]
-            Hash[schema.collect{|name,obj|
+            included_collections = (@options.dig('collections') || {}).collect(&:singularize)
+            if included_collections.empty?
+              _schema = schema
+            else
+              _schema = schema.select {|k,v| included_collections.include?(k) }
+            end
+            Hash[_schema.collect{|name,obj|
               obj['references'] = obj['references'].collect{|type|
                 if !models.include?(type)
                   if type.is_a? Hash
@@ -32,12 +38,7 @@ module Jekyll
         private
 
           def get_models
-            if @options.dig('collections').nil?
-              space.content_types.all
-            else
-              collections = @options.dig('collections').collect(&:singularize)
-              space.content_types.all.select{|t| collections.include?(t.id) }
-            end
+            space.content_types.all
           end
 
           def get_fields(model)

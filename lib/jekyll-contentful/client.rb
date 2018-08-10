@@ -18,6 +18,9 @@ module Jekyll
 
       attr_accessor :site, :options, :space, :docs, :entries
 
+      include ::TextHelper
+      include ::Jekyll::Contentful::Loggable
+
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
@@ -26,6 +29,8 @@ module Jekyll
       end
 
       def sync!
+        nfo = "#{client.configuration.dig(:space)} (#{client.configuration.dig(:environment)})"
+        log("Syncing content from Contentful API... #{nfo}\n", color: "green")
         docs.values.flatten.map(&:write!)
       end
 
@@ -33,6 +38,7 @@ module Jekyll
         @docs ||= begin
           Hash[content_types.collect do |model, schema|
             if @options.dig('clean')
+              log("Removing collection...", model.pluralize, color: "pink")
               rm(model.pluralize)
             end
             cfg = @site.config.dig('collections', model.pluralize)
@@ -80,15 +86,26 @@ module Jekyll
 
       private
 
-        def fetch_entries(type_id)
-          @entries[type_id] = [] unless @entries.keys.include?(type_id)
-          params = query_params.merge({ skip: @entries[type_id].count })
+        def fetch_entries(type)
+          unless @entries.keys.include?(type)
+            @entries[type] = []
+          end
+
+          params = query_params.merge({
+            skip: @entries[type].count,
+            content_type: type
+          })
+
+          log("Querying '#{type.pluralize}' with the following parameters...", color: "yellow")
+          log(params.to_json, color: "yellow")
+
           this_page = client.entries(params).to_a
-          @entries[type_id].concat(this_page)
+          @entries[type].concat(this_page)
           if this_page.size == 1000
-            fetch_entries(type_id)
+            fetch_entries(type)
           else
-            @entries[type_id]
+            log("#{pluralize(@entries[type].count, type)} returned.\n", color: "yellow")
+            @entries[type]
           end
         end
 
@@ -109,8 +126,6 @@ module Jekyll
           end
 
           args
-        rescue Exception => e
-          binding.pry
         end
 
         def sort_order(order)
@@ -124,6 +139,15 @@ module Jekyll
               "#{'-' if dir == 'desc'}fields.#{field}"
             end
           end
+        end
+
+        def client_endpoint(params)
+          uri = [
+            client.base_url,
+            client.environment_url('/entries'),
+            '?access_token=...',
+            URI.encode_www_form(params)
+          ].join()
         end
 
     end
