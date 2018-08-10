@@ -6,33 +6,30 @@ module Jekyll
     class ContentTypes
       class << self
 
-        attr_accessor :space, :entries, :config, :models, :options
+        attr_accessor :space, :config, :models
 
         def all(project_dir=nil, options={})
           load_jekyll_config(project_dir)
-          @options = options
-          @entries ||= begin
-            schema = Hash[get_schema]
-            included_collections = (@options.dig('collections') || {}).collect(&:singularize)
-            if included_collections.empty?
-              _schema = schema
-            else
-              _schema = schema.select {|k,v| included_collections.include?(k) }
-            end
-            Hash[_schema.collect{|name,obj|
-              obj['references'] = obj['references'].collect{|type|
-                if !models.include?(type)
-                  if type.is_a? Hash
-                    type, models = type.first
-                    Hash[type, models.collect{|model| Hash[model, schema.dig(model, 'fields')] }]
-                  else
-                    Hash[type, schema[type.singularize]['fields']]
-                  end
-                end
-              }.compact.reduce({}, :merge)
-              [name, obj]
-            }]
+          schema = Hash[get_schema]
+          included_collections = (options.dig('collections') || {}).collect(&:singularize)
+          if included_collections.empty?
+            _schema = schema
+          else
+            _schema = schema.select {|k,v| included_collections.include?(k) }
           end
+          Hash[_schema.collect{|name,obj|
+            obj['references'] = obj['references'].collect{|type|
+              if !models.include?(type)
+                if type.is_a? Hash
+                  type, models = type.first
+                  Hash[type, models.collect{|model| Hash[model, schema.dig(model, 'fields')] }]
+                else
+                  Hash[type, schema[type.singularize]['fields']]
+                end
+              end
+            }.compact.reduce({}, :merge)
+            [name, obj]
+          }]
         end
 
         private
@@ -68,10 +65,10 @@ module Jekyll
           def parse_reference_field
             -> (field) {
               content_types = begin
-                if field.type == 'Array'
-                  field.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
-                else
-                  field.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+              if field.type == 'Array'
+                field.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+              else
+                field.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
                 end
               end
               if content_types.empty?

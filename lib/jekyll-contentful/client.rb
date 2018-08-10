@@ -5,29 +5,28 @@ module Jekyll
   module Contentful
     class Client
 
-      attr_accessor :site, :options, :space, :docs, :entries
+      attr_accessor :site, :options, :space, :docs, :entries, :log_color
 
       include ::TextHelper
-      include ::Jekyll::Contentful::Loggable
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
         @options = options
         @entries = {}
+        @log_color = 'green'
       end
 
       def sync!
         nfo = "#{client.configuration.dig(:space)} (#{client.configuration.dig(:environment)})"
         log("Syncing content from Contentful API... #{nfo}\n", color: "green")
-        docs.values.flatten.map(&:write!)
-      end
-
-      def docs
+        colors = ColorizedString.colors.shuffle
         @docs ||= begin
-          Hash[content_types.collect do |model, schema|
+          Hash[content_types.each_with_index.collect do |content_type, index|
+            @log_color = colors[index % (colors.count - 1)]
+            model, schema = content_type
+
             if @options.dig('clean')
-              log("Removing collection...", model.pluralize, color: "pink")
               rm(model.pluralize)
             end
             cfg = @site.config.dig('collections', model.pluralize)
@@ -35,6 +34,12 @@ module Jekyll
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
             }
+            files = docs.collect{|entry|
+              if entry.write!
+                STDOUT.write ColorizedString.new('.').send(log_color)
+              end
+            }
+            log "\n#{pluralize(files.count, model)} imported.\n"
             [model.pluralize, docs]
           end]
         end
@@ -46,6 +51,7 @@ module Jekyll
       end
 
       def rm(type)
+        log("Removing collection directory '_#{type.pluralize}'")
         collections_glob(type).each do |file|
           FileUtils.remove_entry_secure(file) if File.exist?(file)
         end
@@ -60,7 +66,8 @@ module Jekyll
           ::Contentful::Client.new(
             access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
             space: ENV['CONTENTFUL_SPACE_ID'],
-            environment: (ENV['CONTENTFUL_ENV'] || 'master')
+            environment: (ENV['CONTENTFUL_ENV'] || 'master'),
+            reuse_entries: true
           )
         end
       end
@@ -85,15 +92,15 @@ module Jekyll
             content_type: type
           })
 
-          log("Querying '#{type.pluralize}' with the following parameters...", color: "yellow")
-          log(params.to_json, color: "yellow")
+          log("Querying '#{type.pluralize}' with the following parameters...")
+          log(params.to_json)
 
           this_page = client.entries(params).to_a
           @entries[type].concat(this_page)
           if this_page.size == 1000
             fetch_entries(type)
           else
-            log("#{pluralize(@entries[type].count, type)} returned.\n", color: "yellow")
+            log("#{pluralize(@entries[type].count, type)} returned.")
             @entries[type]
           end
         end
@@ -137,6 +144,12 @@ module Jekyll
             '?access_token=...',
             URI.encode_www_form(params)
           ].join()
+        end
+
+        def log(a, b=nil, color: nil)
+          a = ColorizedString.new(a).send(color || @log_color)
+          b = ColorizedString.new(b).send(color || @log_color) unless b.nil?
+          Jekyll.logger.info a, b
         end
 
       class << self

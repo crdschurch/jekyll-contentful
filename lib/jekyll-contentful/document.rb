@@ -1,5 +1,3 @@
-require 'pry'
-require 'jekyll'
 require 'kramdown'
 require 'active_support/inflector'
 
@@ -23,7 +21,6 @@ module Jekyll
           @body = "#{@frontmatter.to_yaml}---\n\n"
           file.write @body
         end
-        Jekyll.logger.info "#{filename} imported"
       end
 
       def association_ids
@@ -89,16 +86,13 @@ module Jekyll
             if field_name == 'content_type'
               value = entry.send(:content_type).id
             else
-              value = entry.send(field_name) rescue nil
+              value = entry.send(field_name).to_s rescue nil
             end
-
             Hash[
               field_name,
               parse_field(field_name, value)
             ]
           }.reduce({}, :merge)
-        rescue Exception => e
-          binding.pry
         end
 
         def parse_filename

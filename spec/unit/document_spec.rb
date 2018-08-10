@@ -7,19 +7,19 @@ describe Jekyll::Contentful::Document do
 
   let(:product) {
     VCR.use_cassette('contentful/entries/products') do
-      @client.docs.dig('products').detect{|p| p.data.id == '5im4abQIPKgSE0CUey4uYY' }
+      @client.sync!.dig('products').detect{|p| p.data.id == '5im4abQIPKgSE0CUey4uYY' }
     end
   }
 
   let(:article) {
     VCR.use_cassette('contentful/entries/articles') do
-      @client.docs.dig('articles').detect{|a| a.data.id == '4swni4tAHme0gI8yySC6Sy' }
+      @client.sync!.dig('articles').detect{|a| a.data.id == '4swni4tAHme0gI8yySC6Sy' }
     end
   }
 
   let(:author) {
     VCR.use_cassette('contentful/entries/authors') do
-      @client.docs.dig('authors').first
+      @client.sync!.dig('authors').first
     end
   }
 
@@ -46,12 +46,6 @@ describe Jekyll::Contentful::Document do
   it 'should return slug if defined' do
     allow(product.data).to receive(:slug).and_return('lorem-ipsum')
     expect(product.send(:slug)).to eq('lorem-ipsum')
-  end
-
-  # TODO ... review the implementation and/or need for "links" following refactor
-  it 'should add links to frontmatter' do
-    pending
-    expect(product.send(:frontmatter_links)).to eq({})
   end
 
   it 'should return frontmatter entry mappings' do

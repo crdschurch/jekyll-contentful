@@ -4,6 +4,7 @@ Bundler.setup
 require 'jekyll-contentful'
 require 'vcr'
 require 'timecop'
+require 'pry'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 

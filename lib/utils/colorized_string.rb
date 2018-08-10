@@ -1,29 +1,34 @@
+require 'active_support/inflector'
+
 class ColorizedString < String
   def colorize(color_code)
-    "\e[#{color_code}m#{self}\e[0m"
+    name = self.class.color_codes.key(color_code).to_s.humanize
+    "\e[#{color_code}m#{name}\e[0m"
   end
 
-  def red
-    colorize(31)
+  def method_missing(m, *args, &block)
+    if color_code = self.class.color_codes.dig(m)
+      colorize(color_code)
+    else
+      super
+    end
   end
 
-  def green
-    colorize(32)
+  class << self
+    def colors
+      color_codes.keys
+    end
+
+    def color_codes
+      {
+        red: 31,
+        green: 32,
+        yellow: 33,
+        blue: 34,
+        magenta: 35,
+        cyan: 36
+      }
+    end
   end
 
-  def yellow
-    colorize(33)
-  end
-
-  def blue
-    colorize(34)
-  end
-
-  def pink
-    colorize(35)
-  end
-
-  def light_blue
-    colorize(36)
-  end
 end

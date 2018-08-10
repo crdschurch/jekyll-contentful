@@ -46,7 +46,7 @@ describe Jekyll::Contentful::Client do
       types = @client.content_types
     end
     VCR.use_cassette 'contentful/entries/testables' do
-      docs = @client.docs
+      docs = @client.sync!
       expect(docs.dig('testables')).to be_a(Array)
       expect(docs.dig('testables').first).to be_a(Jekyll::Contentful::Document)
     end
@@ -72,9 +72,9 @@ describe Jekyll::Contentful::Client do
     it 'should limit the number of results returned' do
       @client = Jekyll::Contentful::Client.new(site: @site, options: { 'limit' => 2 })
       VCR.use_cassette 'contentful/entries-limited' do
-        docs = @client.docs
+        docs = @client.sync!
         docs.keys.each do |id|
-          expect(docs.dig(id).count).to eq(2)
+          expect(docs.dig(id).count).to be <= 2
         end
       end
     end
