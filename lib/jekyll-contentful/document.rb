@@ -29,7 +29,6 @@ module Jekyll
 
       def reload!
         @filename = parse_filename
-        # @associations = frontmatter_associations
         @frontmatter = build_frontmatter
       end
 
@@ -53,6 +52,8 @@ module Jekyll
         def parse_field(field_name, value)
           if value.is_a? ::Contentful::Asset
             parse_asset(value)
+          elsif value.is_a? ::Contentful::Link
+            nil
           elsif value.is_a? Array
             value.collect do |entry|
               parse_reference(entry, field_name)
@@ -86,13 +87,15 @@ module Jekyll
             if field_name == 'content_type'
               value = entry.send(:content_type).id
             else
-              value = entry.send(field_name).to_s rescue nil
+              value = parse_field(field_name, entry.send(field_name)) rescue nil
             end
+            next if value.nil?
+
             Hash[
               field_name,
               parse_field(field_name, value)
             ]
-          }.reduce({}, :merge)
+          }.compact.reduce({}, :merge)
         end
 
         def parse_filename

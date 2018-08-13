@@ -84,10 +84,10 @@ describe Jekyll::Contentful::Client do
   context 'with additional query params' do
 
     it 'should pass queries along to Contentful' do
-      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'query' => 'sys.id=123&published_at=2001-01-01' })
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'query' => 'sys.id=123&fields.published_at=2001-01-01' })
       params = @client.send(:query_params)
       expect(params.dig('sys.id')).to eq('123')
-      expect(params.dig('published_at')).to eq('2001-01-01')
+      expect(params.dig('fields.published_at')).to eq('2001-01-01')
     end
 
   end
