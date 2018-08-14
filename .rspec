@@ -1,2 +1,3 @@
 --color
 --format documentation
+--exclude-pattern "_site/**/*_spec.rb"
