@@ -1,5 +1,6 @@
 require 'kramdown'
 require 'active_support/inflector'
+require 'pry'
 
 module Jekyll
   module Contentful
@@ -72,12 +73,16 @@ module Jekyll
         end
 
         def parse_reference(entry, field_name)
-          fields = @schema.dig('references', field_name.to_s) || []
-          if fields.all?{|f| f.is_a?(String) }
-            parse_entry_fields(entry, fields)
+          if entry.is_a?(String)
+            entry
           else
-            fields = fields.reduce({}, :merge)[entry.content_type.id]
-            parse_entry_fields(entry, fields)
+            fields = @schema.dig('references', field_name.to_s) || []
+            if fields.all?{|f| f.is_a?(String) }
+              parse_entry_fields(entry, fields)
+            else
+              fields = fields.reduce({}, :merge)[entry.content_type.id]
+              parse_entry_fields(entry, fields)
+            end
           end
         end
 
