@@ -1,7 +1,6 @@
 ---
 title: Ligula Nullam Ipsum
 slug: ligula-nullam-ipsum
-author: 1BlMqK8bEwQ8USEqYAQ0A0
 ---
 
 Nulla vitae elit libero, a pharetra augue. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur.

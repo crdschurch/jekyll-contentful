@@ -1,81 +1,155 @@
-require 'active_support/inflector'
+require 'active_support/all'
+require 'contentful/management'
 
 module Jekyll
   module Contentful
     class Client
 
-      class << self
-        attr_accessor :entries
+      attr_accessor :site, :options, :space, :docs, :entries, :log_color
 
-        def store_entries(type_id)
-          self.entries ||= {}
-          self.entries[type_id.to_sym] = fetch_entries(type_id)
-        end
+      include ::TextHelper
 
-        private
-
-          def fetch_entries(type_id, entries = [])
-            this_page = client.entries(content_type: type_id, limit: 1000, skip: entries.size).to_a
-            entries.concat(this_page)
-            this_page.size == 1000 ? fetch_entries(type_id, entries) : entries
-          end
-
-          def client
-            @client ||= begin
-              ::Contentful::Client.new(
-                access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
-                space: ENV['CONTENTFUL_SPACE_ID'],
-                environment: (ENV['CONTENTFUL_ENV'] || 'master')
-              )
-            end
-          end
-      end
-
-      attr_accessor :site
-
-      def initialize(args: [], site: nil)
+      def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
         @site = site || self.class.scaffold(base)
+        @options = options
+        @entries = {}
+        @log_color = 'green'
       end
 
       def sync!
-        content_types.each do |type|
-          rm(type)
-          documents = get_entries(type)
-          documents.map(&:write!)
+        nfo = "#{client.configuration.dig(:space)} (#{client.configuration.dig(:environment)})"
+        log("Syncing content from Contentful API... #{nfo}\n", color: "green")
+        colors = ColorizedString.colors.shuffle
+        @docs ||= begin
+          Hash[content_types.each_with_index.collect do |content_type, index|
+            @log_color = colors[index % (colors.count - 1)]
+            model, schema = content_type
+
+            if @options.dig('clean')
+              rm(model.pluralize)
+            end
+            cfg = @site.config.dig('collections', model.pluralize)
+            entries = fetch_entries(model)
+            docs = entries.collect{|entry|
+              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
+            }
+            files = docs.collect{|entry|
+              if entry.write!
+                STDOUT.write ColorizedString.new('.').send(log_color)
+              end
+            }
+            log "\n#{pluralize(files.count, model)} imported.\n"
+            [model.pluralize, docs]
+          end]
         end
+      end
+
+      def collections_glob(type)
+        path = File.join(@site.collections_path, "_#{type}/*")
+        Dir.glob(path)
+      end
+
+      def rm(type)
+        log("Removing collection directory '_#{type.pluralize}'")
+        collections_glob(type).each do |file|
+          FileUtils.remove_entry_secure(file) if File.exist?(file)
+        end
+      end
+
+      def content_types
+        @content_types ||= Jekyll::Contentful::ContentTypes.all(@site.config.dig('source'), @options)
+      end
+
+      def client
+        @client ||= begin
+          ::Contentful::Client.new(
+            access_token: ENV['CONTENTFUL_ACCESS_TOKEN'],
+            space: ENV['CONTENTFUL_SPACE_ID'],
+            environment: (ENV['CONTENTFUL_ENV'] || 'master'),
+            reuse_entries: true
+          )
+        end
+      end
+
+      def management
+        @management ||= ::Contentful::Management::Client.new(ENV['CONTENTFUL_MANAGEMENT_TOKEN'])
+      end
+
+      def space
+        @space ||= management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
       end
 
       private
 
-        def get_entries(type)
-          type_cfg = cfg(type)
-          type_id = type_cfg.dig('id')
-          entries = self.class.store_entries(type_id)
-          entries.collect{|entry| Jekyll::Contentful::Document.new(entry, type_cfg) }
-        end
+        def fetch_entries(type)
+          unless @entries.keys.include?(type)
+            @entries[type] = []
+          end
 
-        def content_types
-          @content_types ||= @site.config.dig('contentful', 'content_types').keys
-        end
+          params = query_params.merge({
+            skip: @entries[type].count,
+            content_type: type
+          })
 
-        def cfg(type)
-          @site.config.dig('contentful', 'content_types', type).merge({ 'collection_name' => type })
-        end
+          log("Querying '#{type.pluralize}' with the following parameters...")
+          log(params.to_json)
 
-        def collections_glob(type)
-          path = File.join(@site.collections_path, "_#{type}/*")
-          Dir.glob(path)
-        end
-
-        def rm(type)
-          collections_glob(type).each do |file|
-            FileUtils.remove_entry_secure(file) if File.exist?(file)
+          this_page = client.entries(params).to_a
+          @entries[type].concat(this_page)
+          if this_page.size == 1000
+            fetch_entries(type)
+          else
+            log("#{pluralize(@entries[type].count, type)} returned.")
+            @entries[type]
           end
         end
 
-        def client
-          @client ||= self.class.send(:client)
+        def query_params
+          args = {
+            limit: (options.dig('limit') || 1000),
+            order: sort_order(options.dig('order'))
+          }
+
+          if !options.dig('recent').nil?
+            args['sys.createdAt[gte]'] = eval(options.dig('recent')).strftime('%Y-%m-%d') rescue nil
+          end
+
+          if !options.dig('query').nil?
+            CGI.parse(options.dig('query')).each do |k,v|
+              args[k] = v.first
+            end
+          end
+
+          args
+        end
+
+        def sort_order(order)
+          if order.nil?
+            '-sys.createdAt'
+          else
+            field, dir = order.split(' ')
+            if order[0..3] == 'sys.'
+              "#{'-' if dir == 'desc'}#{field}"
+            else
+              "#{'-' if dir == 'desc'}fields.#{field}"
+            end
+          end
+        end
+
+        def client_endpoint(params)
+          uri = [
+            client.base_url,
+            client.environment_url('/entries'),
+            '?access_token=...',
+            URI.encode_www_form(params)
+          ].join()
+        end
+
+        def log(a, b=nil, color: nil)
+          a = ColorizedString.new(a).send(color || @log_color)
+          b = ColorizedString.new(b).send(color || @log_color) unless b.nil?
+          Jekyll.logger.info a, b
         end
 
       class << self

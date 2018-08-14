@@ -9,65 +9,37 @@
 Add the following to your `Gemfile` and bundle...
 
 ```ruby
-gem "jekyll-contentful", "~> 0.0.1", git: 'https://github.com/crdschurch/jekyll-contentful.git'
+gem "jekyll-contentful", "~> 1.0.0", git: 'https://github.com/crdschurch/jekyll-contentful.git'
 ```
 
 Note, in order to support Contentful environents, this project requires [v2.6.0](https://github.com/contentful/contentful.rb/releases/tag/v2.6.0) or greater of the [Contentful gem](http://rubygems.org/gems/contentful).
 
 ## Configuration
 
-Define collections in `_config.yml` according to [the Jekyll documenation](https://jekyllrb.com/docs/collections/)...
+As of version 1.0, this library doesn't need a ton of configuration to do its thing. In fact, by default jekyll-contentful will pull all content-models from your Contentful space unless you explicitly exclude them.
 
-```yml
-collections_dir: collections
-collections:
-  authors:
-    output: true
-    permalink: /authors/:path
+### Excluding Content Models
+
+If you do not want to query and generate collection documents for a specific content-model, you can add the following Jekyll's `_config.yml` file where the exclude array contains one or more Contentful ids. This will tell jekyll-contentful to pull in all content-models, except `article` and `podcast`.
+
 ```
-
-For each collection you want persisted from Contentful, define the `id`, `body` attributes and the frontmatter mappings in `_config.yml`, as shown below...
-
-```yml
 contentful:
-  content_types:
-    authors:
-      id: author
-      body: bio
-      filename: '{{ first_name }}-{{ last_name }}'
-      frontmatter:
-        entry_mappings:
-          title: displayName
-          images: images/url
-        other:
-          layout: author
-          draft: false
+  exclude:
+    - article
+    - product
 ```
 
-The `id` attribute specifies the ID for the Contentful content-type you'd like to associate with this collection. The `body` attribute specifies which field from your content-type should populate the content of resulting Markdown file.
+### Specifying Filenames
 
-The `filename` attribute is a Liquid template that defines the value used when saving each document for this content-type (sans-filename, of course). This is handy if you need to format a string or date value in your filename, derived from your Contentful data. If the `filename` attribute is missing, it will first look for a `slug` field on the document and falls back to parameterizing the title field.
+By default, the names for any files generated in the collections directory will adhere to the following format... `#{content-type}-#{id}.md`.
 
-The `frontmatter` section defines what fields we want to map from Contentful into our document frontmatter:
+In some cases, you may want to manipulate the filenames so that they work better with Jekyll's internal publishing logic. For each collection in your `_config.yml` file, you can specify the template for resulting filenames. Note, this template is parsed like any other Liquid template so you can access any filters and/or frontmatter data for the individual document...
 
-- `entry_mappings` is a list of target/src values that map a field from Contentful's API.
-    - By default the key is the desired frontmatter key, while the value is the field name in Contentful. (In the example above, we want the value for field named `displayName` to be rendered in the frontmatter value named `title`.)
-    - When the Contentful field is a reference, you can use a slash (`/`) to chain attributes together. (In the example above, `images` frontmatter will show the value for the `url` field for each associated image.)
-- The `other` section refers to additional attributes that you want hardcoded for each document.
-
-An example of what might be rendered based on the above configuration, looks like this...
-
-```yml
----
-title: Walter Sobchak
-images:
-- //some/image.png
-- //another/image.jpg
-layout: author
-draft: false
----
-
-Body content here.
+```
+collections:
+  articles:
+    filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+    output: false
 ```
 
 ## Environment Variables
@@ -76,7 +48,8 @@ The following environment variables are required to run the script. Please make 
 
 | Name | Description | Default |
 | ----- | ------ | ------- |
-| `CONTENTFUL_ACCESS_TOKEN` | Access token for Contentful's Develivery or Preview API | |
+| `CONTENTFUL_ACCESS_TOKEN` | Access token for Contentful's Delivery or Preview API | |
+| `CONTENTFUL_MANAGEMENT_TOKEN` | Access token for Contentful's Management API | |
 | `CONTENTFUL_SPACE_ID` | ID specifying Contentful Space | |
 | `CONTENTFUL_ENV` | Contentful environment | `master` |
 
@@ -87,6 +60,28 @@ Once configured as described above, you can run the following Jekyll subcommand 
 ```text
 $ bundle exec jekyll contentful
 ```
+
+You can reduce the volume of content returned from Contentful by specifying one or more collections on the command line and/or speciyfing a limit. The following example will return (up to) 10 records for both articles & authors collection...
+
+```
+$ bundle exec jekyll contentful --collections articles,authors --limit 10
+```
+
+You can also tell jekyll-contentful to just return recently created content by specifying a range for the `--recent` flag. For example...
+
+```
+$ bundle exec jekyll contentful  --recent 10.days.ago
+```
+
+...will return any content who's createdAt is greater than or equal to 10 days ago. This features relies relative date syntax provided by [ActiveSupport](https://github.com/rails/rails/tree/master/activesupport).
+
+If none of these approaches are scratching your itch, you can also pass through any individual query parameters supported by the Contentful Delivery API. For example...
+
+```
+$ bundle exec jekyll contentful  --query='fields.published_at[gte]=2018-08-01'
+```
+
+...will return any content who's `published_at` field has a date value greater than or equal to `2018-08-01`. For multiple params, just delimit them with ampersands and they'll be passed directly to the API.
 
 ## License
 

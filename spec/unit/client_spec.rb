@@ -3,36 +3,26 @@ require 'jekyll'
 require 'active_support/inflector'
 
 describe Jekyll::Contentful::Client do
-  cassette 'contentful/articles'
 
   before do
     Jekyll.logger.adjust_verbosity(quiet: true)
-    base = File.join(__dir__, '../dummy')
-    @site = Jekyll::Contentful::Client.scaffold(base)
+    @base = File.join(__dir__, '../dummy')
+    @site = Jekyll::Contentful::Client.scaffold(@base)
     @client = Jekyll::Contentful::Client.new(site: @site)
+  end
+
+  it 'should return content_types, sans-exclusions' do
+    VCR.use_cassette 'contentful/types-excluded' do
+      @site.config['contentful'] = { exclude: 'products' }
+      types = @client.content_types
+      expect(types.keys).to include('testable')
+      expect(types.keys).to include('widget')
+      expect(types.keys).to_not include('products')
+    end
   end
 
   it 'should scaffold Jekyll site' do
     expect(@site).to be_instance_of(Jekyll::Site)
-  end
-
-  it 'should return content_types' do
-    expect(@client.send(:content_types)).to match_array(%w[articles podcasts messages series trailers])
-  end
-
-  it 'should return config' do
-    expect(@client.send(:cfg, 'articles')).to be_instance_of(Hash)
-  end
-
-  it 'should return client object, stored on the class' do
-    expect(@client.send(:client)).to be_instance_of(Contentful::Client)
-    expect(@client.send(:client)).to eq(@client.class.send(:client))
-  end
-
-  it 'should store a reference to entries on the class' do
-    expect(Jekyll::Contentful::Client.entries).to eq(nil)
-    expect(@client.send(:get_entries, 'articles').collect(&:data))
-      .to eq(Jekyll::Contentful::Client.entries[:article].to_a)
   end
 
   it 'should return collections glob' do
@@ -41,22 +31,65 @@ describe Jekyll::Contentful::Client do
     expect(glob).to include(@site.collections['articles'].first.path)
   end
 
-  context 'get_entries()' do
-    cassette 'contentful/articles'
+  it 'should remove a collection, file by file' do
+    @site.instance_variable_set('@collections_path', File.join(File.expand_path(@site.config['source']), 'tmp', 'collections'))
+    file = File.join(@site.collections_path, '_testables', 'this-is-a-test.md')
+    FileUtils.mkdir_p File.dirname(file)
+    FileUtils.touch file
+    expect(File.exists?(file)).to be_truthy
+    @client.rm('testables')
+    expect(File.exists?(file)).to be_falsey
+  end
 
-    it 'should return document instances for each CF entry' do
-      documents = @client.send(:get_entries, 'articles')
-      expect(documents.all?{|d| d.class.name == 'Jekyll::Contentful::Document' }).to be(true)
+  it 'should return docs' do
+    VCR.use_cassette 'contentful/types' do
+      types = @client.content_types
+    end
+    VCR.use_cassette 'contentful/entries/testables' do
+      docs = @client.sync!
+      expect(docs.dig('testables')).to be_a(Array)
+      expect(docs.dig('testables').first).to be_a(Jekyll::Contentful::Document)
     end
   end
 
-  context 'fetch_entries()' do
-    cassette 'contentful/messages'
+  it 'should return the CF delivery client' do
+    expect(@client.client).to be_a(Contentful::Client)
+  end
 
-    it 'fetches all entries when there are more than 1000' do
-      documents = @client.class.send(:fetch_entries, 'message')
-      expect(documents.size).to eq(1068)
+  it 'should return the CF management client' do
+    expect(@client.management).to be_a(Contentful::Management::Client)
+  end
+
+  context 'with limits' do
+
+    it 'should return query string params for recent queries' do
+      Timecop.freeze(Time.local(2018, 8, 9)) do
+        @client = Jekyll::Contentful::Client.new(site: @site, options: { 'recent' => '1.day.ago' })
+        expect(@client.send(:query_params).dig('sys.createdAt[gte]')).to eq('2018-08-08')
+      end
     end
+
+    it 'should limit the number of results returned' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'limit' => 2 })
+      VCR.use_cassette 'contentful/entries-limited' do
+        docs = @client.sync!
+        docs.keys.each do |id|
+          expect(docs.dig(id).count).to be <= 2
+        end
+      end
+    end
+
+  end
+
+  context 'with additional query params' do
+
+    it 'should pass queries along to Contentful' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'query' => 'sys.id=123&fields.published_at=2001-01-01' })
+      params = @client.send(:query_params)
+      expect(params.dig('sys.id')).to eq('123')
+      expect(params.dig('fields.published_at')).to eq('2001-01-01')
+    end
+
   end
 
 end

@@ -3,6 +3,8 @@ require 'bundler/setup'
 Bundler.setup
 require 'jekyll-contentful'
 require 'vcr'
+require 'timecop'
+require 'pry'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
@@ -12,5 +14,5 @@ VCR.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.extend CassetteHelper
+  # config.extend CassetteHelper
 end
