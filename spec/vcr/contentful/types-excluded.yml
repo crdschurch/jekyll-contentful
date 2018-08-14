@@ -47,7 +47,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Fri, 10 Aug 2018 03:55:00 GMT
+      - Tue, 14 Aug 2018 14:49:51 GMT
       Etag:
       - W/"c52f61517c43318550d9441468f61419"
       Referrer-Policy:
@@ -61,7 +61,7 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35939'
+      - '35999'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
@@ -69,7 +69,7 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 969b6b9d776b42aa4f6307ac66892cd3
+      - 529b2b05503780818bcf30629c57cf56
       X-Download-Options:
       - noopen
       X-Frame-Options:
@@ -83,14 +83,14 @@ http_interactions:
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_890_673446=cLdVWLGQ8EiL+C4Ku+pZDJQMbVsAAAAAdlZB0w7Aw4Y38z5lbUDkgw==;
+      - incap_ses_622_673446=XqvcElcDRmFpqmQZccqhCA7sclsAAAAAOCY5m+FgGUt9Y5ENJ8iOtg==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=S53YAZSg+kLVS5A76lKYhQAAAADyOTJO86b/ZYy1OYMj3hdL; path=/; Domain=.contentful.com
-      - visid_incap_673446=HrMjQKjSQPK9WHkzW+edSJQMbVsAAAAAQUIPAAAAAAD40gq3nu5MCdpSQwqKEGZg;
-        expires=Fri, 09 Aug 2019 07:09:42 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=a4QqTskiXXJCuk3O6lKYhQAAAABWFbCuA5oiouxn/mZrBiba; path=/; Domain=.contentful.com
+      - visid_incap_673446=u86IcUFKSQWtPrpm7iOXZA7sclsAAAAAQUIPAAAAAADeA7zTyOvzZy9A4jzT6I0u;
+        expires=Wed, 14 Aug 2019 07:17:37 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 3-89368090-89368094 NNNN CT(1 4 0) RT(1533873300281 50) q(0 0 0 -1) r(1 1)
-        U5
+      - 7-74230290-74230619 NNNN CT(0 1 0) RT(1534258187225 3680) q(0 0 0 -1) r(0
+        0) U5
       X-Cdn:
       - Incapsula
     body:
@@ -122,7 +122,7 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:00 GMT
+  recorded_at: Tue, 14 Aug 2018 14:49:51 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
@@ -164,7 +164,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Fri, 10 Aug 2018 03:55:00 GMT
+      - Tue, 14 Aug 2018 14:49:52 GMT
       Etag:
       - '"3fafcbac0675da7d20de215088a87557"'
       Server:
@@ -176,7 +176,7 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35938'
+      - '35998'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
@@ -184,20 +184,20 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '8'
       X-Contentful-Request-Id:
-      - a198c3b5f28f9f4936f99b63502547ae
+      - 8bd3cbde12e5651ab7d2d2443e6cec11
       Content-Length:
       - '10196'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_890_673446=lvmKe7Y0nx8F+S4Ku+pZDJQMbVsAAAAAc2v6KJy2C8jy1330MMsL2w==;
+      - incap_ses_622_673446=uyA/EHK4S3eRq2QZccqhCA/sclsAAAAAFqiyNtK48M/PFsW79CWP1Q==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=cc+0VFlNnhhAMqoH6lKYhQAAAABdqKjGQ1nm9yK6fHt6qIP2; path=/; Domain=.contentful.com
-      - visid_incap_673446=kebbpapVR3294yUIup2UhZQMbVsAAAAAQUIPAAAAAADrqoxrRqwOyZ8C4HEOaw81;
-        expires=Fri, 09 Aug 2019 07:09:42 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=hg5FT6sTvFbRfsYR6lKYhQAAAAA3w5+QG/ka65GOK8L1CwgK; path=/; Domain=.contentful.com
+      - visid_incap_673446=UCP2im/bTzKx2bMx+TKlgA/sclsAAAAAQUIPAAAAAADNzod7AHLTFQvSEAzXThLP;
+        expires=Wed, 14 Aug 2019 07:17:37 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 3-89368120-89368124 NNNN CT(1 1 0) RT(1533873300477 56) q(0 0 0 -1) r(2 2)
-        U5
+      - 8-156870923-156870946 NNNN CT(0 0 0) RT(1534258191329 196) q(0 0 0 -1) r(2
+        2) U5
       X-Cdn:
       - Incapsula
     body:
@@ -626,7 +626,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:00 GMT
+  recorded_at: Tue, 14 Aug 2018 14:49:53 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
@@ -668,7 +668,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Fri, 10 Aug 2018 03:55:01 GMT
+      - Tue, 14 Aug 2018 14:49:54 GMT
       Etag:
       - '"3fafcbac0675da7d20de215088a87557"'
       Server:
@@ -680,27 +680,27 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35937'
+      - '35997'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '7'
+      - '9'
       X-Contentful-Request-Id:
-      - 5aa48c91da75ba8a93d52266995093b4
+      - d242f0d7f30c23dcff2e460aecc6bf4d
       Content-Length:
       - '10196'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_890_673446=itgUShKjlg19+S4Ku+pZDJUMbVsAAAAA7J5VzkMKxJOvpYTgj6e3xQ==;
+      - incap_ses_622_673446=ACfIEU6nKzg5r2QZccqhCBHsclsAAAAAG+uMhGfvza2DJ1PsSFi8kw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=I1Jtao1JZjwVRdmb6lKYhQAAAAAWhDLPlUcOjbwLUtcJNnHc; path=/; Domain=.contentful.com
-      - visid_incap_673446=o5BwFMRJTjOetEAG14+0pZUMbVsAAAAAQUIPAAAAAADKfaXZEA6INnkmRuaoR8ym;
-        expires=Fri, 09 Aug 2019 07:09:43 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=sAIwNYJYk2fYPpeA6lKYhQAAAAA5/3Y7X37Yv6CchuLz1bao; path=/; Domain=.contentful.com
+      - visid_incap_673446=kLNifTbkTKO5dWMVg13CxRHsclsAAAAAQUIPAAAAAABwQB4smAWTTss7BnVjAIJY;
+        expires=Wed, 14 Aug 2019 07:17:37 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 14-300002477-300002490 NNNN CT(1 1 0) RT(1533873300853 62) q(0 0 0 -1) r(3
+      - 5-338521476-338521545 NNNN CT(0 0 0) RT(1534258193349 289) q(0 0 0 -1) r(3
         3) U5
       X-Cdn:
       - Incapsula
@@ -1130,5 +1130,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:01 GMT
+  recorded_at: Tue, 14 Aug 2018 14:49:55 GMT
 recorded_with: VCR 4.0.0
