@@ -17,10 +17,12 @@ module Jekyll
       end
 
       def write!
-        FileUtils.mkdir_p File.dirname(path)
-        File.open(path, 'w') do |file|
-          @body = "#{@frontmatter.to_yaml}---\n\n"
-          file.write @body
+        unless is_future?
+          FileUtils.mkdir_p File.dirname(path)
+          File.open(path, 'w') do |file|
+            @body = "#{@frontmatter.to_yaml}---\n\n"
+            file.write @body
+          end
         end
       end
 
@@ -34,6 +36,13 @@ module Jekyll
       end
 
       private
+
+        def is_future?
+          matches = File.basename(@filename).match('^\d{4}-\d{2}-\d{2}')
+          if matches
+            Date.parse(matches.to_a.first) >= Date.today
+          end
+        end
 
         def build_frontmatter
           @frontmatter ||= begin

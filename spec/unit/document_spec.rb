@@ -30,6 +30,15 @@ describe Jekyll::Contentful::Document do
     @client = Jekyll::Contentful::Client.new(site: @site)
   end
 
+  it 'should evaluate collection filenames to determine whether content if future dated' do
+    product.instance_variable_set('@filename', 'collections/_products/product-5im4abQIPKgSE0CUey4uYY.md')
+    expect(product.send(:is_future?)).to be(nil)
+    product.instance_variable_set('@filename', 'collections/_products/2018-01-01-something.md')
+    expect(product.send(:is_future?)).to be(false)
+    product.instance_variable_set('@filename', 'collections/_products/2030-01-01-something.md')
+    expect(product.send(:is_future?)).to be(true)
+  end
+
   it 'should return the collection name' do
     expect(product.send(:collection_name)).to eq('products')
   end
@@ -74,6 +83,11 @@ describe Jekyll::Contentful::Document do
   it 'should write the file' do
     path = write_document!(product)
     expect(File.exist?(path)).to be(true)
+  end
+
+  it 'should not write the file if the filename is prefixed with a future date' do
+    path = write_document!(product, "#{1.week.from_now.strftime('%Y-%m-%d')}-something.md")
+    expect(File.exist?(path)).to be(false)
   end
 
   context 'mapping fields from Contentful' do

@@ -59,11 +59,11 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 10 Aug 2018 03:55:01 GMT
+      - Tue, 14 Aug 2018 15:54:32 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1060'
+      - '3869'
       Connection:
       - close
       X-Served-By:
@@ -71,9 +71,9 @@ http_interactions:
       X-Cache:
       - HIT
       X-Cache-Hits:
-      - '2'
+      - '1'
       X-Timer:
-      - S1533873302.744370,VS0,VE0
+      - S1534262073.616036,VS0,VE1
       Vary:
       - Accept-Encoding
     body:
@@ -81,7 +81,7 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+1V32+bMBB+z19h+XmJTEJTyhuLqFa1U7dB1XbTHizwshPGENs0Tav877NNfqBsGu20h1aqxYPv8H333eHveBwghNVK4RA9mq0x9KpmxsKRlHSFjW/9zp7Rlabc+CfOUgXUxiDO4FCCNpZHSOsAzUqL+M0htrgHaVwqVdPM5tqeaJ0dMtbhnFtSFyAKbJPul0kvinRDOnGIBwcgt/XwQpb3ik39PKhtWdu13u1doe3CbcykSL/8fB/UCQGlzkh5fZZMIerg74jFQstV90UmGdUsj2xj8Jh4wZCYx0u9IPSOwkkwGk/8r92Aps6fF8DEHchKlEzYHP09bEsqqdJMHrboqf2NOzl7eyjZHSiohL0andZmldCG8+aT9fN+KrdZB/ePN2AJ+Zzp/m/Pq4xypwEmhlfJNmB3PfAPYDzfS8ZeGaxBtzGGhmKZZrqR6KKSrERXXEvIgKkdkmvdBu8Vy4P79U1RLKPPycfzy6Y4XwDA4n+owxv5J0fPUcfvAW/qsIN5PxlfiDriOVOaKnQqQcyBc4piDbREp40yg3szUtqR/Pr1Mf6U3jxc3n+Io2S+uM2uo9mtmi3/VSDHwzFJvePQJ6E/HZ34QZ9A/h7wJpAXKZCZtOpg0v7WmxKlldSVPBCGkcn3wXrwC6D0+ou8CQAA
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:01 GMT
+  recorded_at: Tue, 14 Aug 2018 15:54:32 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=product&limit=1000&order=-sys.createdAt&skip=0
@@ -139,21 +139,21 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 10 Aug 2018 03:55:01 GMT
+      - Tue, 14 Aug 2018 15:54:32 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1060'
+      - '3869'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1730-ORD
+      - cache-ord1720-ORD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1533873302.940217,VS0,VE0
+      - S1534262073.701928,VS0,VE0
       Vary:
       - Accept-Encoding
     body:
@@ -204,7 +204,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:01 GMT
+  recorded_at: Tue, 14 Aug 2018 15:54:32 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=author&limit=1000&order=-sys.createdAt&skip=0
@@ -262,21 +262,21 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 10 Aug 2018 03:55:02 GMT
+      - Tue, 14 Aug 2018 15:54:32 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1060'
+      - '3869'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1747-ORD
+      - cache-ord1724-ORD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1533873302.084919,VS0,VE1
+      - S1534262073.781795,VS0,VE0
       Vary:
       - Accept-Encoding
     body:
@@ -327,7 +327,7 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:02 GMT
+  recorded_at: Tue, 14 Aug 2018 15:54:32 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=testable&limit=1000&order=-sys.createdAt&skip=0
@@ -387,21 +387,21 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 10 Aug 2018 03:55:02 GMT
+      - Tue, 14 Aug 2018 15:54:33 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1059'
+      - '3869'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1740-ORD
+      - cache-ord1724-ORD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1533873302.217864,VS0,VE5
+      - S1534262073.005236,VS0,VE1
       Vary:
       - Accept-Encoding
     body:
@@ -409,7 +409,7 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+1WTW/iMBC98ysinxeUQFpYbgix2qrtlgpYSlc9pIkXWeSrttOWVvz32rFDTGonVGJvm0MUOx7Pmzczz35vWRYgWwKG1jv7ZAO6TSEbgRHG3hawud03voYm1AvZvJOPyAalbGDngxBFiPJfti0mEIUR3/FPvqPYt+Imd0VSz+e+ihViUgHDJ/LJAtQVijeAOy0f5j7ezCXoWb5jZQEKeDzhBkevBJ67wSDlYRXPbv+dByoeIGycX+Qu+W07b2i1vLh2Z0/LG7K5VPbfA5vEFG/VHz6GHoXBiBMDurYzaNv9dteeO/2h6wztXqfX7d+rBlkafM0Axs8IJ3EEY+6jmUMRUuQRCnGVomP5nSg+GznE8BkRlMRF1Uhq/SSmDLNMWTPuY7GNlX21FUAhod5jCJuzHya+x9axzMG4vZgVBvsCAX8RDIOyaXhkgCIqbK7QOgs9a5rhjFjXSRgiYv3IiA+t28yL1Jy/oGANadkqgiGVEk3bSBpraMl7smyKam0elHh3Or97u3n9ORnN1k8rfzkar8j4RaWIKYA21Q9Ku6Q4CTL/uDqsAd4IW/blGYpc7/H2Ynq5nk3s8QJu3Wy1MuRVghdB8HcOHKDYD7MAKsoneCpkqxQubQ604qVdKYpDCpRGwCrZ0kkYh1srYpUcqeUvLQ15PlhZZOZzwYA6ObOH7nnnuztQ5YwhrhM0g4lZ0szM1sgaM6optgrvBmmrY1YvcGxfs8SZ4zgeqVno9nUihKWmiw/ybpA7efRLudBIHue3EL0x9pjKQcyPoyyy5gmmCS4BFBKyl9BS5A6uH9KZ7mZwCur+UXMZ9Og0zdUbdAZnvS81l9bkf3NZoFl+j2iu4rBTTsU6lThJd2WYsMvEIqQY+QgSa7LmlxmiabAc1QN771q71gdcLEGS3wsAAA==
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:02 GMT
+  recorded_at: Tue, 14 Aug 2018 15:54:33 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=article&limit=1000&order=-sys.createdAt&skip=0
@@ -469,21 +469,21 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Fri, 10 Aug 2018 03:55:02 GMT
+      - Tue, 14 Aug 2018 15:54:33 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '1059'
+      - '3869'
       Connection:
       - close
       X-Served-By:
-      - cache-ord1734-ORD
+      - cache-ord1721-ORD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1533873302.364836,VS0,VE0
+      - S1534262073.141881,VS0,VE1
       Vary:
       - Accept-Encoding
     body:
@@ -491,5 +491,5 @@ http_interactions:
       string: !binary |-
         H4sIAAAAAAAAA+1YW2/aMBR+76+I8jyQcyFNeWOMbohW0xaq7qKqyhIXrDgXYmc0qvjvc+6GORA0Vqlqowph18fn+Ph83/nC05kkySQl8lB6Yl/ZgKYRZCN5FMd2KrO5zbtsDQ2pjdm8mo+IhyI2APkAIx9RNlIAKCYQhX624898x2LfHTe5KxLZTuarWlFMcsFkE/lkFdQVCjw5c9o8zH3gzcugrXzHnQXIzc6Dvdh/JNDQXTPKjlU9m/p7ftDikQsbbTAZY/VyFozRVB3fEuPjjNyE3P51YJOAxin/DyeGNoXuKEuMrALF7AH2dzFX9KE6GOqDvjZQfvAGSeQeZwCD3ygOAx8GmY/DOSyO5NuEwng3RV3zO+F8HsxhDH8jgsIgKw0utU4YUBZzeWWH4+4a25jbV1gBdkyRg+Hhy8ehY7N17OJg0LuxKoO6PuQHBLHbYCarGZkiWtiMgpAuYSyNSnfc0QlOFtm2drGktxNRUYqlmxcMG52sA6TT0ScfgsXUTFNrbFhb6KjutCNslLliDhUGG9A3zo0OsDHnyvlQBUP1om+q2wYvCTbaK4KNFfqQLlGwkCaY8Bwu2wldhnEnjuvKFbt1lyO4IEjj2v/w3ZnMHlehnhJnvQrB1JgeJo01cheQNm2vaCQ8vQlaYNlt9oSd99emwYkCr0PHevTN89ajL9b17HPizVYIoRUfOWvmPGvzLPmsgWre/OvyvRlZABEyBf7t1DLQaE+kddR3HCKi5BdGZAnde3u7yypzAIYA9IDOPvkeW/EvqWqtB7NaK3cv6ZeNci8yChycuJDTRkX2K2HTSBvhzQrljXBl0T9KCSOQODs1IBI5TQ20yJw9V1+JHfGl8EXSKneYe7HgqZhbM/uqpvPMzUzEkmevSTt7t2d2j/BhRsdgrxFcHIz2ZVYsgbJstYqg9nN0j7RdCtV1UtDVHsht3XuLIipfDkoWE6iiLL+VLmJBEehQSJNYugpj6Es3mMbIQQxhdTorfqq1VsNLW68ppUvRG8QpEvifINbSW04DMVXrq6p5FMSEJm8Qk+TDJNwBYqVu6UgV/wCxhwTj+8D281cWiwFrDjFOXg2qxLLnNKDSlL5+MTgKVEKTN1CdCFTP37cmC0ioTaTLmL2cIIxtaUKR7UuXCWG/Nf3dufKZO/a5Oduc/QGWAUdjYBMAAA==
     http_version: 
-  recorded_at: Fri, 10 Aug 2018 03:55:02 GMT
+  recorded_at: Tue, 14 Aug 2018 15:54:33 GMT
 recorded_with: VCR 4.0.0
