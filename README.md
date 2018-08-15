@@ -44,6 +44,23 @@ collections:
 
 NOTE– if the filename for your collection is prefixed with a date value in the format of `YYYY-MM-DD` as shown above, `jekyll-contentful` will only write content that is less than or equal to today's date. This makes it possible to ensure no content with a future publish date is aggregated from Contentful / rendered within your static site.
 
+## Specifying Content Field
+
+To make use of [Jekyll's `content` and `excerpt` methods](https://jekyllrb.com/docs/posts/), the command will look for a `content` option in your collections configuration. If it does not exist, it will attempt to fall back to body, and otherwise include no content in the body of the entry's YML file.
+
+Given the following example:
+
+```yml
+collections:
+  articles:
+    # ...
+  authors:
+    # ...
+    content: bio
+```
+
+If there is a `body` field on the `article` content type in Contentful, the content of that field will be rendered as the content of the entry's YML file. Otherwise it will be blank. On the other hand, the script will render the `bio` field for authors' entry files as the content.
+
 ## Environment Variables
 
 The following environment variables are required to run the script. Please make sure they are exported to the same scope in which your Jekyll commands are run.
