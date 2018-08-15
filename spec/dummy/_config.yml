@@ -3,6 +3,7 @@ collections_dir: collections
 collections:
   articles:
     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+    content: body
     output: false
   testables:
     output: false

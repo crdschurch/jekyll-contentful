@@ -20,8 +20,7 @@ module Jekyll
         unless is_future?
           FileUtils.mkdir_p File.dirname(path)
           File.open(path, 'w') do |file|
-            @body = "#{@frontmatter.to_yaml}---\n\n"
-            file.write @body
+            file.write "#{@frontmatter.to_yaml}---\n\n#{body}"
           end
         end
       end
@@ -36,6 +35,14 @@ module Jekyll
       end
 
       private
+
+        def body
+          if !cfg.nil? && cfg.keys.include?('content')
+            @data.fields[cfg.dig('content').intern]
+          elsif @data.fields.keys.include? :body
+            @data.fields[:body]
+          end
+        end
 
         def is_future?
           matches = File.basename(@filename).match('^\d{4}-\d{2}-\d{2}')
