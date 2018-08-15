@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-contentful (1.0.1)
+    jekyll-contentful (1.0.2)
       activesupport
       contentful (>= 2.6.0)
       contentful-management (~> 1.10.1)
