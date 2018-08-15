@@ -85,6 +85,13 @@ describe Jekyll::Contentful::Document do
     expect(File.exist?(path)).to be(true)
   end
 
+  it 'should include body content in written file if it exists' do
+    content = 'This is body content'
+    product.data.fields[:body] = content
+    path = write_document!(product)
+    expect(File.read(path).gsub(/\A---(.|\n)*?---\n\n/,'')).to eq(content)
+  end
+
   it 'should not write the file if the filename is prefixed with a future date' do
     path = write_document!(product, "#{1.week.from_now.strftime('%Y-%m-%d')}-something.md")
     expect(File.exist?(path)).to be(false)
@@ -107,6 +114,19 @@ describe Jekyll::Contentful::Document do
     it 'should not throw an error if body is nil' do
       allow(product.data).to receive('body').and_return(nil)
       expect{ write_document!(product) }.to_not raise_error
+    end
+
+    it 'should populate file content with body attribute, if one exists' do
+      content = 'This is body content'
+      product.data.fields[:body] = content
+      expect(product.send(:body)).to eq(content)
+    end
+
+    it 'should populate file content with specified attribute where one exists' do
+      expect(@site.config.dig('collections', 'articles', 'content')).to eq('body')
+      content = 'This is body content'
+      article.data.fields[:body] = content
+      expect(article.send(:body)).to eq(content)
     end
 
   end
