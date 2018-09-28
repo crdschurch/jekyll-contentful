@@ -34,6 +34,7 @@ module Jekyll
 
         def frontmatter
           matter = {
+            "id" => data.id,
             "contentful_id" => data.id
           }
           matter.merge!(frontmatter_extras)
