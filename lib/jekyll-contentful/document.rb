@@ -55,6 +55,7 @@ module Jekyll
           @frontmatter ||= begin
             defaults = {
               "id" => @data.id,
+              "contentful_id" => @data.id,
               "content_type" => @data.content_type.id
             }
             Hash[@data.fields.collect do |field_name, value|
