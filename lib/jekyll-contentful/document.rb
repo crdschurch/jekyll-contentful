@@ -47,7 +47,7 @@ module Jekyll
         def is_future?
           matches = File.basename(@filename).match('^\d{4}-\d{2}-\d{2}')
           if matches
-            Date.parse(matches.to_a.first) >= Date.today
+            Date.parse(matches.to_a.first).to_time.to_i >= Date.today.end_of_day.to_i
           end
         end
 
@@ -131,8 +131,16 @@ module Jekyll
         def render_liquid(tpl)
           template = Liquid::Template.parse(tpl) # Parses and compiles the template
           tpl_vars = template.root.nodelist.select{|obj| obj.class.name == 'Liquid::Variable' }
-          mapped = tpl_vars.collect { |obj| Hash[*obj.name.name, @data.send(obj.name.name.to_sym)] rescue nil }.reject(&:blank?).reduce({}, :merge)
-          template.render(mapped)
+
+          mapped = tpl_vars.collect do |obj|
+            value = @data.fields.send(obj.name.name.to_sym) rescue nil
+            value = value.id if value.is_a? ::Contentful::Link
+            Hash[*obj.name.name, value]
+          end.reject(&:blank?).reduce({}, :merge)
+          template.render mapped.merge(data.fields.stringify_keys)
+
+        rescue Exception => e
+          binding.pry
         end
 
         def slug

@@ -85,6 +85,12 @@ describe Jekyll::Contentful::Document do
     expect(File.exist?(path)).to be(true)
   end
 
+  it 'should render Liquid templates against document frontmatter when generating filename' do
+    article.data.fields[:some_date_value] = '2018-08-01T00:00-04:00'
+    article.cfg['filename'] = "{{ some_date_value | date: '%d%Y%m' }}-testing"
+    expect(article.send(:parse_filename)).to eq('collections/_articles/01201808-testing.md')
+  end
+
   it 'should include body content in written file if it exists' do
     content = 'This is body content'
     product.data.fields[:body] = content
