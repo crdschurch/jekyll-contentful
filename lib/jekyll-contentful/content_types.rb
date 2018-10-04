@@ -8,11 +8,11 @@ module Jekyll
         def all(project_dir=nil, options={})
           load_jekyll_config(project_dir)
           schema = Hash[get_schema]
-          included_collections = (options.dig('collections') || {}).collect(&:singularize)
+          included_collections = (options.dig('collections') || {})
           if included_collections.empty?
             _schema = schema
           else
-            _schema = schema.select {|k,v| included_collections.include?(k) }
+            _schema = schema.select {|k,v| (included_collections & [k, k.singularize]).present? }
           end
           Hash[_schema.collect{|name,obj|
             obj['references'] = obj['references'].collect{|type|
