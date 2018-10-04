@@ -12,15 +12,3 @@ describe Array do
     expect(sorted.collect{|c| c.dig('data', 'id') }).to eq(b)
   end
 end
-
-describe Hash do
-  it 'should support the blank? method' do
-    expect(Hash.new().blank?).to be_truthy
-  end
-end
-
-describe NilClass do
-  it 'should support the blank? method' do
-    expect(nil.blank?).to be_truthy
-  end
-end

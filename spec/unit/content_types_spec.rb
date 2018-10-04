@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'jekyll'
-require 'active_support/inflector'
 
 describe Jekyll::Contentful::ContentTypes do
 
@@ -81,10 +79,6 @@ describe Jekyll::Contentful::ContentTypes do
   end
 
   context 'with --collections' do
-
-    # before do
-      # @klass.instance_variable_set('@options', { 'collections' => @types })
-    # end
 
     it 'should return content_types defined' do
       types = ['products', 'article']

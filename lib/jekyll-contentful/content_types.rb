@@ -1,6 +1,3 @@
-require 'active_support/inflector'
-require 'contentful/management'
-
 module Jekyll
   module Contentful
     class ContentTypes

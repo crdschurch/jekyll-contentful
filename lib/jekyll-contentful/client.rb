@@ -1,13 +1,8 @@
-require 'active_support/all'
-require 'contentful/management'
-
 module Jekyll
   module Contentful
     class Client
 
       attr_accessor :site, :options, :space, :docs, :entries, :log_color
-
-      include ::TextHelper
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
@@ -39,7 +34,7 @@ module Jekyll
                 STDOUT.write ColorizedString.new('.').send(log_color)
               end
             }
-            log "\n#{pluralize(files.count, model)} imported.\n"
+            log "\n#{model.pluralize(files.count)} imported.\n"
             [model.pluralize, docs]
           end]
         end
@@ -100,7 +95,7 @@ module Jekyll
           if this_page.size == 1000
             fetch_entries(type)
           else
-            log("#{pluralize(@entries[type].count, type)} returned.")
+            log("#{type.pluralize(@entries[type].count)} returned.")
             @entries[type]
           end
         end

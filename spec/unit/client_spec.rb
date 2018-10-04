@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'jekyll'
-require 'active_support/inflector'
 
 describe Jekyll::Contentful::Client do
 
