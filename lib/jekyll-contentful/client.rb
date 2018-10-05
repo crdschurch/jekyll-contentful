@@ -31,7 +31,7 @@ module Jekyll
           end]
           Document.process_associations!(data)
           data.each_with_index.map do |(type, docs), index|
-            log_color = colors[index % (colors.count - 1)]
+            @log_color = colors[index % (colors.count - 1)]
             imported_count = 0
             files = docs.collect do |entry|
               if entry.write!
@@ -39,8 +39,7 @@ module Jekyll
                 imported_count += 1
               end
             end
-            msg = "\n#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported.\n"
-            STDOUT.write(ColorizedString.new(msg).send(log_color))
+            log "\n#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported."
             [type, docs]
           end.to_h
         end

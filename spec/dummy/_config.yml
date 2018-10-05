@@ -5,6 +5,8 @@ collections:
     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
     content: body
     output: false
+  categories:
+    output: false
   testables:
     output: false
   videos:
@@ -16,3 +18,5 @@ contentful:
   article:
     map:
       name: title
+    belongs_to:
+      category: posts
