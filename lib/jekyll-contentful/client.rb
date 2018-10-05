@@ -17,7 +17,7 @@ module Jekyll
         log("Syncing content from Contentful API... #{nfo}\n", color: "green")
         colors = ColorizedString.colors.shuffle
         @docs ||= begin
-          Hash[content_types.each_with_index.collect do |content_type, index|
+          data = Hash[content_types.each_with_index.collect do |content_type, index|
             @log_color = colors[index % (colors.count - 1)]
             model, schema = content_type
             rm(model.pluralize) if @options.dig('clean')
@@ -27,14 +27,22 @@ module Jekyll
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
             }
-            files = docs.collect{|entry|
-              if entry.write!
-                STDOUT.write ColorizedString.new('.').send(log_color)
-              end
-            }
-            log "\n#{model.pluralize(files.count)} imported.\n"
             [model.pluralize, docs]
           end]
+          Document.process_associations!(data)
+          data.each_with_index.map do |(type, docs), index|
+            log_color = colors[index % (colors.count - 1)]
+            imported_count = 0
+            files = docs.collect do |entry|
+              if entry.write!
+                STDOUT.write(ColorizedString.new('.').send(log_color))
+                imported_count += 1
+              end
+            end
+            msg = "\n#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported.\n"
+            STDOUT.write(ColorizedString.new(msg).send(log_color))
+            [type, docs]
+          end.to_h
         end
       end
 
@@ -93,7 +101,7 @@ module Jekyll
           if this_page.size == 1000
             fetch_entries(type)
           else
-            log("#{type.pluralize(@entries[type].count)} returned.")
+            log("#{@entries[type].count} #{type.pluralize(@entries[type].count)} returned.")
             @entries[type]
           end
         end

@@ -44,6 +44,34 @@ collections:
 
 NOTE– if the filename for your collection is prefixed with a date value in the format of `YYYY-MM-DD` as shown above, `jekyll-contentful` will only write content that is less than or equal to today's date. This makes it possible to ensure no content with a future publish date is aggregated from Contentful / rendered within your static site.
 
+### Linked Entries
+
+Contentful content models can contain _reference_ fields in which an entry can associate one or many other entries to it. In some cases you may want to apply the reciprocal reference to the frontmatter of an entry. This gem currently supports one specific case in which you can accomplish this:
+
+Suppose you have two content types -- _question_ and _answer_ -- and you have configured these content models such that the _question_ content type has a _many reference_ field called `answers` in which you can add and arrange answers to the question. If you want to display a question on an answer's page in Jekyll, you'd have to query through Liquid (which is slow) or write a custom Jekyll plugin (which is faster, but still slow). Alternatively, jekyll-contentful can drop the frontmatter for a question inside the frontmatter for each of its answers.
+
+The configuration for this type of relationship looks like this:
+
+```yml
+contentful:
+  # ...
+  (content_type):
+    belongs_to:
+      (associated_content_type): (reference_field_name)
+```
+
+For this particular example, the config would look like this:
+
+```yml
+contentful:
+  # ...
+  answer:
+    belongs_to:
+      question: answers
+```
+
+_Note: Currently only `belongs_to` reciprocal relationships are supported._
+
 ## Specifying Content Field
 
 To make use of [Jekyll's `content` and `excerpt` methods](https://jekyllrb.com/docs/posts/), the command will look for a `content` option in your collections configuration. If it does not exist, it will attempt to fall back to body, and otherwise include no content in the body of the entry's YML file.

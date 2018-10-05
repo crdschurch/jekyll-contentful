@@ -27,6 +27,20 @@ module Jekyll
         @frontmatter = build_frontmatter
       end
 
+      def self.process_associations!(data)
+        data.each do |content_type, docs|
+          next unless docs.present? && docs.first.ct_cfg.dig('belongs_to').present?
+          docs.each do |doc|
+            doc.ct_cfg.dig('belongs_to').each do |type, attr|
+              doc.frontmatter[type] = data[type].detect { |d|
+                next unless d.frontmatter[attr]
+                d.frontmatter[attr].collect { |f| f['id'] }.include?(doc.data.id)
+              }.try(:frontmatter)
+            end
+          end
+        end
+      end
+
       private
 
         def body
