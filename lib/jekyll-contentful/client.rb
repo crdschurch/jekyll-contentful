@@ -20,14 +20,12 @@ module Jekyll
           Hash[content_types.each_with_index.collect do |content_type, index|
             @log_color = colors[index % (colors.count - 1)]
             model, schema = content_type
-
-            if @options.dig('clean')
-              rm(model.pluralize)
-            end
+            rm(model.pluralize) if @options.dig('clean')
+            ct_cfg = @site.config.dig('contentful', content_type.first)
             cfg = @site.config.dig('collections', model.pluralize)
             entries = fetch_entries(model)
             docs = entries.collect{|entry|
-              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
+              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
             }
             files = docs.collect{|entry|
               if entry.write!
