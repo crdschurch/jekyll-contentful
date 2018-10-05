@@ -13,3 +13,6 @@ collections:
 contentful:
   exclude:
     - migrations
+  article:
+    map:
+      name: title

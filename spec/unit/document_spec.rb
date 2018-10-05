@@ -63,7 +63,13 @@ describe Jekyll::Contentful::Document do
   it 'should expose entry id in frontmatter of every document' do
     yml = product.send(:frontmatter)
     expect(yml.keys).to include('id')
+    expect(yml.keys).to include('contentful_id')
     expect(yml.keys).to include('content_type')
+  end
+
+  it 'should map fields to custom keys' do
+    expect(article.frontmatter.keys).to include('name')
+    expect(article.frontmatter['name']).to eq(article.frontmatter['title'])
   end
 
   it 'should return "content-type and id" if slug is not defined' do

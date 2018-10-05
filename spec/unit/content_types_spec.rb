@@ -85,7 +85,7 @@ describe Jekyll::Contentful::ContentTypes do
       path = File.expand_path(__dir__), '../dummy'
       options = { 'collections' => types }
       VCR.use_cassette 'contentful/types-filtered' do
-        expect(@klass.send(:all, path, options).keys).to match_array(types.collect(&:singularize))
+        expect(@klass.send(:all, path, options).keys).to match_array(['article'])
       end
     end
 
