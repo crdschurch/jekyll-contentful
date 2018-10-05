@@ -4,10 +4,10 @@ module Jekyll
 
       attr_accessor :data, :schema, :cfg, :ct_cfg, :filename, :dir, :body, :frontmatter
 
-      def initialize(obj, schema:, cfg:, ct_cfg: {})
+      def initialize(obj, schema:, cfg:, ct_cfg:)
         @data = obj
         @cfg = cfg
-        @ct_cfg = ct_cfg
+        @ct_cfg = ct_cfg || {}
         @schema = schema
         @dir = FileUtils.pwd
         reload!
