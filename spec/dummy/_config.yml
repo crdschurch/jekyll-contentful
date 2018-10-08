@@ -5,6 +5,8 @@ collections:
     filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
     content: body
     output: false
+  categories:
+    output: false
   testables:
     output: false
   videos:
@@ -13,3 +15,13 @@ collections:
 contentful:
   exclude:
     - migrations
+  article:
+    map:
+      name: title
+  widget:
+    belongs_to:
+      article: widgets
+  another_model:
+    query: fields.published_at[lte]=2018-05-18
+    order: title
+    limit: 10

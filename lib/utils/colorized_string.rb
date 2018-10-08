@@ -7,11 +7,9 @@ class ColorizedString < String
   end
 
   def method_missing(m, *args, &block)
-    if color_code = self.class.color_codes.dig(m)
-      colorize(color_code)
-    else
-      super
-    end
+    color_code = self.class.color_codes.dig(m)
+    super unless color_code
+    colorize(color_code)
   end
 
   class << self
