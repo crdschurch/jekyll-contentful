@@ -1,9 +1,14 @@
+require 'active_support/all'
+require 'pry'
+
+require 'contentful'
+require 'contentful/management'
+
+require 'jekyll'
+
 require 'utils/array'
 require 'utils/colorized_string'
-require 'utils/hash'
-require 'utils/nil'
-require 'helpers/text_helper'
-require 'jekyll'
+
 require 'jekyll-contentful/client'
 require 'jekyll-contentful/command'
 require 'jekyll-contentful/content_types'

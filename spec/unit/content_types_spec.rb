@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'jekyll'
-require 'active_support/inflector'
 
 describe Jekyll::Contentful::ContentTypes do
 
@@ -82,16 +80,12 @@ describe Jekyll::Contentful::ContentTypes do
 
   context 'with --collections' do
 
-    # before do
-      # @klass.instance_variable_set('@options', { 'collections' => @types })
-    # end
-
     it 'should return content_types defined' do
       types = ['products', 'article']
       path = File.expand_path(__dir__), '../dummy'
       options = { 'collections' => types }
       VCR.use_cassette 'contentful/types-filtered' do
-        expect(@klass.send(:all, path, options).keys).to match_array(types.collect(&:singularize))
+        expect(@klass.send(:all, path, options).keys).to match_array(['article'])
       end
     end
 

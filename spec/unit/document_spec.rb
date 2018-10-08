@@ -1,13 +1,16 @@
 require 'spec_helper'
-require 'pry'
-require 'jekyll'
-require 'active_support/inflector'
 
 describe Jekyll::Contentful::Document do
 
   let(:product) {
     VCR.use_cassette('contentful/entries/products') do
       @client.sync!.dig('products').detect{|p| p.data.id == '5im4abQIPKgSE0CUey4uYY' }
+    end
+  }
+
+  let(:widget) {
+    VCR.use_cassette('contentful/entries/widgets') do
+      @client.sync!.dig('widgets').detect{|p| p.data.id == 'l4pXkkwAQSMKOukKqiiiq' }
     end
   }
 
@@ -66,6 +69,7 @@ describe Jekyll::Contentful::Document do
   it 'should expose entry id in frontmatter of every document' do
     yml = product.send(:frontmatter)
     expect(yml.keys).to include('id')
+    expect(yml.keys).to include('contentful_id')
     expect(yml.keys).to include('content_type')
   end
 
@@ -133,6 +137,16 @@ describe Jekyll::Contentful::Document do
       content = 'This is body content'
       article.data.fields[:body] = content
       expect(article.send(:body)).to eq(content)
+    end
+
+    it 'should map fields to custom keys' do
+      expect(article.frontmatter.keys).to include('name')
+      expect(article.frontmatter['name']).to eq(article.frontmatter['title'])
+    end
+
+    it 'should map belongs_to reciprocal fields' do
+      expect(widget.frontmatter.keys).to include('article')
+      expect(widget.frontmatter.dig('article', 'title')).to eq('Something Else')
     end
 
   end

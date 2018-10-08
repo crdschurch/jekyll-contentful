@@ -1,16 +1,13 @@
-require 'kramdown'
-require 'active_support/inflector'
-require 'pry'
-
 module Jekyll
   module Contentful
     class Document
 
-      attr_accessor :data, :schema, :cfg, :filename, :dir, :body, :frontmatter, :associations
+      attr_accessor :data, :schema, :cfg, :ct_cfg, :filename, :dir, :body, :frontmatter
 
-      def initialize(obj, schema:, cfg:)
+      def initialize(obj, schema:, cfg:, ct_cfg:)
         @data = obj
         @cfg = cfg
+        @ct_cfg = ct_cfg || {}
         @schema = schema
         @dir = FileUtils.pwd
         reload!
@@ -25,13 +22,27 @@ module Jekyll
         end
       end
 
-      def association_ids
-        @associations.keys.collect{|key| @frontmatter.dig(key) }.flatten
-      end
-
       def reload!
         @filename = parse_filename
         @frontmatter = build_frontmatter
+      end
+
+      def self.process_associations!(data)
+        data.each do |content_type, docs|
+          next unless docs.present? && docs.first.ct_cfg.dig('belongs_to').present?
+          docs.each do |doc|
+            doc.ct_cfg.dig('belongs_to').each do |type, attr|
+              attr_name = type
+              type = type.pluralize if data[type].nil?
+              type = type.singularize if data[type].nil?
+              next unless data[type]
+              doc.frontmatter[attr_name] = data[type].detect { |d|
+                next unless d.frontmatter[attr]
+                d.frontmatter[attr].collect { |f| f['id'] }.include?(doc.data.id)
+              }.try(:frontmatter)
+            end
+          end
+        end
       end
 
       private
@@ -54,16 +65,14 @@ module Jekyll
         def build_frontmatter
           @frontmatter ||= begin
             defaults = {
-              "id" => @data.id,
-              "contentful_id" => @data.id,
-              "content_type" => @data.content_type.id
+              'id' => data.id,
+              'contentful_id' => data.id,
+              'content_type' => data.content_type.id
             }
-            Hash[@data.fields.collect do |field_name, value|
-              [
-                field_name.to_s,
-                parse_field(field_name, value)
-              ]
-            end].merge(defaults)
+            ct_fields = data.fields.stringify_keys
+            mapped_fields = (ct_cfg.dig('map') || {}).map { |k, v| [k, parse_field(v, ct_fields[v])] }.to_h
+            fields = ct_fields.map { |k, v| [k, parse_field(k, v)] }.to_h
+            defaults.merge(fields).merge(mapped_fields)
           end
         end
 

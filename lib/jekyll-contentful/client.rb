@@ -1,13 +1,8 @@
-require 'active_support/all'
-require 'contentful/management'
-
 module Jekyll
   module Contentful
     class Client
 
       attr_accessor :site, :options, :space, :docs, :entries, :log_color
-
-      include ::TextHelper
 
       def initialize(args: [], site: nil, options: {})
         base = File.expand_path(args.join(" "), Dir.pwd)
@@ -22,26 +17,32 @@ module Jekyll
         log("Syncing content from Contentful API... #{nfo}\n", color: "green")
         colors = ColorizedString.colors.shuffle
         @docs ||= begin
-          Hash[content_types.each_with_index.collect do |content_type, index|
+          data = Hash[content_types.each_with_index.collect do |content_type, index|
             @log_color = colors[index % (colors.count - 1)]
             model, schema = content_type
-
-            if @options.dig('clean')
-              rm(model.pluralize)
-            end
+            rm(model.pluralize) if @options.dig('clean')
+            ct_cfg = @site.config.dig('contentful', model)
             cfg = @site.config.dig('collections', model.pluralize)
+            # binding.pry
             entries = fetch_entries(model)
             docs = entries.collect{|entry|
-              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg)
+              Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
             }
-            files = docs.collect{|entry|
-              if entry.write!
-                STDOUT.write ColorizedString.new('.').send(log_color)
-              end
-            }
-            log "\n#{pluralize(files.count, model)} imported.\n"
             [model.pluralize, docs]
           end]
+          Document.process_associations!(data)
+          data.each_with_index.map do |(type, docs), index|
+            @log_color = colors[index % (colors.count - 1)]
+            imported_count = 0
+            files = docs.collect do |entry|
+              if entry.write!
+                STDOUT.write(ColorizedString.new('.').send(log_color))
+                imported_count += 1
+              end
+            end
+            log "\n#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported."
+            [type, docs]
+          end.to_h
         end
       end
 
@@ -83,11 +84,9 @@ module Jekyll
       private
 
         def fetch_entries(type)
-          unless @entries.keys.include?(type)
-            @entries[type] = []
-          end
+          @entries[type] ||= []
 
-          params = query_params.merge({
+          params = query_params(type).merge({
             skip: @entries[type].count,
             content_type: type
           })
@@ -100,25 +99,26 @@ module Jekyll
           if this_page.size == 1000
             fetch_entries(type)
           else
-            log("#{pluralize(@entries[type].count, type)} returned.")
+            log("#{@entries[type].count} #{type.pluralize(@entries[type].count)} returned.")
             @entries[type]
           end
         end
 
-        def query_params
+        def query_params(type = nil)
+          ct_cfg = @site.config.dig('contentful', type) || {}
+
           args = {
-            limit: (options.dig('limit') || 1000),
-            order: sort_order(options.dig('order'))
+            limit: (ct_cfg.dig('limit') || options.dig('limit') || 1000),
+            order: sort_order(ct_cfg.dig('order') || options.dig('order'))
           }
 
           if !options.dig('recent').nil?
             args['sys.createdAt[gte]'] = eval(options.dig('recent')).strftime('%Y-%m-%d') rescue nil
           end
 
-          if !options.dig('query').nil?
-            CGI.parse(options.dig('query')).each do |k,v|
-              args[k] = v.first
-            end
+          query = ct_cfg.dig('query') || options.dig('query')
+          if query.present?
+            CGI.parse(query).each { |k,v| args[k] = v.first }
           end
 
           args

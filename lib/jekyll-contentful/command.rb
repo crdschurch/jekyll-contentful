@@ -1,5 +1,3 @@
-require 'contentful'
-
 module Jekyll
   module Commands
     class Contentful < Command
