@@ -6,7 +6,7 @@ PATH
       contentful (>= 2.6.0)
       contentful-management (~> 1.10.1)
       dotenv
-      jekyll (>= 3.7.4)
+      jekyll
 
 GEM
   remote: https://rubygems.org/
@@ -154,7 +154,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   guard-rspec
-  jekyll (~> 3.7.2)
+  jekyll (~> 3.7.4)
   jekyll-contentful!
   launchy
   pry
