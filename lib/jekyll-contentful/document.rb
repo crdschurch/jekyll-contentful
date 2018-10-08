@@ -32,8 +32,11 @@ module Jekyll
           next unless docs.present? && docs.first.ct_cfg.dig('belongs_to').present?
           docs.each do |doc|
             doc.ct_cfg.dig('belongs_to').each do |type, attr|
+              attr_name = type
+              type = type.pluralize if data[type].nil?
+              type = type.singularize if data[type].nil?
               next unless data[type]
-              doc.frontmatter[type] = data[type].detect { |d|
+              doc.frontmatter[attr_name] = data[type].detect { |d|
                 next unless d.frontmatter[attr]
                 d.frontmatter[attr].collect { |f| f['id'] }.include?(doc.data.id)
               }.try(:frontmatter)

@@ -8,6 +8,12 @@ describe Jekyll::Contentful::Document do
     end
   }
 
+  let(:widget) {
+    VCR.use_cassette('contentful/entries/widgets') do
+      @client.sync!.dig('widgets').detect{|p| p.data.id == 'l4pXkkwAQSMKOukKqiiiq' }
+    end
+  }
+
   let(:article) {
     VCR.use_cassette('contentful/entries/articles') do
       @client.sync!.dig('articles').detect{|a| a.data.id == '4swni4tAHme0gI8yySC6Sy' }
@@ -65,11 +71,6 @@ describe Jekyll::Contentful::Document do
     expect(yml.keys).to include('id')
     expect(yml.keys).to include('contentful_id')
     expect(yml.keys).to include('content_type')
-  end
-
-  it 'should map fields to custom keys' do
-    expect(article.frontmatter.keys).to include('name')
-    expect(article.frontmatter['name']).to eq(article.frontmatter['title'])
   end
 
   it 'should return "content-type and id" if slug is not defined' do
@@ -136,6 +137,16 @@ describe Jekyll::Contentful::Document do
       content = 'This is body content'
       article.data.fields[:body] = content
       expect(article.send(:body)).to eq(content)
+    end
+
+    it 'should map fields to custom keys' do
+      expect(article.frontmatter.keys).to include('name')
+      expect(article.frontmatter['name']).to eq(article.frontmatter['title'])
+    end
+
+    it 'should map belongs_to reciprocal fields' do
+      expect(widget.frontmatter.keys).to include('article')
+      expect(widget.frontmatter.dig('article', 'title')).to eq('Something Else')
     end
 
   end

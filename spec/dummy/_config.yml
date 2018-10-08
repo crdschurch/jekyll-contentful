@@ -18,5 +18,6 @@ contentful:
   article:
     map:
       name: title
+  widget:
     belongs_to:
-      category: posts
+      article: widgets
