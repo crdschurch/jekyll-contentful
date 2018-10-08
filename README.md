@@ -72,6 +72,29 @@ contentful:
 
 _Note: Currently only `belongs_to` reciprocal relationships are supported._
 
+### Query Controls
+
+While you can control queries for all content types from the command line (see [_Usage_](#usage) below), you can also control the query for individual content types within the config file.
+
+The following keys are available:
+
+- `query`
+- `limit`
+- `order`
+
+For example:
+
+```yml
+contentful:
+  # ...
+  article:
+    limit: 10
+    query: fields.published_at[lte]=2018-08-16
+    order: sys.createdAt
+```
+
+See [_Usage_](#usage) for additional details.
+
 ## Specifying Content Field
 
 To make use of [Jekyll's `content` and `excerpt` methods](https://jekyllrb.com/docs/posts/), the command will look for a `content` option in your collections configuration. If it does not exist, it will attempt to fall back to body, and otherwise include no content in the body of the entry's YML file.
@@ -117,7 +140,7 @@ $ bundle exec jekyll contentful --collections articles,authors --limit 10
 You can also tell jekyll-contentful to just return recently created content by specifying a range for the `--recent` flag. For example...
 
 ```
-$ bundle exec jekyll contentful  --recent 10.days.ago
+$ bundle exec jekyll contentful --recent 10.days.ago
 ```
 
 ...will return any content who's createdAt is greater than or equal to 10 days ago. This features relies relative date syntax provided by [ActiveSupport](https://github.com/rails/rails/tree/master/activesupport).

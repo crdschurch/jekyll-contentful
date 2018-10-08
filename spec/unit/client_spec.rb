@@ -77,6 +77,11 @@ describe Jekyll::Contentful::Client do
       end
     end
 
+    it 'can limit for an individual model' do
+      @client = Jekyll::Contentful::Client.new(site: @site)
+      expect(@client.send(:query_params, 'another_model').dig(:limit)).to eq(10)
+    end
+
   end
 
   context 'with additional query params' do
@@ -86,6 +91,11 @@ describe Jekyll::Contentful::Client do
       params = @client.send(:query_params)
       expect(params.dig('sys.id')).to eq('123')
       expect(params.dig('fields.published_at')).to eq('2001-01-01')
+    end
+
+    it 'can pass queries for an individual model' do
+      @client = Jekyll::Contentful::Client.new(site: @site)
+      expect(@client.send(:query_params, 'another_model').dig('fields.published_at[lte]')).to eq('2018-05-18')
     end
 
   end

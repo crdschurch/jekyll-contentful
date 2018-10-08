@@ -21,8 +21,9 @@ module Jekyll
             @log_color = colors[index % (colors.count - 1)]
             model, schema = content_type
             rm(model.pluralize) if @options.dig('clean')
-            ct_cfg = @site.config.dig('contentful', content_type.first)
+            ct_cfg = @site.config.dig('contentful', model)
             cfg = @site.config.dig('collections', model.pluralize)
+            # binding.pry
             entries = fetch_entries(model)
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
@@ -83,11 +84,9 @@ module Jekyll
       private
 
         def fetch_entries(type)
-          unless @entries.keys.include?(type)
-            @entries[type] = []
-          end
+          @entries[type] ||= []
 
-          params = query_params.merge({
+          params = query_params(type).merge({
             skip: @entries[type].count,
             content_type: type
           })
@@ -105,20 +104,21 @@ module Jekyll
           end
         end
 
-        def query_params
+        def query_params(type = nil)
+          ct_cfg = @site.config.dig('contentful', type) || {}
+
           args = {
-            limit: (options.dig('limit') || 1000),
-            order: sort_order(options.dig('order'))
+            limit: (ct_cfg.dig('limit') || options.dig('limit') || 1000),
+            order: sort_order(ct_cfg.dig('order') || options.dig('order'))
           }
 
           if !options.dig('recent').nil?
             args['sys.createdAt[gte]'] = eval(options.dig('recent')).strftime('%Y-%m-%d') rescue nil
           end
 
-          if !options.dig('query').nil?
-            CGI.parse(options.dig('query')).each do |k,v|
-              args[k] = v.first
-            end
+          query = ct_cfg.dig('query') || options.dig('query')
+          if query.present?
+            CGI.parse(query).each { |k,v| args[k] = v.first }
           end
 
           args

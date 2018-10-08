@@ -21,3 +21,7 @@ contentful:
   widget:
     belongs_to:
       article: widgets
+  another_model:
+    query: fields.published_at[lte]=2018-05-18
+    order: title
+    limit: 10
