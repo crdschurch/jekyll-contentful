@@ -9,7 +9,7 @@
 Add the following to your `Gemfile` and bundle...
 
 ```ruby
-gem "jekyll-contentful", "~> 1.0.0", git: 'https://github.com/crdschurch/jekyll-contentful.git'
+gem "jekyll-contentful", "~> 1.0", git: 'https://github.com/crdschurch/jekyll-contentful.git'
 ```
 
 Note, in order to support Contentful environents, this project requires [v2.6.0](https://github.com/contentful/contentful.rb/releases/tag/v2.6.0) or greater of the [Contentful gem](http://rubygems.org/gems/contentful).
