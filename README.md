@@ -93,6 +93,10 @@ contentful:
     order: sys.createdAt
 ```
 
+Note: for more fine-grained control of ordering try using `desc`. For example:
+`order: 'published_at desc'` would return entries sorted by most recent published
+date.
+
 See [_Usage_](#usage) for additional details.
 
 ## Specifying Content Field
