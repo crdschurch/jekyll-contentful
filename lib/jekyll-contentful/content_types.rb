@@ -78,7 +78,7 @@ module Jekyll
 
           def space
             @space ||= begin
-              management.spaces.find(ENV['CONTENTFUL_SPACE_ID'])
+              management.environments(ENV['CONTENTFUL_SPACE_ID']).find(ENV['CONTENTFUL_ENV'] || 'master')
             end
           end
 

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.add_dependency 'jekyll'
   s.add_dependency 'contentful', '>= 2.6.0'
-  s.add_dependency 'contentful-management', '~> 1.10.1'
+  s.add_dependency 'contentful-management', '~> 2.6'
   s.add_dependency 'dotenv'
   s.add_dependency 'activesupport'
 end
