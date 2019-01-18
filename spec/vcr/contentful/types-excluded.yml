@@ -2,15 +2,15 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.contentful.com/spaces/lkrmxse64d8p
+    uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master
     body:
       encoding: US-ASCII
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/1.10.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful-management.rb/2.6.0; platform ruby/2.4.2; os macOS/18;
       Authorization:
-      - Bearer CFPAT-a9ff2f92a9c987c65638fdbee1c88f26b8a4b2ea1b1ef90f77d631c6cbfffdd5
+      - Bearer CFPAT-af77ae5f40bdeb00cfe32a39c0a288289f55a3dd48af0537216ee55548297272
       Content-Type:
       - application/vnd.contentful.management.v1+json
       Connection:
@@ -47,9 +47,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 28 Aug 2018 17:25:39 GMT
+      - Thu, 17 Jan 2019 17:38:33 GMT
       Etag:
-      - W/"c52f61517c43318550d9441468f61419"
+      - W/"015ac29ea46aa74ebdd2085da85d53a7"
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Server:
@@ -61,7 +61,7 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35991'
+      - '35999'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
@@ -69,7 +69,7 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - d2034dc4261353439bb477ab83f0bc46
+      - dc3ccb2b3a775ec935820d6568516488
       X-Download-Options:
       - noopen
       X-Frame-Options:
@@ -79,28 +79,43 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Content-Length:
-      - '454'
+      - '688'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_113_673446=nBAJIxcj2HduS2ovTXWRAZOFhVsAAAAA8we1tN48EsU62T1PKx3ysg==;
+      - incap_ses_623_673446=mqaaE7MVEysUHpg1HlilCJm9QFwAAAAAbyulrBXFrvOgpnUc/MJEYw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=lQmefUd93WsmHIIp6lKYhQAAAADnnDRAO+ceNDeowjTNwGiI; path=/; Domain=.contentful.com
-      - visid_incap_673446=vR7n4YlkTv+hVfIpSTefsJOFhVsAAAAAQUIPAAAAAABnwefkrXYX81dguw4QQZ13;
-        expires=Wed, 28 Aug 2019 06:48:11 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=ZxhwTF3e3UCT0C0b6lKYhQAAAACzbev9JETfS2nFTjnpYGl9; path=/; Domain=.contentful.com
+      - visid_incap_673446=nM47UZm/RLmMTt+BK1ukLZm9QFwAAAAAQUIPAAAAAAAkspHyzmzHYrKgLjmU//Sr;
+        expires=Fri, 17 Jan 2020 12:07:01 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 9-2800559-2800561 NNNN CT(0 0 0) RT(1535477138896 24) q(0 0 0 -1) r(1 1) U5
+      - 5-81547933-81547948 NNNN CT(12 11 0) RT(1547746713314 78) q(0 0 1 -1) r(2
+        2) U5
       X-Cdn:
       - Incapsula
     body:
       encoding: ASCII-8BIT
       string: |+
         {
-          "name":"development",
+          "name":"master",
           "sys":{
-            "type":"Space",
-            "id":"lkrmxse64d8p",
+            "type":"Environment",
+            "id":"master",
             "version":1,
+            "space":{
+              "sys":{
+                "type":"Link",
+                "linkType":"Space",
+                "id":"lkrmxse64d8p"
+              }
+            },
+            "status":{
+              "sys":{
+                "type":"Link",
+                "linkType":"Status",
+                "id":"ready"
+              }
+            },
             "createdBy":{
               "sys":{
                 "type":"Link",
@@ -121,18 +136,18 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Tue, 28 Aug 2018 17:25:39 GMT
+  recorded_at: Thu, 17 Jan 2019 17:38:33 GMT
 - request:
     method: get
-    uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
+    uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
     body:
       encoding: US-ASCII
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/1.10.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful-management.rb/2.6.0; platform ruby/2.4.2; os macOS/18;
       Authorization:
-      - Bearer CFPAT-a9ff2f92a9c987c65638fdbee1c88f26b8a4b2ea1b1ef90f77d631c6cbfffdd5
+      - Bearer CFPAT-af77ae5f40bdeb00cfe32a39c0a288289f55a3dd48af0537216ee55548297272
       Content-Type:
       - application/vnd.contentful.management.v1+json
       Connection:
@@ -163,9 +178,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 28 Aug 2018 17:25:39 GMT
+      - Thu, 17 Jan 2019 17:38:34 GMT
       Etag:
-      - '"3fafcbac0675da7d20de215088a87557"'
+      - '"261338c783c4eda342b17ea0dee5aa6e"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -175,7 +190,7 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35990'
+      - '35998'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
@@ -183,19 +198,19 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '8'
       X-Contentful-Request-Id:
-      - 1cc56e28a6c3baae21a899f3c21bdd51
+      - 4bdaeccc26ec4132e53ba5fbfcfe01c4
       Content-Length:
       - '10196'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_113_673446=xFGrUZsFrBD2S2ovTXWRAZOFhVsAAAAA6X7JYNN9cM9zvOnNAk2yEg==;
+      - incap_ses_623_673446=vHFtXBMKhkcuH5g1HlilCJm9QFwAAAAAfQYQi1/xIPbwJuQMByPKnw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=FKIiNxtO/iEWjv2L6lKYhQAAAAACBjkyccQfwaO/885VRyfA; path=/; Domain=.contentful.com
-      - visid_incap_673446=qaqyunmKSzaAX2tuiN7aXJOFhVsAAAAAQUIPAAAAAACFB+xWQ9m0NpuSRYMQHN2U;
-        expires=Wed, 28 Aug 2019 06:48:11 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=mysbbO4DtikUTbss6lKYhQAAAACXvFoDhaY+xsJ2VuloRH/n; path=/; Domain=.contentful.com
+      - visid_incap_673446=H12PKEoeRMOl/F2dkU3GUJm9QFwAAAAAQUIPAAAAAAAr0wF/NDvoGFuzjooFkshE;
+        expires=Fri, 17 Jan 2020 12:07:01 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 10-4342820-4342825 NNNN CT(0 0 0) RT(1535477139044 49) q(0 0 0 -1) r(1 1)
+      - 7-43460758-43460769 NNNN CT(0 0 0) RT(1547746713605 85) q(0 0 0 -1) r(3 3)
         U5
       X-Cdn:
       - Incapsula
@@ -210,195 +225,6 @@ http_interactions:
           "skip": 0,
           "limit": 100,
           "items": [
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "widget",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:51:16.575Z",
-                "updatedAt": "2018-07-20T16:51:16.734Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
-                "publishedAt": "2018-07-20T16:51:16.734Z"
-              },
-              "displayField": "title",
-              "name": "Widget",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "product",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2018-07-20T16:59:57.545Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 3,
-                "version": 6,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 5,
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "publishedAt": "2018-07-20T16:59:57.545Z"
-              },
-              "displayField": "title",
-              "name": "Product",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "author",
-                "type": "ContentType",
-                "createdAt": "2018-08-01T18:13:37.445Z",
-                "updatedAt": "2018-08-01T18:13:37.638Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
-                "publishedAt": "2018-08-01T18:13:37.638Z"
-              },
-              "displayField": "full_name",
-              "name": "Author",
-              "description": "",
-              "fields": [
-                {
-                  "id": "full_name",
-                  "name": "Full Name",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
             {
               "sys": {
                 "space": {
@@ -621,99 +447,7 @@ http_interactions:
                   "omitted": false
                 }
               ]
-            }
-          ]
-        }
-    http_version: 
-  recorded_at: Tue, 28 Aug 2018 17:25:39 GMT
-- request:
-    method: get
-    uri: https://api.contentful.com/spaces/lkrmxse64d8p/content_types
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      X-Contentful-User-Agent:
-      - sdk contentful-management.rb/1.10.1; platform ruby/2.4.2; os macOS/17;
-      Authorization:
-      - Bearer CFPAT-a9ff2f92a9c987c65638fdbee1c88f26b8a4b2ea1b1ef90f77d631c6cbfffdd5
-      Content-Type:
-      - application/vnd.contentful.management.v1+json
-      Connection:
-      - close
-      Host:
-      - api.contentful.com
-      User-Agent:
-      - http.rb/2.2.2
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Access-Control-Allow-Headers:
-      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
-      Access-Control-Allow-Methods:
-      - DELETE,GET,HEAD,POST,PUT,OPTIONS
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - Etag
-      Access-Control-Max-Age:
-      - '1728000'
-      Cf-Space-Id:
-      - lkrmxse64d8p
-      Content-Type:
-      - application/vnd.contentful.management.v1+json
-      Contentful-Api:
-      - cma
-      Date:
-      - Tue, 28 Aug 2018 17:25:39 GMT
-      Etag:
-      - '"3fafcbac0675da7d20de215088a87557"'
-      Server:
-      - Contentful
-      Strict-Transport-Security:
-      - max-age=15768000
-      X-Content-Type-Options:
-      - nosniff
-      X-Contentful-Ratelimit-Hour-Limit:
-      - '36000'
-      X-Contentful-Ratelimit-Hour-Remaining:
-      - '35989'
-      X-Contentful-Ratelimit-Reset:
-      - '0'
-      X-Contentful-Ratelimit-Second-Limit:
-      - '10'
-      X-Contentful-Ratelimit-Second-Remaining:
-      - '7'
-      X-Contentful-Request-Id:
-      - 012b44e78902cdc73918b398483e2d6e
-      Content-Length:
-      - '10196'
-      Connection:
-      - Close
-      Set-Cookie:
-      - incap_ses_113_673446=39Z/Qd04F0XGTGovTXWRAZOFhVsAAAAAdUxfzN9I1nq3cf0f1AwEqQ==;
-        path=/; Domain=.contentful.com
-      - nlbi_673446=JZm0H69d9U5lUX+I6lKYhQAAAACSnb/N7j5AUlQLD84FPD0M; path=/; Domain=.contentful.com
-      - visid_incap_673446=dYM3gGziQciWjXSxdZylB5OFhVsAAAAAQUIPAAAAAABMz+66yG66EuUnM7NGkfoY;
-        expires=Wed, 28 Aug 2019 06:48:11 GMT; path=/; Domain=.contentful.com
-      X-Iinfo:
-      - 14-8320892-8320898 NNNN CT(0 0 0) RT(1535477139194 36) q(0 0 0 -1) r(2 2)
-        U5
-      X-Cdn:
-      - Incapsula
-    body:
-      encoding: ASCII-8BIT
-      string: |
-        {
-          "sys": {
-            "type": "Array"
-          },
-          "total": 5,
-          "skip": 0,
-          "limit": 100,
-          "items": [
+            },
             {
               "sys": {
                 "space": {
@@ -763,69 +497,6 @@ http_interactions:
               },
               "displayField": "title",
               "name": "Widget",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "product",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2018-07-20T16:59:57.545Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 3,
-                "version": 6,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 5,
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "publishedAt": "2018-07-20T16:59:57.545Z"
-              },
-              "displayField": "title",
-              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -912,10 +583,10 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
-                "id": "testable",
+                "id": "product",
                 "type": "ContentType",
-                "createdAt": "2018-07-20T16:50:56.009Z",
-                "updatedAt": "2018-07-20T16:58:07.477Z",
+                "createdAt": "2018-07-20T16:52:20.890Z",
+                "updatedAt": "2018-07-20T16:59:57.545Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -937,8 +608,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 6,
-                "version": 12,
+                "publishedCounter": 3,
+                "version": 6,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -946,12 +617,12 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedVersion": 11,
-                "firstPublishedAt": "2018-07-20T16:50:56.170Z",
-                "publishedAt": "2018-07-20T16:58:07.477Z"
+                "publishedVersion": 5,
+                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
+                "publishedAt": "2018-07-20T16:59:57.545Z"
               },
               "displayField": "title",
-              "name": "Testable",
+              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -960,166 +631,6 @@ http_interactions:
                   "type": "Symbol",
                   "localized": false,
                   "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                },
-                {
-                  "id": "widgets",
-                  "name": "Widgets",
-                  "type": "Array",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false,
-                  "items": {
-                    "type": "Link",
-                    "validations": [
-                      {
-                        "linkContentType": [
-                          "widget"
-                        ]
-                      }
-                    ],
-                    "linkType": "Entry"
-                  }
-                },
-                {
-                  "id": "product",
-                  "name": "Product",
-                  "type": "Link",
-                  "localized": false,
-                  "required": false,
-                  "validations": [
-                    {
-                      "linkContentType": [
-                        "product"
-                      ]
-                    }
-                  ],
-                  "disabled": false,
-                  "omitted": false,
-                  "linkType": "Entry"
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "article",
-                "type": "ContentType",
-                "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2018-08-08T17:20:17.703Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 5,
-                "version": 10,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 9,
-                "firstPublishedAt": "2018-08-01T18:14:36.656Z",
-                "publishedAt": "2018-08-08T17:20:17.703Z"
-              },
-              "displayField": "title",
-              "name": "Article",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                },
-                {
-                  "id": "author",
-                  "name": "Author",
-                  "type": "Link",
-                  "localized": false,
-                  "required": false,
-                  "validations": [
-                    {
-                      "linkContentType": [
-                        "author"
-                      ]
-                    }
-                  ],
-                  "disabled": false,
-                  "omitted": false,
-                  "linkType": "Entry"
-                },
-                {
-                  "id": "widgets",
-                  "name": "Widgets",
-                  "type": "Array",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false,
-                  "items": {
-                    "type": "Link",
-                    "validations": [
-                      {
-                        "linkContentType": [
-                          "testable",
-                          "widget"
-                        ]
-                      }
-                    ],
-                    "linkType": "Entry"
-                  }
-                },
-                {
-                  "id": "published_at",
-                  "name": "Published At",
-                  "type": "Date",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                },
-                {
-                  "id": "slug",
-                  "name": "Slug",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": true,
                   "validations": [],
                   "disabled": false,
                   "omitted": false
@@ -1129,5 +640,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 28 Aug 2018 17:25:39 GMT
+  recorded_at: Thu, 17 Jan 2019 17:38:34 GMT
 recorded_with: VCR 4.0.0

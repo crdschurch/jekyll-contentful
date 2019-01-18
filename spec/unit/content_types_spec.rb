@@ -6,9 +6,9 @@ describe Jekyll::Contentful::ContentTypes do
     @klass = Jekyll::Contentful::ContentTypes
   end
 
-  it 'should return the CF space instance' do
+  it 'should return the CF environment instance' do
     VCR.use_cassette 'contentful/space' do
-      expect(@klass.send(:space)).to be_a(Contentful::Management::Space)
+      expect(@klass.send(:space)).to be_a(Contentful::Management::Environment)
     end
   end
 
