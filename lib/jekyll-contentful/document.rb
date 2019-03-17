@@ -99,7 +99,7 @@ module Jekyll
         end
 
         def parse_reference(entry, field_name)
-          if entry.is_a?(String)
+          if entry.is_a?(String) or entry.is_a?(Hash)
             entry
           else
             fields = @schema.dig('references', field_name.to_s) || []
