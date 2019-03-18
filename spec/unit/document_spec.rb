@@ -10,7 +10,7 @@ describe Jekyll::Contentful::Document do
 
   let(:widget) {
     VCR.use_cassette('contentful/entries/widgets') do
-      @client.sync!.dig('widgets').detect{|p| p.data.id == 'l4pXkkwAQSMKOukKqiiiq' }
+      @client.sync!.dig('widgets').detect{|p| p.data.id == '3o97VNLQgvCwxMQlSWL40S' }
     end
   }
 
@@ -147,6 +147,19 @@ describe Jekyll::Contentful::Document do
     it 'should map belongs_to reciprocal fields' do
       expect(widget.frontmatter.keys).to include('article')
       expect(widget.frontmatter.dig('article', 'title')).to eq('Something Else')
+    end
+
+    it 'accepts JSON objects as fields' do
+      exp_json = [
+        {"minutes" => 12, "seconds" => 34, "description" => "Test #1"},
+        {"minutes" => 2, "seconds" => 4, "description" => "Test #2"}
+      ]
+      expect(widget.frontmatter['custom_json']).to eq(exp_json)
+    end
+
+    it 'writes JSON as accepted YAML frontmatter' do
+      exp_text = "custom_json:\n- minutes: 12\n  seconds: 34\n  description: 'Test #1'\n- minutes: 2\n  seconds: 4\n  description: 'Test #2'\n"
+      expect(File.read(widget.send(:path))).to include(exp_text)
     end
 
   end

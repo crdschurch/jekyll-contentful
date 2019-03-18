@@ -27,7 +27,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Access-Control-Allow-Headers:
-      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team
       Access-Control-Allow-Methods:
       - DELETE,GET,HEAD,POST,PUT,OPTIONS
       Access-Control-Allow-Origin:
@@ -47,7 +47,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Thu, 17 Jan 2019 17:38:33 GMT
+      - Mon, 18 Mar 2019 16:58:15 GMT
       Etag:
       - W/"015ac29ea46aa74ebdd2085da85d53a7"
       Referrer-Policy:
@@ -69,7 +69,7 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - dc3ccb2b3a775ec935820d6568516488
+      - 2f2c1c19d960b584044803f415021bfe
       X-Download-Options:
       - noopen
       X-Frame-Options:
@@ -83,14 +83,14 @@ http_interactions:
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_623_673446=mqaaE7MVEysUHpg1HlilCJm9QFwAAAAAbyulrBXFrvOgpnUc/MJEYw==;
+      - incap_ses_483_673446=wfHLMnI9sSRw9c42VfezBifOj1wAAAAA4nT/WnXdBudZ4iPbXUFscw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=ZxhwTF3e3UCT0C0b6lKYhQAAAACzbev9JETfS2nFTjnpYGl9; path=/; Domain=.contentful.com
-      - visid_incap_673446=nM47UZm/RLmMTt+BK1ukLZm9QFwAAAAAQUIPAAAAAAAkspHyzmzHYrKgLjmU//Sr;
-        expires=Fri, 17 Jan 2020 12:07:01 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=Qgf4YZSY8l1sZSpwYMlkBAAAAAC/Ai0+SwokRQlxV9AtZ+A4; path=/; Domain=.contentful.com
+      - visid_incap_673446=iKMa/x1sRsONNl3sJrWbEifOj1wAAAAAQUIPAAAAAAAaWwkC42h6YIKGDEfgtIBI;
+        expires=Tue, 17 Mar 2020 11:23:51 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 5-81547933-81547948 NNNN CT(12 11 0) RT(1547746713314 78) q(0 0 1 -1) r(2
-        2) U5
+      - 10-151832585-151832596 NNNN CT(0 0 0) RT(1552928295014 54) q(0 0 0 -1) r(1
+        1) U5
       X-Cdn:
       - Incapsula
     body:
@@ -136,7 +136,7 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Thu, 17 Jan 2019 17:38:33 GMT
+  recorded_at: Mon, 18 Mar 2019 16:58:14 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
@@ -162,7 +162,7 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team
       Access-Control-Allow-Methods:
       - DELETE,GET,HEAD,POST,PUT,OPTIONS
       Access-Control-Allow-Origin:
@@ -178,9 +178,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Thu, 17 Jan 2019 17:38:34 GMT
+      - Mon, 18 Mar 2019 16:58:16 GMT
       Etag:
-      - '"261338c783c4eda342b17ea0dee5aa6e"'
+      - '"338b1bfad96c237f859e86b7bbbd71ac"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -198,19 +198,19 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '8'
       X-Contentful-Request-Id:
-      - 4bdaeccc26ec4132e53ba5fbfcfe01c4
+      - d18c3a5c39971c47d22628640a81e0b0
       Content-Length:
-      - '10196'
+      - '10453'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_623_673446=vHFtXBMKhkcuH5g1HlilCJm9QFwAAAAAfQYQi1/xIPbwJuQMByPKnw==;
+      - incap_ses_483_673446=vOfSDlMNAgRK9s42VfezBifOj1wAAAAAqjW+HIgPlerejaVjn6nGag==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=mysbbO4DtikUTbss6lKYhQAAAACXvFoDhaY+xsJ2VuloRH/n; path=/; Domain=.contentful.com
-      - visid_incap_673446=H12PKEoeRMOl/F2dkU3GUJm9QFwAAAAAQUIPAAAAAAAr0wF/NDvoGFuzjooFkshE;
-        expires=Fri, 17 Jan 2020 12:07:01 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=ANMgYxdhMXaXv90xYMlkBAAAAAAfnlmrvoBsD9+BWR6/hfPX; path=/; Domain=.contentful.com
+      - visid_incap_673446=QzS+mLPwQBCIBwSttPlcUifOj1wAAAAAQUIPAAAAAAA6mlysWktPECNAc+RTUSxV;
+        expires=Tue, 17 Mar 2020 11:23:51 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 7-43460758-43460769 NNNN CT(0 0 0) RT(1547746713605 85) q(0 0 0 -1) r(3 3)
+      - 6-23965834-23965835 NNNN CT(0 0 0) RT(1552928295159 48) q(0 0 0 -1) r(1 1)
         U5
       X-Cdn:
       - Incapsula
@@ -245,6 +245,9 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
+                "publishedVersion": 11,
+                "publishedAt": "2018-07-20T16:58:07.477Z",
+                "firstPublishedAt": "2018-07-20T16:50:56.170Z",
                 "createdBy": {
                   "sys": {
                     "type": "Link",
@@ -267,10 +270,7 @@ http_interactions:
                     "linkType": "User",
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
-                },
-                "publishedVersion": 11,
-                "firstPublishedAt": "2018-07-20T16:50:56.170Z",
-                "publishedAt": "2018-07-20T16:58:07.477Z"
+                }
               },
               "displayField": "title",
               "name": "Testable",
@@ -335,6 +335,142 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
+                "id": "widget",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:51:16.575Z",
+                "updatedAt": "2019-03-18T13:34:46.360Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "publishedVersion": 3,
+                "publishedAt": "2019-03-18T13:34:46.360Z",
+                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 2,
+                "version": 4,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                }
+              },
+              "displayField": "title",
+              "name": "Widget",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "custom_json",
+                  "name": "Custom JSON",
+                  "type": "Object",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "author",
+                "type": "ContentType",
+                "createdAt": "2018-08-01T18:13:37.445Z",
+                "updatedAt": "2018-08-01T18:13:37.638Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "publishedVersion": 1,
+                "publishedAt": "2018-08-01T18:13:37.638Z",
+                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                }
+              },
+              "displayField": "full_name",
+              "name": "Author",
+              "description": "",
+              "fields": [
+                {
+                  "id": "full_name",
+                  "name": "Full Name",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
@@ -346,6 +482,9 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
+                "publishedVersion": 9,
+                "publishedAt": "2018-08-08T17:20:17.703Z",
+                "firstPublishedAt": "2018-08-01T18:14:36.656Z",
                 "createdBy": {
                   "sys": {
                     "type": "Link",
@@ -368,10 +507,7 @@ http_interactions:
                     "linkType": "User",
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
-                },
-                "publishedVersion": 9,
-                "firstPublishedAt": "2018-08-01T18:14:36.656Z",
-                "publishedAt": "2018-08-08T17:20:17.703Z"
+                }
               },
               "displayField": "title",
               "name": "Article",
@@ -457,132 +593,6 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
-                "id": "widget",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:51:16.575Z",
-                "updatedAt": "2018-07-20T16:51:16.734Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-07-20T16:51:16.734Z",
-                "publishedAt": "2018-07-20T16:51:16.734Z"
-              },
-              "displayField": "title",
-              "name": "Widget",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
-                "id": "author",
-                "type": "ContentType",
-                "createdAt": "2018-08-01T18:13:37.445Z",
-                "updatedAt": "2018-08-01T18:13:37.638Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 1,
-                "version": 2,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedVersion": 1,
-                "firstPublishedAt": "2018-08-01T18:13:37.638Z",
-                "publishedAt": "2018-08-01T18:13:37.638Z"
-              },
-              "displayField": "full_name",
-              "name": "Author",
-              "description": "",
-              "fields": [
-                {
-                  "id": "full_name",
-                  "name": "Full Name",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
                 "id": "product",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:52:20.890Z",
@@ -594,6 +604,9 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
+                "publishedVersion": 5,
+                "publishedAt": "2018-07-20T16:59:57.545Z",
+                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
                 "createdBy": {
                   "sys": {
                     "type": "Link",
@@ -616,10 +629,7 @@ http_interactions:
                     "linkType": "User",
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
-                },
-                "publishedVersion": 5,
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "publishedAt": "2018-07-20T16:59:57.545Z"
+                }
               },
               "displayField": "title",
               "name": "Product",
@@ -640,5 +650,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Thu, 17 Jan 2019 17:38:34 GMT
+  recorded_at: Mon, 18 Mar 2019 16:58:15 GMT
 recorded_with: VCR 4.0.0
