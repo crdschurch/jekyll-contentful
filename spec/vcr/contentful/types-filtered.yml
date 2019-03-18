@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/2.6.0; platform ruby/2.4.2; os macOS/18;
+      - sdk contentful-management.rb/2.8.0; platform ruby/2.4.2; os macOS/18;
       Authorization:
       - Bearer CFPAT-af77ae5f40bdeb00cfe32a39c0a288289f55a3dd48af0537216ee55548297272
       Content-Type:
@@ -41,7 +41,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Mon, 18 Mar 2019 16:58:17 GMT
+      - Mon, 18 Mar 2019 17:32:13 GMT
       Etag:
       - '"338b1bfad96c237f859e86b7bbbd71ac"'
       Server:
@@ -61,20 +61,20 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - fa563c2502c7190a19c6af3b2ad1d737
+      - 23253ef50e7040c47bc16faeb757e3a8
       Content-Length:
       - '10453'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_483_673446=OXVPaHsHOhVW+s42VfezBijOj1wAAAAAM5Q3/nZs/lKyzmx8a0Zz+g==;
+      - incap_ses_483_673446=BWPtSkXg612PE+g2VfezBhzWj1wAAAAAvk5q99buOcakLexlro6JvQ==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=yFRkYJQHc0fWO92tYMlkBAAAAAABtHZWJMaXyv/3QPD1d7SD; path=/; Domain=.contentful.com
-      - visid_incap_673446=NP8ouHpYSBu8CRvFuYWyTyjOj1wAAAAAQUIPAAAAAADo42I4VXG4dJq3JsfBsCsW;
-        expires=Tue, 17 Mar 2020 11:23:51 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=4ENzMzFhEXVkX84IYMlkBAAAAAC4C0PIKUsm8AJX8pot8D2l; path=/; Domain=.contentful.com
+      - visid_incap_673446=1adPKe6NTr6PbxRAaDQj8RzWj1wAAAAAQUIPAAAAAAApx7zA9KxlXdWhN39wIHGG;
+        expires=Tue, 17 Mar 2020 11:23:50 GMT; path=/; Domain=.contentful.com
       X-Iinfo:
-      - 10-151833085-151833096 NNNN CT(0 0 0) RT(1552928296563 57) q(0 0 0 -1) r(0
-        0) U5
+      - 2-60867998-60868009 NNNN CT(0 0 0) RT(1552930332264 51) q(0 0 0 -1) r(0 0)
+        U5
       X-Cdn:
       - Incapsula
     body:
@@ -513,5 +513,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 16:58:16 GMT
+  recorded_at: Mon, 18 Mar 2019 17:32:13 GMT
 recorded_with: VCR 4.0.0
