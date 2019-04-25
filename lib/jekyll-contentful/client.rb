@@ -36,11 +36,10 @@ module Jekyll
             imported_count = 0
             files = docs.collect do |entry|
               if entry.write!
-                STDOUT.write(ColorizedString.new('.').send(log_color))
                 imported_count += 1
               end
             end
-            log "\n#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported."
+            log "#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported."
             [type, docs]
           end.to_h
         end
