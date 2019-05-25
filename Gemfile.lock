@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-contentful (1.2.2)
+    jekyll-contentful (1.2.3)
       activesupport
       contentful (>= 2.6.0)
       contentful-management (~> 2.6)
@@ -24,7 +24,7 @@ GEM
     contentful (2.12.0)
       http (> 0.8, < 4.0)
       multi_json (~> 1)
-    contentful-management (2.8.2)
+    contentful-management (2.9.1)
       http (> 1.0, < 3.0)
       json (~> 1.8)
       multi_json (~> 1)
