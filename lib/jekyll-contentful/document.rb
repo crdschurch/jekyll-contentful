@@ -48,10 +48,16 @@ module Jekyll
       private
 
         def body
+          if content_key.present?
+            @data.fields[content_key]
+          end
+        end
+
+        def content_key
           if !cfg.nil? && cfg.keys.include?('content')
-            @data.fields[cfg.dig('content').intern]
-          elsif @data.fields.keys.include? :body
-            @data.fields[:body]
+            cfg.dig('content').intern
+          elsif @data.fields.keys.include?(:body)
+            :body
           end
         end
 
@@ -70,6 +76,12 @@ module Jekyll
               'content_type' => data.content_type.id
             }
             ct_fields = data.fields.stringify_keys
+
+            # Remove content field (e.g. body) from ct_fields object
+            if ct_fields.keys.include?(content_key.to_s)
+              ct_fields.except!(content_key.to_s)
+            end
+
             mapped_fields = (ct_cfg.dig('map') || {}).map { |k, v| [k, parse_field(v, ct_fields[v])] }.to_h
             fields = ct_fields.map { |k, v| [k, parse_field(k, v)] }.to_h
             defaults.merge(fields).merge(mapped_fields)
