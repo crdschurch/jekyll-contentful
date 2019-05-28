@@ -29,6 +29,14 @@ contentful:
     - product
 ```
 
+If you want to exclude all models not otherwise specified, you can do the following...
+
+```
+contentful:
+  exclude:
+    - '*'
+```
+
 ### Specifying Filenames
 
 By default, the names for any files generated in the collections directory will adhere to the following format... `#{content-type}-#{id}.md`.
@@ -108,7 +116,7 @@ Given the following example:
 ```yml
 collections:
   articles:
-    # ...
+  # ...
   authors:
     # ...
     content: bio
@@ -120,12 +128,12 @@ If there is a `body` field on the `article` content type in Contentful, the cont
 
 The following environment variables are required to run the script. Please make sure they are exported to the same scope in which your Jekyll commands are run.
 
-| Name | Description | Default |
-| ----- | ------ | ------- |
-| `CONTENTFUL_ACCESS_TOKEN` | Access token for Contentful's Delivery or Preview API | |
-| `CONTENTFUL_MANAGEMENT_TOKEN` | Access token for Contentful's Management API | |
-| `CONTENTFUL_SPACE_ID` | ID specifying Contentful Space | |
-| `CONTENTFUL_ENV` | Contentful environment | `master` |
+| Name                          | Description                                           | Default  |
+| ----------------------------- | ----------------------------------------------------- | -------- |
+| `CONTENTFUL_ACCESS_TOKEN`     | Access token for Contentful's Delivery or Preview API |          |
+| `CONTENTFUL_MANAGEMENT_TOKEN` | Access token for Contentful's Management API          |          |
+| `CONTENTFUL_SPACE_ID`         | ID specifying Contentful Space                        |          |
+| `CONTENTFUL_ENV`              | Contentful environment                                | `master` |
 
 ## Usage
 

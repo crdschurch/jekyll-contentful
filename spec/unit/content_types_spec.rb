@@ -4,6 +4,12 @@ describe Jekyll::Contentful::ContentTypes do
 
   before do
     @klass = Jekyll::Contentful::ContentTypes
+    @cfg = @klass.config
+  end
+
+  after do
+    # reset
+    @klass.config = @cfg
   end
 
   it 'should return the CF environment instance' do
@@ -60,7 +66,7 @@ describe Jekyll::Contentful::ContentTypes do
   it 'should return schema, sans excluded content-types' do
     VCR.use_cassette 'contentful/types' do
       allow(@klass).to receive(:config).and_return({ 'exclude' => ['testable', 'widget'] })
-      schema = @klass.send(:get_schema)
+      schema = @klass.send(:get_schema_sans_exclusions)
       keys = schema.collect(&:first)
       expect(keys).to match_array(['product','article','author'])
       expect(keys).to_not include('testable')
@@ -75,6 +81,21 @@ describe Jekyll::Contentful::ContentTypes do
       fields = @klass.send(:get_fields, model)
       references = fields.references.collect(&@klass.send(:parse_reference_field))
       expect(references).to match_array([{"author"=>["author"]}, {"widgets"=>["testable", "widget"]}])
+    end
+  end
+
+  it 'should return all collection models except those that have been excluded' do
+    @klass.instance_variable_set('@config', { 'author' => {'output' => false}, 'exclude' => ['*'] })
+
+    VCR.use_cassette 'contentful/types' do
+      schema = @klass.send(:get_schema)
+      models = @klass.send(:excluded_models, schema)
+      expect(models).to_not include('author')
+    end
+
+    VCR.use_cassette 'contentful/types' do
+      schema = @klass.send(:get_schema_sans_exclusions)
+      expect(schema.collect(&:first)).to match_array(['author'])
     end
   end
 

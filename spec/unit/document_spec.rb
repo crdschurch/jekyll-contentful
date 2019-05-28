@@ -73,6 +73,11 @@ describe Jekyll::Contentful::Document do
     expect(yml.keys).to include('content_type')
   end
 
+  it 'should not expose body in frontmatter' do
+    yml = product.send(:frontmatter)
+    expect(yml.keys).to_not include('body')
+  end
+
   it 'should return "content-type and id" if slug is not defined' do
     allow(product.data).to receive(:title).and_return('this is a test')
     allow(product.data).to receive(:slug) { raise }
@@ -82,6 +87,22 @@ describe Jekyll::Contentful::Document do
   it 'should return frontmatter' do
     yml = product.send(:frontmatter)
     expect(yml).to be_instance_of(Hash)
+  end
+
+  it 'should exclude content field from frontmatter' do
+    product.cfg = { "content" => "title" }
+    product.remove_instance_variable('@frontmatter')
+    yml = product.send(:build_frontmatter)
+    expect(yml.keys).to_not include("title")
+  end
+
+  it 'should return key for the "content" field (e.g. body)' do
+    product.data.fields[:body] = "Ever thus to deadbeats, Lebowski"
+    expect(product.send(:content_key)).to be(:body)
+
+    product.remove_instance_variable('@data')
+    product.cfg = { "content" => "title" }
+    expect(product.send(:content_key)).to be(:title)
   end
 
   it 'should write the file' do

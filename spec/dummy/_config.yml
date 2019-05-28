@@ -14,7 +14,7 @@ collections:
 
 contentful:
   exclude:
-    - migrations
+    - "migrations"
   article:
     map:
       name: title
