@@ -7,7 +7,7 @@ module Jekyll
 
         def all(project_dir=nil, options={})
           load_jekyll_config(project_dir)
-          schema = Hash[get_schema]
+          schema = Hash[get_schema_sans_exclusions]
           included_collections = (options.dig('collections') || {})
           if included_collections.empty?
             _schema = schema
@@ -49,14 +49,29 @@ module Jekyll
 
           def get_schema
             @models = get_models
-            schema = @models.collect do |model|
+            @models.collect do |model|
               model_details = get_fields(model)
               [model.id, {
                 "fields" => model_details.fields.collect(&:id),
                 "references" => model_details.references.collect(&parse_reference_field)
               }]
             end
-            schema.reject{|arr| (config.dig('exclude') || []).include? arr.first }
+          end
+
+          def get_schema_sans_exclusions
+            schema = get_schema
+            excluded = excluded_models(schema)
+            schema.reject{|arr| excluded.include? arr.first }
+          end
+
+          def excluded_models(schema)
+            if config.dig('exclude').include?('*')
+              models = schema.collect(&:first)
+              specified_models = @config.except('exclude').keys
+              models.difference(specified_models)
+            else
+              config.dig('exclude') || []
+            end
           end
 
           def parse_reference_field
