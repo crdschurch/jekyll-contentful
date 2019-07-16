@@ -19,6 +19,7 @@ contentful:
     map:
       name: title
   widget:
+    query: content_type={{env.CONTENT_TYPE}}
     belongs_to:
       article: widgets
   another_model:
