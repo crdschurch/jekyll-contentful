@@ -65,7 +65,7 @@ module Jekyll
           end
 
           def excluded_models(schema)
-            if config.dig('exclude').include?('*')
+            if config.dig('exclude').try('include?','*')
               models = schema.collect(&:first)
               specified_models = @config.except('exclude').keys
               models.difference(specified_models)
