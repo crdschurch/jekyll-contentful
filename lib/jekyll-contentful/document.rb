@@ -111,7 +111,7 @@ module Jekyll
         end
 
         def parse_reference(entry, field_name)
-          if entry.is_a?(String) or entry.is_a?(Hash)
+          if entry.is_a?(String) or entry.is_a?(Hash) or entry.class.name == 'Contentful::Asset'
             entry
           else
             fields = @schema.dig('references', field_name.to_s) || []
