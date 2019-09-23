@@ -106,7 +106,8 @@ module Jekyll
 
         def parse_asset(asset)
           {
-            "url" => asset.fields.dig(:file).url
+            "url" => asset.fields.dig(:file).url,
+            "id" => asset.id
           }
         end
 
