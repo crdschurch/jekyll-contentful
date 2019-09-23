@@ -1,5 +1,5 @@
 module Jekyll
   module Contentful
-    VERSION = "1.2.3"
+    VERSION = "1.4.1"
   end
 end
