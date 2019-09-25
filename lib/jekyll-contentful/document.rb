@@ -62,8 +62,8 @@ module Jekyll
         end
 
         def is_future?
-          if @frontmatter['published_at']
-            @frontmatter['published_at'] > Time.now
+          if @frontmatter['date'] #not all content has this field
+            @frontmatter['date'] > Time.now
           end
         end
 

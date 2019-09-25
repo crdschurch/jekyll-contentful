@@ -26,3 +26,4 @@ contentful:
     query: fields.published_at[lte]=2018-05-18
     order: title
     limit: 10
+
