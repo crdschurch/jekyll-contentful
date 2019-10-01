@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-contentful (1.4.1)
+    jekyll-contentful (2.0.0)
       activesupport
       contentful (>= 2.6.0)
       contentful-management (~> 2.6)
@@ -112,6 +112,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rb-readline (0.5.5)
     rouge (3.3.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -159,6 +160,7 @@ DEPENDENCIES
   launchy
   pry
   rake
+  rb-readline
   rspec
   timecop
   vcr

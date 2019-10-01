@@ -43,14 +43,25 @@ By default, the names for any files generated in the collections directory will 
 
 In some cases, you may want to manipulate the filenames so that they work better with Jekyll's internal publishing logic. For each collection in your `_config.yml` file, you can specify the template for resulting filenames. Note, this template is parsed like any other Liquid template so you can access any filters and/or frontmatter data for the individual document...
 
-```
+```yaml
 collections:
   articles:
-    filename: "{{ published_at | date: '%Y-%m-%d' }}-{{ slug }}"
+    filename: "{{ some_date_field | date: '%Y-%m-%d' }}-{{ slug }}"
     output: false
 ```
 
-NOTE– if the filename for your collection is prefixed with a date value in the format of `YYYY-MM-DD` as shown above, `jekyll-contentful` will only write content that is less than or equal to today's date. This makes it possible to ensure no content with a future publish date is aggregated from Contentful / rendered within your static site.
+### Specifying Content Date
+
+To ensure anything with a specified date in the future is not written for processing, add the following to your _config.yml:
+
+```yaml
+contentful:
+  some_content_type:
+    map: 
+      date: 'some_date_field'
+```
+
+NOTE – `jekyll-contentful` will only write content that is less than or equal to today's date if a date field exists in the frontmatter. This makes it possible to ensure no content with a future date is aggregated from Contentful / rendered within your static site.
 
 ### Linked Entries
 

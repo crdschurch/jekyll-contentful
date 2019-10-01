@@ -34,11 +34,11 @@ describe Jekyll::Contentful::Document do
   end
 
   it 'should evaluate collection filenames to determine whether content if future dated' do
-    product.instance_variable_set('@filename', 'collections/_products/product-5im4abQIPKgSE0CUey4uYY.md')
+    product.frontmatter['date'] = nil
     expect(product.send(:is_future?)).to be(nil)
-    product.instance_variable_set('@filename', 'collections/_products/2018-01-01-something.md')
+    product.frontmatter['date'] = Time.now - 6000
     expect(product.send(:is_future?)).to be(false)
-    product.instance_variable_set('@filename', 'collections/_products/2030-01-01-something.md')
+    product.frontmatter['date'] = Time.now + 6000
     expect(product.send(:is_future?)).to be(true)
   end
 
@@ -123,7 +123,7 @@ describe Jekyll::Contentful::Document do
     expect(File.read(path).gsub(/\A---(.|\n)*?---\n\n/,'')).to eq(content)
   end
 
-  it 'should not write the file if the filename is prefixed with a future date' do
+  it 'should not write the file if the published_at is in the future' do
     path = write_document!(product, "#{1.week.from_now.strftime('%Y-%m-%d')}-something.md")
     expect(File.exist?(path)).to be(false)
   end
@@ -185,8 +185,9 @@ describe Jekyll::Contentful::Document do
 
   end
 
-  def write_document!(obj, filename='testing.md')
+  def write_document!(obj, date=Time.now, filename='testing.md')
     obj.dir = File.join(obj.dir, 'tmp')
+    obj.frontmatter['date'] = date
     obj.filename = filename
     path = obj.send(:path)
     FileUtils.rm(path) if File.exist?(path)

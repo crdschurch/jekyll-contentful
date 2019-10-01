@@ -62,9 +62,8 @@ module Jekyll
         end
 
         def is_future?
-          matches = File.basename(@filename).match('^\d{4}-\d{2}-\d{2}')
-          if matches
-            Date.parse(matches.to_a.first).to_time.to_i >= Date.today.end_of_day.to_i
+          if @frontmatter['date'] #not all content has this field
+            @frontmatter['date'] > Time.now
           end
         end
 
