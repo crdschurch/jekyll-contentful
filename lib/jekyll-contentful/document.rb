@@ -14,7 +14,7 @@ module Jekyll
       end
 
       def write!
-        unless is_future?
+        unless is_future? || is_past?
           FileUtils.mkdir_p File.dirname(path)
           File.open(path, 'w') do |file|
             file.write "#{@frontmatter.to_yaml}---\n\n#{body}"
@@ -62,8 +62,14 @@ module Jekyll
         end
 
         def is_future?
-          if @frontmatter['date'] #not all content has this field
-            @frontmatter['date'] > Time.now
+          if @frontmatter['published_at'] #not all content has this field
+            @frontmatter['published_at'] > Time.now
+          end
+        end
+
+        def is_past?
+          if @frontmatter['unpublished_at'] #not all content has this field
+            @frontmatter['unpublished_at'] <= Time.now
           end
         end
 
