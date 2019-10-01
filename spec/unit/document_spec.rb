@@ -44,11 +44,11 @@ describe Jekyll::Contentful::Document do
 
   it 'should evaluate unpublished_at frontmatter' do
     product.frontmatter['unpublished_at'] = nil
-    expect(product.send(:is_past?)).to be(nil)
+    expect(product.send(:is_unpublished?)).to be(nil)
     product.frontmatter['unpublished_at'] = Time.now - 6000
-    expect(product.send(:is_past?)).to be(true)
+    expect(product.send(:is_unpublished?)).to be(true)
     product.frontmatter['unpublished_at'] = Time.now + 6000
-    expect(product.send(:is_past?)).to be(false)
+    expect(product.send(:is_unpublished?)).to be(false)
   end
 
   it 'should return the collection name' do
