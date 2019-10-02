@@ -33,13 +33,22 @@ describe Jekyll::Contentful::Document do
     @client = Jekyll::Contentful::Client.new(site: @site)
   end
 
-  it 'should evaluate collection filenames to determine whether content if future dated' do
-    product.frontmatter['date'] = nil
+  it 'should evaluate published_at frontmatter' do
+    product.frontmatter['published_at'] = nil
     expect(product.send(:is_future?)).to be(nil)
-    product.frontmatter['date'] = Time.now - 6000
+    product.frontmatter['published_at'] = Time.now - 6000
     expect(product.send(:is_future?)).to be(false)
-    product.frontmatter['date'] = Time.now + 6000
+    product.frontmatter['published_at'] = Time.now + 6000
     expect(product.send(:is_future?)).to be(true)
+  end
+
+  it 'should evaluate unpublished_at frontmatter' do
+    product.frontmatter['unpublished_at'] = nil
+    expect(product.send(:is_unpublished?)).to be(nil)
+    product.frontmatter['unpublished_at'] = Time.now - 6000
+    expect(product.send(:is_unpublished?)).to be(true)
+    product.frontmatter['unpublished_at'] = Time.now + 6000
+    expect(product.send(:is_unpublished?)).to be(false)
   end
 
   it 'should return the collection name' do
@@ -121,11 +130,6 @@ describe Jekyll::Contentful::Document do
     product.data.fields[:body] = content
     path = write_document!(product)
     expect(File.read(path).gsub(/\A---(.|\n)*?---\n\n/,'')).to eq(content)
-  end
-
-  it 'should not write the file if the published_at is in the future' do
-    path = write_document!(product, "#{1.week.from_now.strftime('%Y-%m-%d')}-something.md")
-    expect(File.exist?(path)).to be(false)
   end
 
   context 'mapping fields from Contentful' do

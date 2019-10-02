@@ -52,16 +52,35 @@ collections:
 
 ### Specifying Content Date
 
-To ensure anything with a specified date in the future is not written for processing, add the following to your _config.yml:
+To ensure anything with a specified date in the future is not written for processing you have the following options:
 
-```yaml
-contentful:
-  some_content_type:
-    map: 
-      date: 'some_date_field'
-```
+1. add the following to your _config.yml:
 
-NOTE – `jekyll-contentful` will only write content that is less than or equal to today's date if a date field exists in the frontmatter. This makes it possible to ensure no content with a future date is aggregated from Contentful / rendered within your static site.
+    ```yaml
+    contentful:
+      some_content_type:
+        map: 
+          published_at: 'some_date_field'
+    ```
+    Where `some_date_field` represents a date to begin writing content to disk
+
+2. by default have a `published_at` field with the appropriate start date to begin writing content to disk
+
+To ensure anything with a specified unpublished date in the past is not written for processing you have the following options:
+
+1. add the following to your _config.yml:
+    ```yaml
+    contentful:
+      some_content_type:
+        map: 
+          date: 'some_date_field'
+          unpublished_at: 'some_other_date_field'
+    ```
+    Where `some_other_date_field` represents a date to stop writing content to disk
+
+2. by default have an `unpublished_at` field with the appropriate end date to stop writing content to disk
+
+NOTE – `jekyll-contentful` will only write content that is less than or equal to today's date if a `published_at` field exists in the frontmatter. This makes it possible to ensure no content with a future date is aggregated from Contentful / rendered within your static site. Furthermore, if an `unpublished_at` is specified that is <= now the content will not write to disk, ignoring `published_at` entirely.
 
 ### Linked Entries
 
