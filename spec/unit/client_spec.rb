@@ -127,6 +127,14 @@ describe Jekyll::Contentful::Client do
         expect(entries.length).to eq(1)
       end
     end
+
+    it 'should not exclude content for models that do not have the distribution_channels field' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'sites' => 'www.example.com,somethingelse.org' })
+      VCR.use_cassette 'contentful/entries-widgets-distribution-channels' do
+        entries = @client.send(:fetch_entries, 'widget')
+        expect(entries.length).to eq(4)
+      end
+    end
   end
 
 end
