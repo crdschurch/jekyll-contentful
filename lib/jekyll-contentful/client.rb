@@ -52,6 +52,13 @@ module Jekyll
         @distribution_channels ||= @options.dig('sites').try(:split, ',')
       end
 
+      def distribution_channels_frontmatter_field
+        @distribution_channels_frontmatter_field ||= begin
+          (@site.config.dig('contentful', 'config', 'sites') || 'distribution_channels').intern
+        end
+      end
+
+
       def collections_glob(type)
         path = File.join(@site.collections_path, "_#{type}/*")
         Dir.glob(path)
@@ -106,13 +113,11 @@ module Jekyll
             fetch_entries(type)
           else
 
-            # Exclude any content not included in specified channels
+            # Exclude content not included in specified channels
             @entries[type].delete_if do |entry|
               if distribution_channels
-                target_channels = entry.fields.dig(:distribution_channels) || []
+                target_channels = entry.fields.dig(distribution_channels_frontmatter_field) || []
                 (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
-              else
-                false
               end
             end
 

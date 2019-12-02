@@ -110,6 +110,16 @@ describe Jekyll::Contentful::Client do
   end
 
   context 'with --sites' do
+    it 'should source name of distribution-channel field from config with a sensible default' do
+      # default...
+      expect(@client.distribution_channels_frontmatter_field).to eq(:distribution_channels)
+
+      # overridden...
+      @site.config['contentful']['config'] = { 'sites' => 'some_json_field' }
+      @client = Jekyll::Contentful::Client.new(site: @site)
+      expect(@client.distribution_channels_frontmatter_field).to eq(:some_json_field)
+    end
+
     it 'should exclude any content that does not specify site' do
       @client = Jekyll::Contentful::Client.new(site: @site, options: { 'sites' => 'www.example.com,somethingelse.org' })
       VCR.use_cassette 'contentful/entries-articles-distribution-channels' do
