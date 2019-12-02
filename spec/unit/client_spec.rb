@@ -100,4 +100,23 @@ describe Jekyll::Contentful::Client do
 
   end
 
+  context 'without --sites' do
+    it 'should not exclude any content' do
+      VCR.use_cassette 'contentful/entries-articles' do
+        entries = @client.send(:fetch_entries, 'article')
+        expect(entries.length).to eq(2)
+      end
+    end
+  end
+
+  context 'with --sites' do
+    it 'should exclude any content that does not specify site' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'sites' => 'www.example.com,somethingelse.org' })
+      VCR.use_cassette 'contentful/entries-articles-distribution-channels' do
+        entries = @client.send(:fetch_entries, 'article')
+        expect(entries.length).to eq(1)
+      end
+    end
+  end
+
 end

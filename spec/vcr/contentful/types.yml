@@ -8,9 +8,9 @@ http_interactions:
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/2.8.0; platform ruby/2.4.2; os macOS/18;
+      - sdk contentful-management.rb/2.10.0; platform ruby/2.4.2; os macOS/17;
       Authorization:
-      - Bearer CFPAT-af77ae5f40bdeb00cfe32a39c0a288289f55a3dd48af0537216ee55548297272
+      - Bearer CFPAT-JbFovzp93MzMCeNZHfKDhkVn8R2VgK9zMM-HiTXMtKY
       Content-Type:
       - application/vnd.contentful.management.v1+json
       Connection:
@@ -25,7 +25,7 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team,X-Contentful-Parent-Id,x-contentful-validate-only
       Access-Control-Allow-Methods:
       - DELETE,GET,HEAD,POST,PUT,OPTIONS
       Access-Control-Allow-Origin:
@@ -34,6 +34,10 @@ http_interactions:
       - Etag
       Access-Control-Max-Age:
       - '1728000'
+      Cf-Environment-Id:
+      - master
+      Cf-Environment-Uuid:
+      - 7a03087d-951a-43ba-82b3-7d721da3d708
       Cf-Space-Id:
       - lkrmxse64d8p
       Content-Type:
@@ -41,9 +45,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Mon, 18 Mar 2019 17:32:12 GMT
+      - Mon, 02 Dec 2019 16:57:44 GMT
       Etag:
-      - '"338b1bfad96c237f859e86b7bbbd71ac"'
+      - '"14326958410898927519"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -53,30 +57,30 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35997'
+      - '35999'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '7'
+      - '9'
       X-Contentful-Request-Id:
-      - b79819be3724ee466683e990f1195a48
+      - 66494d1c56408758114d8624c77a8759
       Content-Length:
-      - '10453'
+      - '13161'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_483_673446=o2JCI1SXgXsjEOg2VfezBhvWj1wAAAAA0qTGt4tkqWWVj32xQEf/pA==;
+      - incap_ses_482_673446=GRsrSV1SKEwCdXhrh2mwBodC5V0AAAAAl2wST996tjhHkVxxNWzc/g==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=5K6oZyGFiWLptm1dYMlkBAAAAAC2aTJ2tx9ze7cNR1q3PAud; path=/; Domain=.contentful.com
-      - visid_incap_673446=PJrycW7uRO2xHi0uLdpFohvWj1wAAAAAQUIPAAAAAADDHlHCF+BWiAesEWZvPWTx;
-        expires=Tue, 17 Mar 2020 11:23:51 GMT; path=/; Domain=.contentful.com
-      X-Iinfo:
-      - 1-41356251-41356263 NNNN CT(0 0 0) RT(1552930331154 51) q(0 0 0 -1) r(0 0)
-        U5
+      - nlbi_673446=swp0KLgMhz7iNTCVYMlkBAAAAABuLs3QCPQZPTV/tFyqZzx7; path=/; Domain=.contentful.com
+      - visid_incap_673446=Fs6xIRdgS6y8IXBsnLrIaIdC5V0AAAAAQUIPAAAAAACtTzfFtGbxPXAECOsFjclc;
+        expires=Tue, 01 Dec 2020 12:19:35 GMT; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
+      X-Iinfo:
+      - 9-215041827-215041847 NNNY CT(0 0 0) RT(1575305863016 54) q(0 0 0 -1) r(1
+        1) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -84,7 +88,7 @@ http_interactions:
           "sys": {
             "type": "Array"
           },
-          "total": 5,
+          "total": 6,
           "skip": 0,
           "limit": 100,
           "items": [
@@ -337,7 +341,7 @@ http_interactions:
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2018-08-08T17:20:17.703Z",
+                "updatedAt": "2019-06-07T14:32:25.870Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -345,8 +349,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 9,
-                "publishedAt": "2018-08-08T17:20:17.703Z",
+                "publishedVersion": 11,
+                "publishedAt": "2019-06-07T14:32:25.870Z",
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
                 "createdBy": {
                   "sys": {
@@ -362,8 +366,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 5,
-                "version": 10,
+                "publishedCounter": 6,
+                "version": 12,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -444,6 +448,16 @@ http_interactions:
                   "validations": [],
                   "disabled": false,
                   "omitted": false
+                },
+                {
+                  "id": "json",
+                  "name": "JSON",
+                  "type": "Object",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
                 }
               ]
             },
@@ -509,9 +523,110 @@ http_interactions:
                   "omitted": false
                 }
               ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "navigation",
+                "type": "ContentType",
+                "createdAt": "2019-04-09T17:12:13.203Z",
+                "updatedAt": "2019-04-12T13:44:19.114Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "publishedVersion": 7,
+                "publishedAt": "2019-04-12T13:44:19.114Z",
+                "firstPublishedAt": "2019-04-09T17:12:13.440Z",
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 4,
+                "version": 8,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                }
+              },
+              "displayField": "title",
+              "name": "Navigation",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": true,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "path",
+                  "name": "Path",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": true,
+                  "validations": [
+                    {
+                      "regexp": {
+                        "pattern": "^(https?://|\\/)",
+                        "flags": "i"
+                      }
+                    }
+                  ],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "children",
+                  "name": "Children",
+                  "type": "Array",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false,
+                  "items": {
+                    "type": "Link",
+                    "validations": [
+                      {
+                        "linkContentType": [
+                          "navigation"
+                        ]
+                      }
+                    ],
+                    "linkType": "Entry"
+                  }
+                }
+              ]
             }
           ]
         }
     http_version: 
-  recorded_at: Mon, 18 Mar 2019 17:32:12 GMT
+  recorded_at: Mon, 02 Dec 2019 16:57:44 GMT
 recorded_with: VCR 4.0.0
