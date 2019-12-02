@@ -14,7 +14,11 @@ module Jekyll
 
       def sync!
         nfo = "#{client.configuration.dig(:space)} (#{client.configuration.dig(:environment)})"
-        log("Syncing content from Contentful API... #{nfo}\n", color: "green")
+
+        str = "Syncing content from Contentful API"
+        str += " for distribution channels: #{distribution_channels}" if distribution_channels
+        log("#{str}... #{nfo}\n", color: "green")
+
         colors = ColorizedString.colors.shuffle
         @docs ||= begin
           data = Hash[content_types.each_with_index.collect do |content_type, index|
@@ -23,7 +27,6 @@ module Jekyll
             rm(model.pluralize) if @options.dig('clean')
             ct_cfg = @site.config.dig('contentful', model)
             cfg = @site.config.dig('collections', model.pluralize)
-            # binding.pry
             entries = fetch_entries(model)
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
@@ -43,6 +46,10 @@ module Jekyll
             [type, docs]
           end.to_h
         end
+      end
+
+      def distribution_channels
+        @distribution_channels ||= @options.dig('sites').try(:split, ',')
       end
 
       def collections_glob(type)
@@ -98,6 +105,17 @@ module Jekyll
           if this_page.size == 1000
             fetch_entries(type)
           else
+
+            # Exclude any content not included in specified channels
+            @entries[type].delete_if do |entry|
+              if distribution_channels
+                target_channels = entry.fields.dig(:distribution_channels) || []
+                (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
+              else
+                false
+              end
+            end
+
             log("#{@entries[type].count} #{type.pluralize(@entries[type].count)} returned.")
             @entries[type]
           end
