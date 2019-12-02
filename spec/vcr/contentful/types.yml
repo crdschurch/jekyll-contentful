@@ -4,11 +4,11 @@ http_interactions:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/2.10.0; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful-management.rb/2.11.0; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer CFPAT-JbFovzp93MzMCeNZHfKDhkVn8R2VgK9zMM-HiTXMtKY
       Content-Type:
@@ -18,7 +18,7 @@ http_interactions:
       Host:
       - api.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -45,9 +45,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Mon, 02 Dec 2019 16:57:44 GMT
+      - Mon, 02 Dec 2019 19:59:31 GMT
       Etag:
-      - '"14326958410898927519"'
+      - '"4590619143454488576"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -57,29 +57,30 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35999'
+      - '35998'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '9'
+      - '8'
       X-Contentful-Request-Id:
-      - 66494d1c56408758114d8624c77a8759
+      - 1d79d2f759112e7e14f357705993d0e6
       Content-Length:
-      - '13161'
+      - '13438'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_482_673446=GRsrSV1SKEwCdXhrh2mwBodC5V0AAAAAl2wST996tjhHkVxxNWzc/g==;
+      - Nuo7SCzWI4yDSJt5V0AAAAAQUIPAAAAAAA/vTqnHrIL+wiJAQFfh2t9; expires=Tue, 01 Dec
+        2020 12:19:35 GMT; path=/; Domain=.contentful.com
+      - incap_ses_482_673446=NI9/Fawk+0M6QjJsh2mwBiJt5V0AAAAA5GCoVQ7o2NjQU0LpsY3mBw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=swp0KLgMhz7iNTCVYMlkBAAAAABuLs3QCPQZPTV/tFyqZzx7; path=/; Domain=.contentful.com
-      - visid_incap_673446=Fs6xIRdgS6y8IXBsnLrIaIdC5V0AAAAAQUIPAAAAAACtTzfFtGbxPXAECOsFjclc;
-        expires=Tue, 01 Dec 2020 12:19:35 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=66SoPsrhK0rAxfa9YMlkBAAAAADwvS18CnKFSgTzLlQP9/id; path=/; Domain=.contentful.com
+      - visid_incap_673446=rycXTi3+T
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 9-215041827-215041847 NNNY CT(0 0 0) RT(1575305863016 54) q(0 0 0 -1) r(1
+      - 8-156770811-156770830 NNNN CT(1 1 0) RT(1575316770310 54) q(0 0 0 -1) r(1
         1) U5
     body:
       encoding: ASCII-8BIT
@@ -341,7 +342,7 @@ http_interactions:
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2019-06-07T14:32:25.870Z",
+                "updatedAt": "2019-12-02T18:20:42.912Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -349,8 +350,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 11,
-                "publishedAt": "2019-06-07T14:32:25.870Z",
+                "publishedVersion": 13,
+                "publishedAt": "2019-12-02T18:20:42.912Z",
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
                 "createdBy": {
                   "sys": {
@@ -366,8 +367,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 6,
-                "version": 12,
+                "publishedCounter": 7,
+                "version": 14,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -452,6 +453,16 @@ http_interactions:
                 {
                   "id": "json",
                   "name": "JSON",
+                  "type": "Object",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "distribution_channels",
+                  "name": "distribution_channels",
                   "type": "Object",
                   "localized": false,
                   "required": false,
@@ -628,5 +639,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:44 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Mon, 02 Dec 2019 19:59:31 GMT
+recorded_with: VCR 5.0.0

@@ -14,7 +14,7 @@ module Jekyll
       end
 
       def write!
-        unless is_future?
+        unless is_future? || is_unpublished?
           FileUtils.mkdir_p File.dirname(path)
           File.open(path, 'w') do |file|
             file.write "#{@frontmatter.to_yaml}---\n\n#{body}"
@@ -62,9 +62,14 @@ module Jekyll
         end
 
         def is_future?
-          matches = File.basename(@filename).match('^\d{4}-\d{2}-\d{2}')
-          if matches
-            Date.parse(matches.to_a.first).to_time.to_i >= Date.today.end_of_day.to_i
+          if @frontmatter['published_at'] #not all content has this field
+            @frontmatter['published_at'] > Time.now
+          end
+        end
+
+        def is_unpublished?
+          if @frontmatter['unpublished_at'] #not all content has this field
+            @frontmatter['unpublished_at'] <= Time.now
           end
         end
 
@@ -106,7 +111,8 @@ module Jekyll
 
         def parse_asset(asset)
           {
-            "url" => asset.fields.dig(:file).url
+            "url" => asset.fields.dig(:file).url,
+            "id" => asset.id
           }
         end
 

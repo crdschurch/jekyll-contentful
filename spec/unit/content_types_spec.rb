@@ -37,7 +37,7 @@ describe Jekyll::Contentful::ContentTypes do
         expect(content_types.keys).to include(type)
       end
       article = content_types['article']
-      expect(article.dig('fields')).to match_array(['json', 'title', 'published_at', 'slug'])
+      expect(article.dig('fields')).to match_array(['distribution_channels', 'json', 'title', 'published_at', 'slug'])
       expect(article.dig('references', 'author')).to match_array([{"author"=>["full_name"]}])
       expect(article.dig('references', 'widgets')).to match_array([{"widget"=>["title", "custom_json"]}, {"testable"=>["title"]} ])
     end
@@ -68,7 +68,7 @@ describe Jekyll::Contentful::ContentTypes do
       allow(@klass).to receive(:config).and_return({ 'exclude' => ['testable', 'widget'] })
       schema = @klass.send(:get_schema_sans_exclusions)
       keys = schema.collect(&:first)
-      expect(keys).to match_array(['navigation', 'product','article','author'])
+      expect(keys).to match_array(['product','article','author','navigation'])
       expect(keys).to_not include('testable')
       expect(keys).to_not include('widget')
     end

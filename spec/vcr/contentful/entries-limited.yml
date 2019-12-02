@@ -4,11 +4,11 @@ http_interactions:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/2.10.0; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful-management.rb/2.11.0; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer CFPAT-JbFovzp93MzMCeNZHfKDhkVn8R2VgK9zMM-HiTXMtKY
       Content-Type:
@@ -18,7 +18,7 @@ http_interactions:
       Host:
       - api.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -45,9 +45,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Mon, 02 Dec 2019 16:57:45 GMT
+      - Mon, 02 Dec 2019 19:59:33 GMT
       Etag:
-      - '"14326958410898927519"'
+      - '"4590619143454488576"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -65,22 +65,23 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 258b964cdc3724c73556eb28ce4fc457
+      - bf3123bd6ebe19480685e1bb0125f582
       Content-Length:
-      - '13161'
+      - '13438'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_482_673446=BBqRYKuBfXXWfHhrh2mwBohC5V0AAAAA4hSRymIUXb3Pe/KF/piYHQ==;
+      - 8C0/TFTChB4+iRt5V0AAAAAQUIPAAAAAAAHsVjwqmyqiY64/I3tP3ES; expires=Tue, 01 Dec
+        2020 12:19:35 GMT; path=/; Domain=.contentful.com
+      - incap_ses_482_673446=6d/bKDC8TiPFSTJsh2mwBiRt5V0AAAAAur1Uc4rWr32+bjAsHK0+Bw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=83hsAfE5iXmyyMgQYMlkBAAAAACPrACpqxysfD8bLZlxlhaZ; path=/; Domain=.contentful.com
-      - visid_incap_673446=Pcn0OpD/SeS3tPbrexl31IhC5V0AAAAAQUIPAAAAAAD9KqPJ9yPOaHZs0gKnAvhU;
-        expires=Tue, 01 Dec 2020 12:19:35 GMT; path=/; Domain=.contentful.com
+      - nlbi_673446=hb8oE3UDxg0k9z3/YMlkBAAAAACiSNbtbTZWbm2mboGXBpMu; path=/; Domain=.contentful.com
+      - visid_incap_673446=P2EjLm9jQ
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 1-93958305-93958316 NNNY CT(0 0 0) RT(1575305864748 68) q(0 0 0 -1) r(1 1)
-        U5
+      - 7-106692540-106692558 NNNY CT(0 0 0) RT(1575316771986 52) q(0 0 0 -1) r(0
+        0) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -341,7 +342,7 @@ http_interactions:
                 "id": "article",
                 "type": "ContentType",
                 "createdAt": "2018-08-01T18:14:36.413Z",
-                "updatedAt": "2019-06-07T14:32:25.870Z",
+                "updatedAt": "2019-12-02T18:20:42.912Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -349,8 +350,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 11,
-                "publishedAt": "2019-06-07T14:32:25.870Z",
+                "publishedVersion": 13,
+                "publishedAt": "2019-12-02T18:20:42.912Z",
                 "firstPublishedAt": "2018-08-01T18:14:36.656Z",
                 "createdBy": {
                   "sys": {
@@ -366,8 +367,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 6,
-                "version": 12,
+                "publishedCounter": 7,
+                "version": 14,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -452,6 +453,16 @@ http_interactions:
                 {
                   "id": "json",
                   "name": "JSON",
+                  "type": "Object",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "distribution_channels",
+                  "name": "distribution_channels",
                   "type": "Object",
                   "localized": false,
                   "required": false,
@@ -628,16 +639,16 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:45 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:33 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=testable&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -649,7 +660,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -692,7 +703,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:46 GMT
+      - Mon, 02 Dec 2019 19:59:33 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -700,7 +711,7 @@ http_interactions:
       Connection:
       - close
       X-Served-By:
-      - cache-cmh21529-CMH
+      - cache-cmh21535-CMH
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -708,22 +719,22 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - 6ffaa00e-9424-49d3-8b96-a0b186d2648d
+      - 9cb51b50-afc4-4c29-a123-95e951d7ed44
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         H4sIAAAAAAAAA+1Wy27iMBTd8xWR1wNKIC0MO4QYTdV2SgUMpaMu0sSDLJxH/WhLK/69dpwQkzoJlZjdZBFh4+t7fO49x3lvWRagWwqG1rv4KQZsm0AxAiNCvC0Qc7tvcg2LmYfFvJOO6AYlYmCnA4xCxMSom44Qg6Hc7k+6ndq0lCPNQxPPl4nyFWpSQyIn0skc0RWKNkDmKB6RO9rMM8SzdMfSAhTIw+ANCV8pPHeDQSLPlD+7/e/0lOoBKsb5Re/i37bzhlbLi2t39rS8oZtLbf89sEnEyFb/wyfQYzAYSVZA13YGbbvf7tpzpz90naHd6/S6/Xs9gCfB1wJg9IxIHIUwkjmaOVRHCj3KIClTdCy/Ey1nI4cEPiOK4ihvmYxaP46YwJyVrBn3sdjG2r7GDmCQMu8Rw+bq49j3xDpRORi1F7M8YN8g4C+COCgUI08GGGIq5gqtOfasKSecWtcxxohaPzj1oXXLvVCv+QsK1pAVUlEM6ZQYZJPRWENLKshCFOXePGjx7nR+93bz+nMymq2fVv5yNF7R8YtOkZC/sdQPmlwSEgfcP64Pa4A3ws50eYZC13u8vZhermcTe7yAW5evVhV1zcCrQ8h3ChygyMc8gJrtKZ5y2yqMy1gDo3kZV6rmyAzKYGClapksTMKtNbFSjfT2zyIr6nywMq/M54YBdXZmD93zznd3oNuZQFxnaBUh1ZZWzWyNrYmgmmYr8V5hbXXMmg1O7FttcdXnOB5ptdHt+0QZS42KD+peYXfZvZ/ZhcHyJL+56Y2JJ1wOEnkd8dCax4TFpACQW8jeQguTO/j2yJKZvgxOQd0/EleFH51GXL1BZ3DW+5K4jCH/xWWBZvs9Qlz5ZafdinUucRJ1cULFx8QCM4J8BKk1WcuPGWoQWIrqQbx3rV3rA3Fx+eHcCwAA
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:46 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:33 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=widget&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -735,7 +746,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -778,7 +789,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:46 GMT
+      - Mon, 02 Dec 2019 19:59:33 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -786,7 +797,7 @@ http_interactions:
       Connection:
       - close
       X-Served-By:
-      - cache-cmh21525-CMH
+      - cache-cmh21548-CMH
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -794,22 +805,22 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - 77f05890-31b6-4cc0-9215-0cbef02dd633
+      - 825a64f8-4d7a-409c-9b49-94f93f105749
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         H4sIAAAAAAAAA91UTW/bMAy951cY2nUJrMjpXN/SoocOWYfO7gK0KAbD1lrNtmxITNKgyH+fPuxECZo52K0VfDApkY980uPrwPOQXEsUea/qVxmwbqiy0FSIdI2Ub/NZn4Ea0lL5A2PJgjXK8I1RsoqBssbGYkArne7BpLNJDzAMjmzSTAN1J6zTqUQ7jLOraMZ4gTTGbilsXiRtxbHJeHCA5bqZshDVi6RnQR42uqdubbb/pku7kI0h9fmXnzez26fl5erl220Zz2eBHzv5t4VdcRBrdyMTNAWaTzUraOzj86FPhjhMMInIJMJ4RCbBvRuwaPJjAcEkCoIRIeFeAOVLJmpeUa4x+jm0LVWpBCoOKTqV3ysHs5dDQZdMspp376KlNqs5qJrbK+uv+9TaLp28b76AFcufKPTffVlnaWkEQPnwLu4Cts8D/Wa0zHd60X0hYGBj5gbFWzF49r7G32/2HsVCQl39+iMNKVYelhWXBpWtYnwBVENgI6ndQpIqAg06MUJ0tnIqM8EasJyjhErwPuG9ht2Io5jHIU9CHL9N8WNbrBVcy+Z7Hg5F8uP5Imxin0l57Vfz6/iMTf9rOIRDX304wWGEJxEJR2Py7+HQG/CehgN25u4HHw5qRin9AoWF8Ga1oJV3V4JgGVNa35eHsh4Hm8Ffn7Oz4Z0HAAA=
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:46 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:33 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=author&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -821,7 +832,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -862,7 +873,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:46 GMT
+      - Mon, 02 Dec 2019 19:59:33 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -870,7 +881,7 @@ http_interactions:
       Connection:
       - close
       X-Served-By:
-      - cache-cmh21535-CMH
+      - cache-cmh21529-CMH
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -878,7 +889,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - 0ad2c419-a41f-4551-b92f-c2da315bad7f
+      - 937b5900-c05a-41b9-8b85-0fabaa05d0dc
     body:
       encoding: ASCII-8BIT
       string: |
@@ -927,16 +938,16 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:46 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:33 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=article&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -948,7 +959,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -979,7 +990,7 @@ http_interactions:
       Contentful-Api:
       - cda_cached
       Etag:
-      - W/"12498890470286275688"
+      - W/"11039148046786505704"
       Server:
       - Contentful
       X-Content-Type-Options:
@@ -987,11 +998,11 @@ http_interactions:
       X-Contentful-Region:
       - us-east-1
       Content-Length:
-      - '974'
+      - '1037'
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:46 GMT
+      - Mon, 02 Dec 2019 19:59:34 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -999,7 +1010,7 @@ http_interactions:
       Connection:
       - close
       X-Served-By:
-      - cache-cmh21523-CMH
+      - cache-cmh21522-CMH
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -1007,22 +1018,22 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - a3cbb838-5ff7-4c88-b27c-3a2547c1193b
+      - d0ec2777-df89-4611-b4b1-252d235faba6
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        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
+        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
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:46 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:34 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=product&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -1034,7 +1045,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -1075,7 +1086,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:47 GMT
+      - Mon, 02 Dec 2019 19:59:34 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -1083,7 +1094,7 @@ http_interactions:
       Connection:
       - close
       X-Served-By:
-      - cache-cmh21537-CMH
+      - cache-cmh21550-CMH
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -1091,7 +1102,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - d24a642c-8fef-4bf7-ae37-2e93d1d072c8
+      - aae65a97-cea2-4051-be0f-8151423bd038
     body:
       encoding: ASCII-8BIT
       string: |
@@ -1140,16 +1151,16 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:47 GMT
+  recorded_at: Mon, 02 Dec 2019 19:59:34 GMT
 - request:
     method: get
     uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=navigation&limit=2&order=-sys.createdAt&skip=0
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful.rb/2.13.1; platform ruby/2.4.2; os macOS/17;
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
       Authorization:
       - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
       Content-Type:
@@ -1161,7 +1172,7 @@ http_interactions:
       Host:
       - cdn.contentful.com
       User-Agent:
-      - http.rb/2.2.2
+      - http.rb/4.2.0
   response:
     status:
       code: 200
@@ -1202,7 +1213,7 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 02 Dec 2019 16:57:47 GMT
+      - Mon, 02 Dec 2019 19:59:34 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -1218,7 +1229,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - faf9c627-7bdd-45b3-ab9d-75b93a74cf37
+      - c6d7efeb-01fd-4bc7-9e16-b181ace00dfd
     body:
       encoding: ASCII-8BIT
       string: |
@@ -1268,5 +1279,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Mon, 02 Dec 2019 16:57:47 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Mon, 02 Dec 2019 19:59:34 GMT
+recorded_with: VCR 5.0.0
