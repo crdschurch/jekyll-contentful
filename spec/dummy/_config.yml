@@ -13,6 +13,8 @@ collections:
     output: false
 
 contentful:
+  config:
+    sites: distribution_channels
   exclude:
     - "migrations"
   article:

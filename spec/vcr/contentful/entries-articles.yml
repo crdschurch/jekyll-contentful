@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cdn.contentful.com/spaces/lkrmxse64d8p/environments/master/entries?content_type=article&limit=1000&order=-sys.createdAt&skip=0
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Contentful-User-Agent:
+      - sdk contentful.rb/2.15.1; platform ruby/2.4.2; os macOS/17;
+      Authorization:
+      - Bearer 0f27aa9ad58b87224832b8baab321fcceb407e2b8e18aa06ac238d3e6f8d088c
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Accept-Encoding:
+      - gzip
+      Connection:
+      - close
+      Host:
+      - cdn.contentful.com
+      User-Agent:
+      - http.rb/4.2.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      Access-Control-Allow-Methods:
+      - GET,HEAD,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Etag
+      Access-Control-Max-Age:
+      - '86400'
+      Cf-Environment-Id:
+      - master
+      Cf-Environment-Uuid:
+      - 7a03087d-951a-43ba-82b3-7d721da3d708
+      Cf-Organization-Id:
+      - 7n3EjkAWFhYdCfGieX751e
+      Cf-Space-Id:
+      - lkrmxse64d8p
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Contentful-Api:
+      - cda_cached
+      Etag:
+      - W/"1972626583563508360"
+      Server:
+      - Contentful
+      X-Content-Type-Options:
+      - nosniff
+      X-Contentful-Region:
+      - us-east-1
+      Content-Length:
+      - '1040'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 02 Dec 2019 19:59:34 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '2'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-cmh21520-CMH
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Contentful-Request-Id:
+      - 1fa83ee3-ba17-483e-9d97-3889f570001e
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+VY227jNhB9z1cI2tfKoC7WOn5zXbd1k91iK6fBtlgEWolrs6YorUjFMYL8e4e6UoIkO9s+NI0QBCbN4QyHc+Yc+fFC03R+5Ppce4SPMBDHBMNIX6Spf9Rh7uk7uUbEwqcwb+UjvicJDFA+oCQiAkYmQsUEETiSO/6Z71js23GTu+KJH0hf1YpiUglGTuSTVVDXhO116bR5wD3bb8qgvXzHzgISyvPQfRo9cOw64SyRx6qep/pzftDi0Qsbe7paUuvHK7Yka2t5y92frvhNrOxfB7ZiIj2qXwQp9gUOFzIxuoXMmYHg73JjOnNrOnemE3tq/qEaZEn4PAPM7kkaswgz6eN0DosjRT4XOO2m6Nz8rhSfJ3OY4nvCScxkaSipDWImIObyyk7HfW5sS2Xf3grwU0ECik9fPo0DH9bBxWFm3HiVQV0f+heCadhgRtaMLogobBYsFjucaovSnXJ0TrOt3NYvlhidiIpSLN28YNg4/MCIIxY/Rxht17Pj0Vu6Xgsd1Z2eCRtzY87mJsAGTdy37ihsLg3TMpAlDSxzjuyJbbdx9pJg474i2HhxhMWOsK22olzt4bqfiV2cntXjzu0V3brLEVw0SPdd9MPHYHX18DV2jjw4fI3R2l2fbhoHEm6xaGivIBK1vfVQYMk2I2Hn/NoQXF/gdeh2fPn29/fXH7b3y8PDuw/Uu712UN2+Cl8N3ZXMXkw3NF2GpGqCask4ET8r0v3mt933s8RDhPM1im7XnksWapIhul6C+aRAIsk+U8J3OLzz2zRrbhCaI2QgB/6rJFs1YF4Vm4E7xfYXzwnrURUDIeEiJZ8zAWR2F+x8xsAKFhX6pv+iQQPJTn84HCb4wY8SiidBHHV5NwAmYATYBtaKNMP9Ry5nS3qAUZ4EnbCAZiFWtFtRHU1gTfW1NF51xT3y69+o0T4RVtfokAzr3LdK4JUY66+Z1sohXgH3/YKsYhZ7NrFsR2UWMOmXZKMmw+wynNkRYfZMxDWCUCmkscz2SzSZrUGRNnyO87vYsFSr66RopyMdoXXvA4qt1eL6VJvMb6XbICiOA4FFlmrXcYoj7YYC7AMCCKvTWTWluj38vyDWTyDfCrFLA9mGOduY9tyezk0T3nlOQUwxcUDvOSDfZh1UvlyIWa1EvkKI3eYaSTsQsdN+8X5936JDPci4iKO7koFVcu2qE4BtRFgmcu4zW2mV3KYDjmOWv6DZjprz/EtgzCAliSRzydAbzIX2xux0mrZVW8W1vI85P9O3NdzlPr2SxjMgur+18RQ/tlREbdkTy+p2kXFu7zV5uY1H+fnlv8Dt5QvdmRrlH3D7l4zSO+ZHuRT3gNE3mNKsj87zWCTani6eLv4GKId4ghUVAAA=
+    http_version: 
+  recorded_at: Mon, 02 Dec 2019 19:59:34 GMT
+recorded_with: VCR 5.0.0

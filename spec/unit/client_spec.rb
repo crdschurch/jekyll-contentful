@@ -100,4 +100,41 @@ describe Jekyll::Contentful::Client do
 
   end
 
+  context 'without --sites' do
+    it 'should not exclude any content' do
+      VCR.use_cassette 'contentful/entries-articles' do
+        entries = @client.send(:fetch_entries, 'article')
+        expect(entries.length).to eq(2)
+      end
+    end
+  end
+
+  context 'with --sites' do
+    it 'should source name of distribution-channel field from config with a sensible default' do
+      # default...
+      expect(@client.distribution_channels_frontmatter_field).to eq(:distribution_channels)
+
+      # overridden...
+      @site.config['contentful']['config'] = { 'sites' => 'some_json_field' }
+      @client = Jekyll::Contentful::Client.new(site: @site)
+      expect(@client.distribution_channels_frontmatter_field).to eq(:some_json_field)
+    end
+
+    it 'should exclude any content that does not specify site' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'sites' => 'www.example.com,somethingelse.org' })
+      VCR.use_cassette 'contentful/entries-articles-distribution-channels' do
+        entries = @client.send(:fetch_entries, 'article')
+        expect(entries.length).to eq(1)
+      end
+    end
+
+    it 'should not exclude content for models that do not have the distribution_channels field' do
+      @client = Jekyll::Contentful::Client.new(site: @site, options: { 'sites' => 'www.example.com,somethingelse.org' })
+      VCR.use_cassette 'contentful/entries-widgets-distribution-channels' do
+        entries = @client.send(:fetch_entries, 'widget')
+        expect(entries.length).to eq(4)
+      end
+    end
+  end
+
 end

@@ -11,7 +11,6 @@ group :development do
 end
 
 group :test do
-  gem 'pry'
   gem 'rb-readline'
   gem 'rspec'
   gem 'guard-rspec'
