@@ -59,7 +59,7 @@ To ensure anything with a specified date in the future is not written for proces
     ```yaml
     contentful:
       some_content_type:
-        map: 
+        map:
           published_at: 'some_date_field'
     ```
     Where `some_date_field` represents a date to begin writing content to disk
@@ -72,7 +72,7 @@ To ensure anything with a specified unpublished date in the past is not written 
     ```yaml
     contentful:
       some_content_type:
-        map: 
+        map:
           date: 'some_date_field'
           unpublished_at: 'some_other_date_field'
     ```
@@ -164,6 +164,36 @@ The following environment variables are required to run the script. Please make 
 | `CONTENTFUL_MANAGEMENT_TOKEN` | Access token for Contentful's Management API          |          |
 | `CONTENTFUL_SPACE_ID`         | ID specifying Contentful Space                        |          |
 | `CONTENTFUL_ENV`              | Contentful environment                                | `master` |
+
+## Content Distribution
+
+You can choose to only include content relative to a specific "distribution channel" by passing the `--sites` flag when running the command. This is useful if you need to author content for multiple sites in a single Contentful space.
+
+In order to make use of this feature, you'll need to add a new JSON object field to your content model(s) that specifies which sites that content should be distributed to. The contents of that field should look like this...
+
+```
+[
+  {
+    "site": "www.crossroads.net"
+  }
+]
+```
+
+The default name for this field is `distribution_channels`. Let's assume the name of that field is actually just `channels` so you would add the following to your site's `_config.yml` file to tell `jekyll-contentful` which field to look for...
+
+```
+contentful:
+  config:
+    sites: channels
+```
+
+Now, when pulling content from Contentful using this Gem, you would pass the following flag to only include content that contains the entry `www.crossroads.net` within the `channels` field...
+
+```
+$ bundle exec jekyll contentful --sites www.crossroads.net
+```
+
+Note, when passing the `--sites` flag, only those content-models that contain the field specified will be subject to exclusion.
 
 ## Usage
 

@@ -37,7 +37,7 @@ describe Jekyll::Contentful::ContentTypes do
         expect(content_types.keys).to include(type)
       end
       article = content_types['article']
-      expect(article.dig('fields')).to match_array(['json', 'title', 'published_at', 'slug'])
+      expect(article.dig('fields')).to match_array(['distribution_channels', 'json', 'title', 'published_at', 'slug'])
       expect(article.dig('references', 'author')).to match_array([{"author"=>["full_name"]}])
       expect(article.dig('references', 'widgets')).to match_array([{"widget"=>["title", "custom_json"]}, {"testable"=>["title"]} ])
     end
