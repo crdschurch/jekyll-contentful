@@ -123,6 +123,9 @@ module Jekyll
             fields = @schema.dig('references', field_name.to_s) || []
             if fields.all?{|f| f.is_a?(String) }
               parse_entry_fields(entry, fields)
+            elsif entry.type == 'Asset'
+              fields = ['url']
+              parse_entry_fields(entry, fields)
             else
               fields = fields.reduce({}, :merge)[entry.content_type.id]
               parse_entry_fields(entry, fields)
@@ -131,7 +134,9 @@ module Jekyll
         end
 
         def parse_entry_fields(entry, fields)
-          fields = (fields || []) + ['id', 'content_type']
+          fields = (fields || []) + ['id']
+          fields.push 'content_type' unless entry.class.name.include?('Asset')
+
           fields.uniq.collect{|field_name|
             if field_name == 'content_type'
               value = entry.send(:content_type).id
@@ -165,9 +170,6 @@ module Jekyll
             Hash[*obj.name.name, value]
           end.reject(&:blank?).reduce({}, :merge)
           template.render mapped.merge(data.fields.stringify_keys)
-
-        rescue Exception => e
-          binding.pry
         end
 
         def slug
