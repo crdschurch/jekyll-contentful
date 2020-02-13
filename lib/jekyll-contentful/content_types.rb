@@ -9,11 +9,13 @@ module Jekyll
           load_jekyll_config(project_dir)
           schema = Hash[get_schema_sans_exclusions]
           included_collections = (options.dig('collections') || {})
+
           if included_collections.empty?
             _schema = schema
           else
-            _schema = schema.select {|k,v| (included_collections & [k, k.singularize]).present? }
+            _schema = schema.select {|k,v| (included_collections & [k, k.pluralize, k.singularize]).present? }
           end
+
           Hash[_schema.collect{|name,obj|
             obj['references'] = obj['references'].collect{|type|
               if !models.include?(type)
