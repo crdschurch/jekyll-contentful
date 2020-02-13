@@ -102,7 +102,7 @@ describe Jekyll::Contentful::ContentTypes do
   context 'with --collections' do
 
     it 'should return content_types defined' do
-      types = ['products', 'article']
+      types = ['article']
       path = File.expand_path(__dir__), '../dummy'
       options = { 'collections' => types }
       VCR.use_cassette 'contentful/types-filtered' do
