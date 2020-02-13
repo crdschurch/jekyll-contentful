@@ -146,6 +146,10 @@ describe Jekyll::Contentful::Document do
       end
     end
 
+    it 'should return URLs for image references' do
+      expect(article.frontmatter['images'].first.keys).to match_array(['url', 'id'])
+    end
+
     it 'should not throw an error if body is nil' do
       allow(product.data).to receive('body').and_return(nil)
       expect{ write_document!(product) }.to_not raise_error
