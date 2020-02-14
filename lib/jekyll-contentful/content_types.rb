@@ -9,11 +9,13 @@ module Jekyll
           load_jekyll_config(project_dir)
           schema = Hash[get_schema_sans_exclusions]
           included_collections = (options.dig('collections') || {})
+
           if included_collections.empty?
             _schema = schema
           else
-            _schema = schema.select {|k,v| (included_collections & [k, k.singularize]).present? }
+            _schema = schema.select {|k,v| (included_collections & [k, k.pluralize, k.singularize]).present? }
           end
+
           Hash[_schema.collect{|name,obj|
             obj['references'] = obj['references'].collect{|type|
               if !models.include?(type)
@@ -21,7 +23,7 @@ module Jekyll
                   type, models = type.first
                   Hash[type, models.collect{|model| Hash[model, schema.dig(model, 'fields')] }]
                 else
-                  Hash[type, schema[type.singularize]['fields']]
+                  Hash[type, schema.dig(type.singularize, 'fields')]
                 end
               end
             }.compact.reduce({}, :merge)
@@ -38,7 +40,7 @@ module Jekyll
           def get_fields(model)
             output = OpenStruct.new(fields: [], references: [])
             model.properties.dig(:fields).each do |field|
-              if %w(Array Link).include?(field.type) && field.properties.dig(:linkType) != 'Asset'
+              if %w(Array Link).include?(field.type)
                 output.references.push(field)
               else
                 output.fields.push(field)
@@ -77,10 +79,14 @@ module Jekyll
           def parse_reference_field
             -> (field) {
               content_types = begin
-              if field.type == 'Array'
-                field.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
-              else
-                field.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+                if field.type == 'Array'
+                  if field.items.properties[:linkType] == 'Asset'
+                    ['Asset']
+                  else
+                    field.items.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
+                  end
+                else
+                  field.validations.collect{|v| v.properties.dig(:linkContentType) }.flatten
                 end
               end
               if content_types.empty?

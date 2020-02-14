@@ -56,6 +56,16 @@ describe Jekyll::Contentful::ContentTypes do
     expect(refs.references.all?{|f| f.is_a?(Contentful::Management::Field) }).to be true
   end
 
+  it 'should return references for an array of images' do
+    model = nil
+    VCR.use_cassette 'contentful/types' do
+      model = @klass.send(:get_models).detect{|m| m.id == 'article' }
+    end
+    refs = @klass.send(:get_fields, model)
+    image_ref = refs.references.detect{|r| r.id == 'images'}
+    expect(image_ref.type).to eq('Array')
+  end
+
   it 'should get all models from Contentful' do
     VCR.use_cassette 'contentful/types' do
       models = @klass.send(:get_models)
@@ -80,7 +90,7 @@ describe Jekyll::Contentful::ContentTypes do
       model = models.detect{|m| m.id == 'article' }
       fields = @klass.send(:get_fields, model)
       references = fields.references.collect(&@klass.send(:parse_reference_field))
-      expect(references).to match_array([{"author"=>["author"]}, {"widgets"=>["testable", "widget"]}])
+      expect(references).to match_array([{"author"=>["author"]}, {"widgets"=>["testable", "widget"]}, {"images"=>["Asset"]}])
     end
   end
 
@@ -102,7 +112,7 @@ describe Jekyll::Contentful::ContentTypes do
   context 'with --collections' do
 
     it 'should return content_types defined' do
-      types = ['products', 'article']
+      types = ['article']
       path = File.expand_path(__dir__), '../dummy'
       options = { 'collections' => types }
       VCR.use_cassette 'contentful/types-filtered' do
