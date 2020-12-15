@@ -78,7 +78,7 @@ describe Jekyll::Contentful::ContentTypes do
       allow(@klass).to receive(:config).and_return({ 'exclude' => ['testable', 'widget'] })
       schema = @klass.send(:get_schema_sans_exclusions)
       keys = schema.collect(&:first)
-      expect(keys).to match_array(['product','article','author','navigation'])
+      expect(keys).to match_array(['product','article','author','navigation','cta'])
       expect(keys).to_not include('testable')
       expect(keys).to_not include('widget')
     end

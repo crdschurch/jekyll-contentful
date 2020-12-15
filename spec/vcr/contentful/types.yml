@@ -8,9 +8,9 @@ http_interactions:
       string: ''
     headers:
       X-Contentful-User-Agent:
-      - sdk contentful-management.rb/2.11.0; platform ruby/2.6.2; os macOS/17;
+      - sdk contentful-management.rb/2.11.0; platform ruby/2.6.2; os macOS/19;
       Authorization:
-      - Bearer CFPAT-JbFovzp93MzMCeNZHfKDhkVn8R2VgK9zMM-HiTXMtKY
+      - Bearer CFPAT-hL_19QnhbVE0IcoZ0Z7owvJTN9Q4716CTkVXu6Mz2Tc
       Content-Type:
       - application/vnd.contentful.management.v1+json
       Connection:
@@ -25,7 +25,7 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team,X-Contentful-Parent-Id,x-contentful-validate-only,X-Contentful-Marketplace
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature,X-Contentful-Source-Environment,X-Contentful-Team,X-Contentful-Parent-Id,x-contentful-validate-only,X-Contentful-Skip-UI-Draft-Validation,X-Contentful-Marketplace,X-Contentful-UI-Content-Auto-Save,cf-trace
       Access-Control-Allow-Methods:
       - DELETE,GET,HEAD,POST,PUT,OPTIONS
       Access-Control-Allow-Origin:
@@ -34,10 +34,12 @@ http_interactions:
       - Etag
       Access-Control-Max-Age:
       - '1728000'
+      Cache-Control:
+      - no-store
       Cf-Environment-Id:
       - master
       Cf-Environment-Uuid:
-      - 7a03087d-951a-43ba-82b3-7d721da3d708
+      - master
       Cf-Space-Id:
       - lkrmxse64d8p
       Content-Type:
@@ -45,9 +47,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Thu, 13 Feb 2020 13:30:51 GMT
+      - Tue, 15 Dec 2020 22:06:20 GMT
       Etag:
-      - '"17034905468262143724"'
+      - '"17264171870971694433"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -57,30 +59,32 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35999'
+      - '35998'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '9'
+      - '8'
       X-Contentful-Request-Id:
-      - 5aef6f190c3f90c60ce29b687e6f87b8
+      - 771799041c6141
+      - a79cc6acb5db6fed39
+      X-Contentful-Route:
+      - "/spaces/:space/environments/:environment/content_types"
       Content-Length:
-      - '13809'
+      - '16946'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_892_673446=zluoDla6+UUfVZrwXwZhDIpPRV4AAAAAM3DOfSOyRckDKkPCYO4gWA==;
+      - incap_ses_1345_673446=+TshOn8bXwd7b+Jja2aqElsz2V8AAAAAz1caH0a4sz0rlEsHTecZqw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=UYbaEVhIu2U5ZXcwYMlkBAAAAADxvqFRcK2GHQqY2lQH6USQ; path=/; Domain=.contentful.com
-      - sid_incap_673446=XCCCylLvRzWzQNiENlJgvIpPRV4AAAAAQUIPAAAAAAAM+Kh5OxC3MK8d+vV9c5uf;
-        expires=Thu, 11 Feb 2021 14:25:10 GMT; path=/; Domain=.contentful.com
-      - vi
+      - nlbi_673446=aqJgRiAKHmGbJV0MKsJtVwAAAAB0TtaZzbDNgj0EGCkAXwHD; path=/; Domain=.contentful.com
+      - visid_incap_673446=2GyPV5Q9QPe4MicOa9H/wVsz2V8AAAAAQUIPAAAAAABl2ogj0+DICho/PIOGBL2f;
+        expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 7-93361229-93361238 NNNN CT(2 1 0) RT(1581600650588 47) q(0 0 0 -1) r(1 1)
+      - 10-67925736-67925746 NNNN CT(1 1 0) RT(1608069979796 61) q(0 0 0 -1) r(1 1)
         U5
     body:
       encoding: ASCII-8BIT
@@ -89,10 +93,202 @@ http_interactions:
           "sys": {
             "type": "Array"
           },
-          "total": 6,
+          "total": 7,
           "skip": 0,
           "limit": 100,
           "items": [
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "product",
+                "type": "ContentType",
+                "createdAt": "2018-07-20T16:52:20.890Z",
+                "updatedAt": "2020-06-17T13:18:15.060Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "publishedVersion": 13,
+                "publishedAt": "2020-06-17T13:18:15.060Z",
+                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 7,
+                "version": 14,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                }
+              },
+              "displayField": "title",
+              "name": "Jumbotron",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "subtitle",
+                  "name": "Subtitle",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "callsToAction",
+                  "name": "Calls to Action",
+                  "type": "Array",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false,
+                  "items": {
+                    "type": "Link",
+                    "validations": [
+                      {
+                        "linkContentType": [
+                          "cta"
+                        ]
+                      }
+                    ],
+                    "linkType": "Entry"
+                  }
+                },
+                {
+                  "id": "logo",
+                  "name": "Logo",
+                  "type": "Link",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false,
+                  "linkType": "Asset"
+                },
+                {
+                  "id": "body",
+                  "name": "Body",
+                  "type": "RichText",
+                  "localized": false,
+                  "required": false,
+                  "validations": [
+                    {
+                      "nodes": {}
+                    }
+                  ],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
+            {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "lkrmxse64d8p"
+                  }
+                },
+                "id": "cta",
+                "type": "ContentType",
+                "createdAt": "2020-06-17T13:12:23.462Z",
+                "updatedAt": "2020-06-17T13:12:23.796Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "publishedVersion": 1,
+                "publishedAt": "2020-06-17T13:12:23.796Z",
+                "firstPublishedAt": "2020-06-17T13:12:23.796Z",
+                "createdBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "updatedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                },
+                "publishedCounter": 1,
+                "version": 2,
+                "publishedBy": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "User",
+                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
+                  }
+                }
+              },
+              "displayField": "title",
+              "name": "CTA",
+              "description": "",
+              "fields": [
+                {
+                  "id": "title",
+                  "name": "Title",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                },
+                {
+                  "id": "href",
+                  "name": "Href",
+                  "type": "Symbol",
+                  "localized": false,
+                  "required": false,
+                  "validations": [],
+                  "disabled": false,
+                  "omitted": false
+                }
+              ]
+            },
             {
               "sys": {
                 "space": {
@@ -496,69 +692,6 @@ http_interactions:
                     "id": "lkrmxse64d8p"
                   }
                 },
-                "id": "product",
-                "type": "ContentType",
-                "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2018-07-20T16:59:57.545Z",
-                "environment": {
-                  "sys": {
-                    "id": "master",
-                    "type": "Link",
-                    "linkType": "Environment"
-                  }
-                },
-                "publishedVersion": 5,
-                "publishedAt": "2018-07-20T16:59:57.545Z",
-                "firstPublishedAt": "2018-07-20T16:52:21.161Z",
-                "createdBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "updatedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                },
-                "publishedCounter": 3,
-                "version": 6,
-                "publishedBy": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "User",
-                    "id": "7n1UBaaB6uqpJbXAnlaZgA"
-                  }
-                }
-              },
-              "displayField": "title",
-              "name": "Product",
-              "description": "",
-              "fields": [
-                {
-                  "id": "title",
-                  "name": "Title",
-                  "type": "Symbol",
-                  "localized": false,
-                  "required": false,
-                  "validations": [],
-                  "disabled": false,
-                  "omitted": false
-                }
-              ]
-            },
-            {
-              "sys": {
-                "space": {
-                  "sys": {
-                    "type": "Link",
-                    "linkType": "Space",
-                    "id": "lkrmxse64d8p"
-                  }
-                },
                 "id": "testable",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:50:56.009Z",
@@ -654,5 +787,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Thu, 13 Feb 2020 13:30:51 GMT
+  recorded_at: Tue, 15 Dec 2020 22:06:20 GMT
 recorded_with: VCR 5.0.0
