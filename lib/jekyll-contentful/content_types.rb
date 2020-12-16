@@ -51,13 +51,20 @@ module Jekyll
 
           def get_schema
             @models = get_models
-            @models.collect do |model|
+            payload = @models.collect do |model|
               model_details = get_fields(model)
               [model.id, {
                 "fields" => model_details.fields.collect(&:id),
                 "references" => model_details.references.collect(&parse_reference_field)
               }]
             end
+            payload.push([
+              "asset", {
+                "fields" =>  {},
+                "references" => {}
+              }
+            ])
+            payload
           end
 
           def get_schema_sans_exclusions

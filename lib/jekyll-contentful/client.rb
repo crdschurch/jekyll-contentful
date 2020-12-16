@@ -98,16 +98,23 @@ module Jekyll
 
         def fetch_entries(type)
           @entries[type] ||= []
-
-          params = query_params(type).merge({
+          params = {
             skip: @entries[type].count,
-            content_type: type
-          })
+            limit: (options.dig('limit') || 1000)
+          }
+
+          if type != 'asset'
+            params = query_params(type)
+              .merge(params)
+              .merge({
+                content_type: type
+              })
+          end
 
           log("Querying '#{type.pluralize}' with the following parameters...")
           log(params.to_json)
 
-          this_page = client.entries(params).to_a
+          this_page = type == 'asset' ? client.assets(params).to_a : client.entries(params).to_a
           @entries[type].concat(this_page)
           if this_page.size == 1000
             fetch_entries(type)
