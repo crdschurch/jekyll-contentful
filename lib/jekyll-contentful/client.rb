@@ -120,12 +120,14 @@ module Jekyll
             fetch_entries(type)
           else
 
-            # Exclude content not included in specified channels
-            @entries[type].delete_if do |entry|
-              d_field = distribution_channels_frontmatter_field
-              if distribution_channels && content_types.dig(entry.content_type.id, 'fields').include?(d_field.to_s)
-                target_channels = entry.fields.dig(d_field) || []
-                (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
+            if type != 'asset'
+              # Exclude content not included in specified channels
+              @entries[type].delete_if do |entry|
+                d_field = distribution_channels_frontmatter_field
+                if distribution_channels && content_types.dig(entry.content_type.id, 'fields').include?(d_field.to_s)
+                  target_channels = entry.fields.dig(d_field) || []
+                  (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
+                end
               end
             end
 
