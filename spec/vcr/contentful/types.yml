@@ -47,9 +47,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 15 Dec 2020 22:06:20 GMT
+      - Wed, 16 Dec 2020 13:14:12 GMT
       Etag:
-      - '"17264171870971694433"'
+      - '"9192412404959167062"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -59,33 +59,32 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35998'
+      - '35999'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '8'
+      - '9'
       X-Contentful-Request-Id:
-      - 771799041c6141
-      - a79cc6acb5db6fed39
+      - 0006c1634628dfd
+      - 12245c14c0dd7d4b8
       X-Contentful-Route:
       - "/spaces/:space/environments/:environment/content_types"
       Content-Length:
-      - '16946'
+      - '16944'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_1345_673446=+TshOn8bXwd7b+Jja2aqElsz2V8AAAAAz1caH0a4sz0rlEsHTecZqw==;
+      - incap_ses_1345_673446=pIo6c7tl2A8YOLZka2aqEiMI2l8AAAAA4elU/aaNdQ1rRZN/hN098w==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=aqJgRiAKHmGbJV0MKsJtVwAAAAB0TtaZzbDNgj0EGCkAXwHD; path=/; Domain=.contentful.com
-      - visid_incap_673446=2GyPV5Q9QPe4MicOa9H/wVsz2V8AAAAAQUIPAAAAAABl2ogj0+DICho/PIOGBL2f;
-        expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
+      - nlbi_673446=Lf5iWv+N4VHKRhyfKsJtVwAAAADmk9Ys7lzpnogytoqhtqFv; path=/; Domain=.contentful.com
+      - visid_incap_673446=eTlm+XkrQQCNiZqAOyoL+SMI2l8AAAAAQUIPAAAAAAB5pVe+x0TMq7QWa/jSbuTj;
+        expires=Wed, 15 Dec 2021 16:01:11 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 10-67925736-67925746 NNNN CT(1 1 0) RT(1608069979796 61) q(0 0 0 -1) r(1 1)
-        U5
+      - 4-8064168-8064170 NNNY CT(0 0 0) RT(1608124451600 64) q(0 0 0 -1) r(2 2) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -109,7 +108,7 @@ http_interactions:
                 "id": "product",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2020-06-17T13:18:15.060Z",
+                "updatedAt": "2020-12-15T22:09:38.152Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -117,8 +116,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 13,
-                "publishedAt": "2020-06-17T13:18:15.060Z",
+                "publishedVersion": 15,
+                "publishedAt": "2020-12-15T22:09:38.152Z",
                 "firstPublishedAt": "2018-07-20T16:52:21.161Z",
                 "createdBy": {
                   "sys": {
@@ -134,8 +133,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 7,
-                "version": 14,
+                "publishedCounter": 8,
+                "version": 16,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -145,7 +144,7 @@ http_interactions:
                 }
               },
               "displayField": "title",
-              "name": "Jumbotron",
+              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -787,5 +786,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:20 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:12 GMT
 recorded_with: VCR 5.0.0

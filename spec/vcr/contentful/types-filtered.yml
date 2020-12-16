@@ -47,9 +47,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 15 Dec 2020 22:06:27 GMT
+      - Wed, 16 Dec 2020 13:14:17 GMT
       Etag:
-      - '"17264171870971694433"'
+      - '"9192412404959167062"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -67,25 +67,25 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 60607b86a5ce3f16fa
-      - e592255a5e5559
+      - 4dcfe5db502d98351
+      - 8a25fbffecf6959
       X-Contentful-Route:
       - "/spaces/:space/environments/:environment/content_types"
       Content-Length:
-      - '16946'
+      - '16944'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_1345_673446=tLVZbRoCmFuUd+Jja2aqEmIz2V8AAAAA5Bhwh5Y/bC3eGdodB/C+nA==;
+      - incap_ses_1345_673446=TKUJeI4zCSR0PrZka2aqEigI2l8AAAAAmiSI0tsuDrEnlAVpwSz3xA==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=Le+MHy18NSjwNw93KsJtVwAAAAB2FDK5pDG8QiUyYoeGAwwJ; path=/; Domain=.contentful.com
-      - visid_incap_673446=DF1uNwfxSs2ZerP7R9UjB2Iz2V8AAAAAQUIPAAAAAAC2XyXsYlgEeJ6C5nUJf5f4;
+      - nlbi_673446=9gs6EhfTcHPEXLF2KsJtVwAAAAAttJgwKD3l1g/pHQkjyrWE; path=/; Domain=.contentful.com
+      - visid_incap_673446=G/hl6EHfQW60Hbu02/a0rCgI2l8AAAAAQUIPAAAAAADIRj/4OyBraArq0nN3MzRF;
         expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 9-45996959-45996972 NNNY CT(0 0 0) RT(1608069984425 59) q(0 0 0 -1) r(22 22)
-        U5
+      - 14-174110178-174110202 NNNY CT(0 0 0) RT(1608124456772 70) q(0 0 0 -1) r(1
+        1) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -109,7 +109,7 @@ http_interactions:
                 "id": "product",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2020-06-17T13:18:15.060Z",
+                "updatedAt": "2020-12-15T22:09:38.152Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -117,8 +117,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 13,
-                "publishedAt": "2020-06-17T13:18:15.060Z",
+                "publishedVersion": 15,
+                "publishedAt": "2020-12-15T22:09:38.152Z",
                 "firstPublishedAt": "2018-07-20T16:52:21.161Z",
                 "createdBy": {
                   "sys": {
@@ -134,8 +134,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 7,
-                "version": 14,
+                "publishedCounter": 8,
+                "version": 16,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -145,7 +145,7 @@ http_interactions:
                 }
               },
               "displayField": "title",
-              "name": "Jumbotron",
+              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -787,5 +787,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:27 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:17 GMT
 recorded_with: VCR 5.0.0

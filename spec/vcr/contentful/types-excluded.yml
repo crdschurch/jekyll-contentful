@@ -47,7 +47,7 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 15 Dec 2020 22:06:20 GMT
+      - Wed, 16 Dec 2020 13:14:11 GMT
       Etag:
       - W/"015ac29ea46aa74ebdd2085da85d53a7"
       Referrer-Policy:
@@ -69,7 +69,7 @@ http_interactions:
       Ful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - bceec4f690cd32f55533b7ba79fc08c2
+      - f8f7ff3beb852c531c12afb26c4a3564
       X-Contentful-Route:
       - "/spaces/:space_id/environments/:id"
       X-Download-Options:
@@ -85,16 +85,16 @@ http_interactions:
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_1345_673446=MAG6LuBoAm2IbuJja2aqElsz2V8AAAAAgr6qZRfZzZALVB3Ex8PGWA==;
+      - incap_ses_1345_673446=RrTnO8GYnVEzN7Zka2aqEiMI2l8AAAAAe2MW8lfiXFSl1LcjGB0Lsw==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=kjy/AiZOZhkW+9wMKsJtVwAAAABvyIcMzd3cvzyGX5BCw2Zu; path=/; Domain=.contentful.com
-      - visid_incap_673446=RuTu2Vj5Q22YPzDDS7Zf2Vsz2V8AAAAAQUIPAAAAAABCkfToRJuRjzr77N5GyzbJ;
-        expires=Wed, 15 Dec 2021 16:01:11 GMT; HttpOnly; path=/; Domain=.contentful.com
+      - nlbi_673446=Oc0Vc/zraGRkQrkMKsJtVwAAAADMlo9ssHJ/ZgjtooA5WQ1U; path=/; Domain=.contentful.com
+      - visid_incap_673446=1/pV0Dj8R+CJSkyu9VfCyiMI2l8AAAAAQUIPAAAAAADpI9FW+oY/S/NVG1he2uCy;
+        expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 13-143092091-143092117 NNNN CT(1 1 0) RT(1608069979229 67) q(0 0 0 -1) r(1
-        1) U5
+      - 6-19122713-19122727 NNNY CT(0 0 0) RT(1608124450879 63) q(0 0 0 -1) r(2 2)
+        U5
     body:
       encoding: ASCII-8BIT
       string: |+
@@ -138,7 +138,7 @@ http_interactions:
         }
 
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:20 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:11 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
@@ -186,9 +186,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 15 Dec 2020 22:06:20 GMT
+      - Wed, 16 Dec 2020 13:14:12 GMT
       Etag:
-      - '"17264171870971694433"'
+      - '"9192412404959167062"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -198,33 +198,33 @@ http_interactions:
       X-Contentful-Ratelimit-Hour-Limit:
       - '36000'
       X-Contentful-Ratelimit-Hour-Remaining:
-      - '35999'
+      - '35998'
       X-Contentful-Ratelimit-Reset:
       - '0'
       X-Contentful-Ratelimit-Second-Limit:
       - '10'
       X-Contentful-Ratelimit-Second-Remaining:
-      - '9'
+      - '8'
       X-Contentful-Request-Id:
-      - 9d7e5df6440803
-      - ba7ff9b34d37c8a6c8
+      - 7e0f4eade42800e5b
+      - 8b6a6e2fda54693
       X-Contentful-Route:
       - "/spaces/:space/environments/:environment/content_types"
       Content-Length:
-      - '16946'
+      - '16944'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_1345_673446=Vo4iAw9phS4Ib+Jja2aqElsz2V8AAAAAiI4S+stLkMHjymuc2CP2lQ==;
+      - incap_ses_1345_673446=PGVWH6gk0iqiN7Zka2aqEiMI2l8AAAAA77dC3vKvHyW+OtjxyJ9kCg==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=+nnkIzqzgCF719YUKsJtVwAAAADNLaT7Vdv5hTzOcNPUzwzP; path=/; Domain=.contentful.com
-      - visid_incap_673446=RgxTiwbFQ422EbhiI53mBVsz2V8AAAAAQUIPAAAAAADvR9CD/Ih7zm2M0zYdO53R;
-        expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
+      - nlbi_673446=gAeWeX+cczjfpy9SKsJtVwAAAACBz9tpHvs+jBtc+RIWpo1M; path=/; Domain=.contentful.com
+      - visid_incap_673446=3IN9ZE8pSAm9ZiTM/meVmiMI2l8AAAAAQUIPAAAAAAD+pd3ABUhHQqBLiqvOfbda;
+        expires=Wed, 15 Dec 2021 16:01:11 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 11-92369375-92369387 NNNN CT(1 1 0) RT(1608069979419 55) q(0 0 0 -1) r(2 2)
-        U5
+      - 13-156759856-156759874 NNNY CT(0 0 0) RT(1608124451219 58) q(0 0 0 -1) r(2
+        2) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -248,7 +248,7 @@ http_interactions:
                 "id": "product",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2020-06-17T13:18:15.060Z",
+                "updatedAt": "2020-12-15T22:09:38.152Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -256,8 +256,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 13,
-                "publishedAt": "2020-06-17T13:18:15.060Z",
+                "publishedVersion": 15,
+                "publishedAt": "2020-12-15T22:09:38.152Z",
                 "firstPublishedAt": "2018-07-20T16:52:21.161Z",
                 "createdBy": {
                   "sys": {
@@ -273,8 +273,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 7,
-                "version": 14,
+                "publishedCounter": 8,
+                "version": 16,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -284,7 +284,7 @@ http_interactions:
                 }
               },
               "displayField": "title",
-              "name": "Jumbotron",
+              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -926,5 +926,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:20 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:12 GMT
 recorded_with: VCR 5.0.0

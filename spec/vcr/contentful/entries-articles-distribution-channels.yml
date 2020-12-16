@@ -67,13 +67,13 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 15 Dec 2020 22:06:24 GMT
+      - Wed, 16 Dec 2020 13:14:16 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '2029'
+      - '53987'
       X-Served-By:
-      - cache-fty21323-FTY
+      - cache-fty21338-FTY
       X-Cache:
       - HIT
       X-Cache-Hits:
@@ -81,13 +81,13 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Contentful-Request-Id:
-      - a23e1fa9-ac17-4b0c-9db5-913cc196a4ed
+      - 841932f3-9434-475b-9ec1-fdd2efde5c04
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         H4sIAAAAAAAAA+1ZW3PaOBR+769gvK8L6OIrb2w2bWnTblrIZrY7nYwRAlR8IZZcQjv57yvfQHZtA212dpIuwzDI6HJ0dM73fUd8fdbpaHzLtUHnq/wqG2K7prKlDaPI3Wry2f2vSR8RCteTz1Ha4iu2lg2QNjzmMyFbEIDsARPUT2b8O50xm7eyTLoUX7skWavokT1UjEkepA8Loy5YsNKSRfcvuXywmuRGj9MZKx3YLNmPt4r8O05NfWavk20Vr/vd93Sj2UvLxmDj/MxDz18HZ2yEzq65+eI1vwqV+XeGnQci2qo/kIi6gs6GiWM0BKDdBfLtTKA+QMZAN3rYgB/UAfF6dtoAGnxmURj4NEjWOOzDbEu+ywWNqi461r/nypoHfRjRz4yzMEhCQ3EtCQMhbc6P7LDdx9p2psxbGwFuJBjx6OHD90Liyn7y4GjQvRoXA3bxoc0Z9Wb7nEliRhNMZGOGQSiWNOoM8+WUrXMvXiTTulmXbsWiLBTzZR5x2uh8EzBdDF/6FCxG9nY7PjPHpewozvTItIETaA+gTBvQMy2zLW0Q6ALUhXgC8ACayQCA9NKAx5Q21k+UNuPQp2LJgkXn3OMqhmtuLJZhdBTGHYsV1bhLMzgDSPON//tf5Pz13W2obznZ3IZgZI4Og8aGzRZU7GkvIxIV3mooMGebFrNTft0TXJ3hO9Nx6Fh/vr14t/h8trl7884bX1/oYAdf2Vp7usuZPXu8p+ncJFUTFF3aifgkS1eT98vf7PUYMM5HwL8ejU02VJ0sraslmI9KSqzjqcf4ks5u3DLNwgkAAyChQJefKskWAMyLYOvSSrB94ilhfVXFwIxxEbFpLCSZ3ZClGwRylOyU6Zv6g5YaKEH6zWbTo3euv/Zoj4R+lXeJZIKASbaRfUUU04NbZr67oIfWrlFQJx3dkHMqKqbugsx6v1p/cEBsUTuA71ah82r7AbecnErFD50NrYZCMXxx+SW6fHn7nMOLOb0cXa6uli2W7pz/Mf+W87FspVGnsYB48Sx1f7YTLUvHfSTsN1gS1UVO1ejdhwCFOtW7O68m3VtJMPWYCvVbn6Slnk1ELpevV8AFlWO7h3CJmeWQeg3cOqSZzps926KET8qTBjXc5tl6TZx4q1EVN+/jeNpo1sa7OMn4qyU9SufeIJFLnFInkxP/FkJZGsUpEVTEUecijKjfufIkzhImM2yXiwUL7PD4aaVYPWN/b4o5XYC70J5APMDGAEJZZB5KMWWILgW23sPYVvWyPLDHm2Ko5MifMMWuU1Ha2TCx7Lwa//G2ROoaibkI/Ztc8qhqpioHZRT4LIhFyn2w5NaE2zSZx2GQVsRYV32e/igZk0RsnainRBJNKBedX2AFacqjykKhtHrb4keujZpRrqD+PYY/TeBpqHK+F3iy262CqBHuIVRFkXZurx3yeIFHue+SwfufA09eQSvVRZtG+QFun8eedxO4flr7jCWjT6jnxXV0ntqSF3NapuOfqIxuqENqU+3bgqYqoysXXFheJAOnQtiVVDtmyFNJtR+I3Z0uXS9DEXahgU3dNhF2HAt0kWXNTWtuGC6EZRKds/Tat1LaxlFS0mv9flaw94iYu0lVzXsBFX21JuvXx0efQoopdFzkQAdQXZ9bNjFmFobIQlOIcf8kM1MaFi5L7y2+YVfOviR7sA2AnW/oO91BzSg5pawZxFL+VPzzk9W5xae2pGyxTP8Z0h27BD5l+KncRMmJE6e+zWHk1H2W0VZLze9/WtNFwx1eUewXG39SBUb9bc3DYA8weo6BT8Ke2iH/Y8++Jt4HOzSQbgEbm92po+Mp0k2EdPLA2FMbHv2ZQagxnduEmJjaJsFTi0ACoWlTiYgmUaDnCCuPgh5omxbC/wr2YGQ8APYct9HvxZ5MDcnP+2f3z/4BFP0DbZQfAAA=
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:24 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:16 GMT
 - request:
     method: get
     uri: https://api.contentful.com/spaces/lkrmxse64d8p/environments/master/content_types
@@ -135,9 +135,9 @@ http_interactions:
       Contentful-Api:
       - cma
       Date:
-      - Tue, 15 Dec 2020 22:06:24 GMT
+      - Wed, 16 Dec 2020 13:14:16 GMT
       Etag:
-      - '"17264171870971694433"'
+      - '"9192412404959167062"'
       Server:
       - Contentful
       Strict-Transport-Security:
@@ -155,25 +155,25 @@ http_interactions:
       X-Contentful-Ratelimit-Second-Remaining:
       - '9'
       X-Contentful-Request-Id:
-      - 0f348ba3d9f8726e63
-      - 1f955dbbcd28b3
+      - 176a7ad19a1e12e00
+      - c77eafc6235ed0c
       X-Contentful-Route:
       - "/spaces/:space/environments/:environment/content_types"
       Content-Length:
-      - '16946'
+      - '16944'
       Connection:
       - Close
       Set-Cookie:
-      - incap_ses_1345_673446=jfcNRDp5vVhpdOJja2aqEl8z2V8AAAAAwfuzZnqwRaBcO2Dsn9Of9g==;
+      - incap_ses_1345_673446=8I1iIXGPyAEPPbZka2aqEicI2l8AAAAA9pIxD0Yyji52ZjgzpTcuwg==;
         path=/; Domain=.contentful.com
-      - nlbi_673446=bDyBFzbYo0cAQZBvKsJtVwAAAADPgBajkPNq8Yb1IVL5vQAb; path=/; Domain=.contentful.com
-      - visid_incap_673446=HzTE2oV0Q+CozLTvgKUA0V8z2V8AAAAAQUIPAAAAAACt8c+8Ck5WvX6SJL7zeyp9;
+      - nlbi_673446=I0rRQZiTLCJi4dsjKsJtVwAAAACon6vgAJ4L8EzFPee50t2I; path=/; Domain=.contentful.com
+      - visid_incap_673446=AsXD4uQERdqMhugVl4HfAScI2l8AAAAAQUIPAAAAAADugSalYIsSgITZIE0HWmV+;
         expires=Wed, 15 Dec 2021 16:01:10 GMT; HttpOnly; path=/; Domain=.contentful.com
       X-Cdn:
       - Incapsula
       X-Iinfo:
-      - 7-31679271-31679275 NNNY CT(0 0 0) RT(1608069983593 66) q(0 0 0 -1) r(1 1)
-        U5
+      - 11-100877687-100877701 NNNN CT(1 1 0) RT(1608124455646 61) q(0 0 0 -1) r(1
+        1) U5
     body:
       encoding: ASCII-8BIT
       string: |
@@ -197,7 +197,7 @@ http_interactions:
                 "id": "product",
                 "type": "ContentType",
                 "createdAt": "2018-07-20T16:52:20.890Z",
-                "updatedAt": "2020-06-17T13:18:15.060Z",
+                "updatedAt": "2020-12-15T22:09:38.152Z",
                 "environment": {
                   "sys": {
                     "id": "master",
@@ -205,8 +205,8 @@ http_interactions:
                     "linkType": "Environment"
                   }
                 },
-                "publishedVersion": 13,
-                "publishedAt": "2020-06-17T13:18:15.060Z",
+                "publishedVersion": 15,
+                "publishedAt": "2020-12-15T22:09:38.152Z",
                 "firstPublishedAt": "2018-07-20T16:52:21.161Z",
                 "createdBy": {
                   "sys": {
@@ -222,8 +222,8 @@ http_interactions:
                     "id": "7n1UBaaB6uqpJbXAnlaZgA"
                   }
                 },
-                "publishedCounter": 7,
-                "version": 14,
+                "publishedCounter": 8,
+                "version": 16,
                 "publishedBy": {
                   "sys": {
                     "type": "Link",
@@ -233,7 +233,7 @@ http_interactions:
                 }
               },
               "displayField": "title",
-              "name": "Jumbotron",
+              "name": "Product",
               "description": "",
               "fields": [
                 {
@@ -875,5 +875,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 15 Dec 2020 22:06:24 GMT
+  recorded_at: Wed, 16 Dec 2020 13:14:16 GMT
 recorded_with: VCR 5.0.0
