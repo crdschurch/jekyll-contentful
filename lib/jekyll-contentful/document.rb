@@ -78,17 +78,25 @@ module Jekyll
             defaults = {
               'id' => data.id,
               'contentful_id' => data.id,
-              'content_type' => data.content_type.id
+              'content_type' => content_type
             }
             ct_fields = data.fields.stringify_keys
 
-            # Remove content field (e.g. body) from ct_fields object
-            if ct_fields.keys.include?(content_key.to_s)
-              ct_fields.except!(content_key.to_s)
+            if is_asset?
+              mapped_fields = {}
+              fields = {
+                'title' => data.title,
+                'description' => data.description,
+                'url' => data.url
+              }
+            else
+              # Remove content field (e.g. body) from ct_fields object
+              if ct_fields.keys.include?(content_key.to_s)
+                ct_fields.except!(content_key.to_s)
+              end
+              mapped_fields = (ct_cfg.dig('map') || {}).map { |k, v| [k, parse_field(v, ct_fields[v])] }.to_h
+              fields = ct_fields.map { |k, v| [k, parse_field(k, v)] }.to_h
             end
-
-            mapped_fields = (ct_cfg.dig('map') || {}).map { |k, v| [k, parse_field(v, ct_fields[v])] }.to_h
-            fields = ct_fields.map { |k, v| [k, parse_field(k, v)] }.to_h
             defaults.merge(fields).merge(mapped_fields)
           end
         end
@@ -172,10 +180,22 @@ module Jekyll
           template.render mapped.merge(data.fields.stringify_keys)
         end
 
+        def content_type
+          is_asset? ? 'asset' : @data.content_type.id
+        end
+
+        def is_asset?
+          @data.is_a?(::Contentful::Asset)
+        end
+
         def slug
-          @data.slug
+          if is_asset?
+            @data.id
+          else
+            @data.slug
+          end
         rescue
-          "#{@data.content_type.id}-#{@data.id}"
+          "#{content_type}-#{@data.id}"
         end
 
         def path
@@ -183,7 +203,7 @@ module Jekyll
         end
 
         def collection_name
-          @data.sys.dig(:content_type).id.pluralize
+          content_type.pluralize
         end
 
     end

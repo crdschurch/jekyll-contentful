@@ -98,27 +98,36 @@ module Jekyll
 
         def fetch_entries(type)
           @entries[type] ||= []
-
-          params = query_params(type).merge({
+          params = {
             skip: @entries[type].count,
-            content_type: type
-          })
+            limit: (options.dig('limit') || 1000)
+          }
+
+          if type != 'asset'
+            params = query_params(type)
+              .merge(params)
+              .merge({
+                content_type: type
+              })
+          end
 
           log("Querying '#{type.pluralize}' with the following parameters...")
           log(params.to_json)
 
-          this_page = client.entries(params).to_a
+          this_page = type == 'asset' ? client.assets(params).to_a : client.entries(params).to_a
           @entries[type].concat(this_page)
           if this_page.size == 1000
             fetch_entries(type)
           else
 
-            # Exclude content not included in specified channels
-            @entries[type].delete_if do |entry|
-              d_field = distribution_channels_frontmatter_field
-              if distribution_channels && content_types.dig(entry.content_type.id, 'fields').include?(d_field.to_s)
-                target_channels = entry.fields.dig(d_field) || []
-                (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
+            if type != 'asset'
+              # Exclude content not included in specified channels
+              @entries[type].delete_if do |entry|
+                d_field = distribution_channels_frontmatter_field
+                if distribution_channels && content_types.dig(entry.content_type.id, 'fields').include?(d_field.to_s)
+                  target_channels = entry.fields.dig(d_field) || []
+                  (target_channels.collect{|c| c.dig('site') }.compact & distribution_channels).length === 0
+                end
               end
             end
 
