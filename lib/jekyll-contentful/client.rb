@@ -9,6 +9,7 @@ module Jekyll
         @site = site || self.class.scaffold(base)
         @options = options
         @entries = {}
+        @limit = 500
         @log_color = 'green'
       end
 
@@ -100,7 +101,7 @@ module Jekyll
           @entries[type] ||= []
           params = {
             skip: @entries[type].count,
-            limit: (options.dig('limit') || 1000)
+            limit: (options.dig('limit') || @limit)
           }
 
           if type != 'asset'
@@ -108,6 +109,7 @@ module Jekyll
               .merge(params)
               .merge({
                 content_type: type
+
               })
           end
 
@@ -116,7 +118,8 @@ module Jekyll
 
           this_page = type == 'asset' ? client.assets(params).to_a : client.entries(params).to_a
           @entries[type].concat(this_page)
-          if this_page.size == 1000
+
+          if this_page.size == @limit
             fetch_entries(type)
           else
 
@@ -140,7 +143,7 @@ module Jekyll
           ct_cfg = @site.config.dig('contentful', type) || {}
 
           args = {
-            limit: (ct_cfg.dig('limit') || options.dig('limit') || 1000),
+            limit: (ct_cfg.dig('limit') || options.dig('limit') || @limit),
             order: sort_order(ct_cfg.dig('order') || options.dig('order'))
           }
 
