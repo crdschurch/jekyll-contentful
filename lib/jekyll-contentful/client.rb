@@ -9,7 +9,9 @@ module Jekyll
         @site = site || self.class.scaffold(base)
         @options = options
         @entries = {}
-        @limit = 500
+        @max_chunked_response_size = 1000
+        @max_total_records_returned = options.dig('limit')
+        @user_defined_chunked_response_size = options.dig('pagelimit')
         @log_color = 'green'
       end
 
@@ -19,6 +21,7 @@ module Jekyll
         str = "Syncing content from Contentful API"
         str += " for distribution channels: #{distribution_channels}" if distribution_channels
         log("#{str}... #{nfo}\n", color: "green")
+        log("Begin import of assets")
 
         colors = ColorizedString.colors.shuffle
         @docs ||= begin
@@ -101,7 +104,7 @@ module Jekyll
           @entries[type] ||= []
           params = {
             skip: @entries[type].count,
-            limit: (options.dig('limit') || @limit)
+            limit: (@user_defined_chunked_response_size || @max_total_records_returned || @max_chunked_response_size)
           }
 
           if type != 'asset'
@@ -113,13 +116,10 @@ module Jekyll
               })
           end
 
-          log("Querying '#{type.pluralize}' with the following parameters...")
-          log(params.to_json)
-
           this_page = type == 'asset' ? client.assets(params).to_a : client.entries(params).to_a
           @entries[type].concat(this_page)
 
-          if this_page.size == @limit
+          if @user_defined_chunked_response_size == this_page.size || @max_chunked_response_size == this_page.size
             fetch_entries(type)
           else
 
@@ -134,7 +134,6 @@ module Jekyll
               end
             end
 
-            log("#{@entries[type].count} #{type.pluralize(@entries[type].count)} returned.")
             @entries[type]
           end
         end
@@ -143,7 +142,7 @@ module Jekyll
           ct_cfg = @site.config.dig('contentful', type) || {}
 
           args = {
-            limit: (ct_cfg.dig('limit') || options.dig('limit') || @limit),
+            limit: (ct_cfg.dig('limit') || @max_total_records_returned || @max_chunked_response_size),
             order: sort_order(ct_cfg.dig('order') || options.dig('order'))
           }
 
