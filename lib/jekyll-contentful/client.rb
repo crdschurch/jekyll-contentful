@@ -9,7 +9,7 @@ module Jekyll
         @site = site || self.class.scaffold(base)
         @options = options
         @entries = {}
-        @limit = 500
+        @limit = 250
         @log_color = 'green'
       end
 
