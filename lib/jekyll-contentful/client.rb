@@ -9,7 +9,7 @@ module Jekyll
         @site = site || self.class.scaffold(base)
         @options = options
         @entries = {}
-        @limit = 250
+        @limit = 1000
         @log_color = 'green'
       end
 
@@ -28,7 +28,7 @@ module Jekyll
             rm(model.pluralize) if @options.dig('clean')
             ct_cfg = @site.config.dig('contentful', model)
             cfg = @site.config.dig('collections', model.pluralize)
-            entries = fetch_entries(model)
+            entries = fetch_entries(model, (cfg || {}).dig('limit'))
             docs = entries.collect{|entry|
               Jekyll::Contentful::Document.new(entry, schema: schema, cfg: cfg, ct_cfg: ct_cfg)
             }
@@ -97,11 +97,12 @@ module Jekyll
 
       private
 
-        def fetch_entries(type)
+        def fetch_entries(type, limit=nil)
           @entries[type] ||= []
+          limit ||= @limit
           params = {
             skip: @entries[type].count,
-            limit: (options.dig('limit') || @limit)
+            limit: (options.dig('limit') || limit)
           }
 
           if type != 'asset'
@@ -119,8 +120,8 @@ module Jekyll
           this_page = type == 'asset' ? client.assets(params).to_a : client.entries(params).to_a
           @entries[type].concat(this_page)
 
-          if this_page.size == @limit
-            fetch_entries(type)
+          if this_page.size == limit
+            fetch_entries(type, limit)
           else
 
             if type != 'asset'
@@ -141,9 +142,10 @@ module Jekyll
 
         def query_params(type = nil)
           ct_cfg = @site.config.dig('contentful', type) || {}
+          limit = ct_cfg.dig('limit') || @limit
 
           args = {
-            limit: (ct_cfg.dig('limit') || options.dig('limit') || @limit),
+            limit: (options.dig('limit') || limit),
             order: sort_order(ct_cfg.dig('order') || options.dig('order'))
           }
 
