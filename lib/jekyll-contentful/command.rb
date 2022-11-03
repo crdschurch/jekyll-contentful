@@ -15,6 +15,7 @@ module Jekyll
             c.option 'query', '-q', '--query STR', String, 'Additional query string params to append to API requests, e.g. "--query title=Something"'
             c.option 'clean', '-f', '--force', 'Remove existing collections data prior to importing'
             c.option 'sites', '-s', '--sites SITE1[,SITE2]', 'Return only content for specific sites'
+            c.option 'verbose', '-v', '--verbose', 'Verbose output'
             c.action do |args, options|
               Jekyll::Contentful::Client.new(args: args, options: options).sync!
             end

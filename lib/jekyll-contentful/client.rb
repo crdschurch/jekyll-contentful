@@ -18,7 +18,7 @@ module Jekyll
 
         str = "Syncing content from Contentful API"
         str += " for distribution channels: #{distribution_channels}" if distribution_channels
-        log("#{str}... #{nfo}\n", color: "green")
+        log("#{str}... #{nfo}\n", color: "green", verbose: true)
 
         colors = ColorizedString.colors.shuffle
         @docs ||= begin
@@ -43,7 +43,7 @@ module Jekyll
                 imported_count += 1
               end
             end
-            log "#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported."
+            log "#{imported_count}/#{docs.size} #{type.pluralize(imported_count)} imported.", verbose: true
             [type, docs]
           end.to_h
         end
@@ -183,10 +183,12 @@ module Jekyll
           ].join()
         end
 
-        def log(a, b=nil, color: nil)
-          a = ColorizedString.new(a).send(color || @log_color)
-          b = ColorizedString.new(b).send(color || @log_color) unless b.nil?
-          Jekyll.logger.info a, b
+        def log(a, b=nil, color: nil, verbose: false)
+          if verbose || @options.dig('verbose')
+            a = ColorizedString.new(a).send(color || @log_color)
+            b = ColorizedString.new(b).send(color || @log_color) unless b.nil?
+            Jekyll.logger.info a, b
+          end
         end
 
       class << self
