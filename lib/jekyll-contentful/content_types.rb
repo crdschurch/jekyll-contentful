@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module Jekyll
   module Contentful
     class ContentTypes
@@ -34,7 +36,16 @@ module Jekyll
         private
 
           def get_models
-            space.content_types.all
+            models = []
+            limit = 100
+            skip = 0
+            loop do
+              response = space.content_types.all(limit: limit, skip: skip)
+              models.concat(response.items)
+              break if response.items.size < limit
+              skip += limit
+            end
+            models
           end
 
           def get_fields(model)
