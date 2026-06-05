@@ -97,7 +97,54 @@ module Jekyll
               mapped_fields = (ct_cfg.dig('map') || {}).map { |k, v| [k, parse_field(v, ct_fields[v])] }.to_h
               fields = ct_fields.map { |k, v| [k, parse_field(k, v)] }.to_h
             end
-            defaults.merge(fields).merge(mapped_fields)
+            defaults.merge(fields).merge(mapped_fields).merge(metadata_tag_flags)
+          end
+        end
+
+        def metadata_tag_flags
+          flag_config = ct_cfg.dig('metadata_tag_flags') || {}
+          return {} if flag_config.empty?
+
+          metadata_tags = metadata_tag_ids
+          flag_config.transform_values do |tag_id|
+            metadata_tags.include?(tag_id)
+          end
+        end
+
+        def metadata_tag_ids
+          metadata =
+            if @data.respond_to?(:_metadata)
+              @data._metadata
+            elsif @data.respond_to?(:metadata)
+              @data.metadata
+            elsif @data.respond_to?(:raw)
+              @data.raw['metadata']
+            end
+          tags = read_metadata_value(metadata, :tags)
+
+          Array(tags).filter_map { |tag| metadata_tag_id(tag) }.uniq
+        end
+
+        def metadata_tag_id(tag)
+          return if tag.nil?
+
+          if tag.respond_to?(:id)
+            tag.id
+          elsif tag.is_a?(Hash)
+            tag['id'] || tag[:id] || tag.dig('sys', 'id') || tag.dig(:sys, :id)
+          elsif tag.respond_to?(:sys)
+            sys = tag.sys
+            read_metadata_value(sys, :id)
+          end
+        end
+
+        def read_metadata_value(obj, key)
+          return if obj.nil?
+
+          if obj.respond_to?(key)
+            obj.public_send(key)
+          elsif obj.is_a?(Hash)
+            obj[key.to_s] || obj[key.to_sym]
           end
         end
 
